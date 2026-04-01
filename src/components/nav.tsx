@@ -37,15 +37,19 @@ export function Nav() {
 
         {/* Desktop nav links */}
         <div className="hidden items-center gap-8 md:flex">
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="font-sans text-sm text-muted"
-            >
-              {link.label}
-            </Link>
-          ))}
+          {navLinks.map((link) => {
+            const isActive =
+              pathname === link.href || pathname.startsWith(`${link.href}/`);
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={`font-sans text-sm ${isActive ? "text-accent" : "text-muted"}`}
+              >
+                {link.label}
+              </Link>
+            );
+          })}
         </div>
 
         {/* Desktop CTA */}
@@ -89,16 +93,20 @@ export function Nav() {
         style={isOpen ? { maxHeight: `${navLinks.length * 56 + 56}px` } : undefined}
       >
         <Container>
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              onClick={() => setIsOpen(false)}
-              className="block border-b border-border py-4 font-mono text-xs uppercase tracking-widest text-fg"
-            >
-              {link.label}
-            </Link>
-          ))}
+          {navLinks.map((link) => {
+            const isActive =
+              pathname === link.href || pathname.startsWith(`${link.href}/`);
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                onClick={() => setIsOpen(false)}
+                className={`block border-b border-border py-4 font-mono text-xs uppercase tracking-widest ${isActive ? "text-accent" : "text-fg"}`}
+              >
+                {link.label}
+              </Link>
+            );
+          })}
           <Link
             href="/contact"
             onClick={() => setIsOpen(false)}
