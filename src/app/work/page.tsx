@@ -50,7 +50,7 @@ export default function WorkPage() {
         </Container>
       </section>
 
-      <section className="border-b border-border">
+      <section>
         <Container>
           <div className="grid grid-cols-1 gap-0 md:grid-cols-2">
             {projects.map((project) => {
@@ -60,7 +60,7 @@ export default function WorkPage() {
                 <Link
                   key={project.slug}
                   href={`/work/${project.slug}`}
-                  className="group flex flex-col gap-4 border-b border-border p-8 transition-colors hover:bg-surface md:[&:nth-last-child(-n+2)]:border-b-0 md:odd:border-r md:odd:border-border"
+                  className="group flex flex-col gap-4 border-b border-border p-8 transition-colors last:border-b-0 hover:bg-surface md:[&:nth-last-child(-n+2)]:border-b-0 md:odd:border-r md:odd:border-border"
                 >
                   <div className="flex flex-col gap-1 md:flex-row md:items-baseline md:justify-between md:gap-4">
                     <span className="font-serif text-xl text-fg">
