@@ -15,7 +15,7 @@ const externalLinks = [
 export function Footer() {
   return (
     <footer className="border-t border-border py-5">
-      <Container className="flex items-center justify-between">
+      <Container className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 md:gap-0">
         <span className="font-mono text-xs text-muted">
           © 2025 TechTrinity · techtrinity.ai
         </span>

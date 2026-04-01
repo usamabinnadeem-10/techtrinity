@@ -38,9 +38,9 @@ export function ProcessSection() {
           </span>
         </div>
 
-        <div className="grid grid-cols-4 divide-x divide-border border-t border-border py-10">
+        <div className="grid grid-cols-1 md:grid-cols-4 md:divide-x divide-border border-t border-border py-10">
           {STEPS.map((step) => (
-            <div key={step.number} className="flex flex-col gap-3 px-6">
+            <div key={step.number} className="flex flex-col gap-3 px-0 md:px-6 border-b border-border md:border-b-0">
               <span className="font-mono text-xs uppercase text-muted">
                 {step.number}
               </span>

@@ -20,7 +20,7 @@ export function ServiceHero({ name, tagline, description }: ServiceHeroProps) {
         <span>{name}</span>
       </nav>
 
-      <h1 className="mt-8 font-serif text-5xl tracking-tight text-fg">
+      <h1 className="mt-8 font-serif text-3xl md:text-5xl tracking-tight text-fg">
         {name}
       </h1>
 

@@ -40,7 +40,7 @@ export default function ContactPage() {
           <p className="font-mono text-xs uppercase tracking-widest text-muted">
             — Get in touch
           </p>
-          <h1 className="mt-4 font-serif text-5xl tracking-tight text-fg">
+          <h1 className="mt-4 font-serif text-3xl md:text-5xl tracking-tight text-fg">
             <span className="font-serif italic text-muted">Let&apos;s talk</span>{" "}
             about your project.
           </h1>

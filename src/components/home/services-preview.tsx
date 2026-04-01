@@ -36,12 +36,12 @@ export function ServicesPreview() {
           </span>
         </div>
 
-        <div className="grid grid-cols-3 divide-x divide-border [&>*]:border-b [&>*]:border-border">
+        <div className="grid grid-cols-1 md:grid-cols-3 md:divide-x divide-border">
           {SERVICES.map((service) => (
             <Link
               key={service.number}
               href={service.href}
-              className="group flex flex-col gap-3 px-6 py-8 transition-colors hover:bg-surface"
+              className="group flex flex-col gap-3 px-4 py-6 md:px-6 md:py-8 border-b border-border md:border-b-0 transition-colors hover:bg-surface"
             >
               <span className="font-mono text-xs text-muted">
                 {service.number}

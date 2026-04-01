@@ -20,9 +20,12 @@ export function CalendlyEmbed({ url }: CalendlyEmbedProps) {
   }, [])
 
   return (
-    <div
-      className="calendly-inline-widget w-full min-w-80 h-175"
-      data-url={`${url}?hide_landing_page_details=1&hide_gdpr_banner=1&primary_color=1A1A18`}
-    />
+    <div className="w-full overflow-hidden">
+      <div
+        className="calendly-inline-widget"
+        style={{ minWidth: '320px', height: '700px', width: '100%' }}
+        data-url={`${url}?hide_landing_page_details=1&hide_gdpr_banner=1&primary_color=1A1A18`}
+      />
+    </div>
   )
 }

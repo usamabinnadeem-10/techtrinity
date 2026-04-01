@@ -20,7 +20,7 @@ export function HeroSection() {
           <em className="text-muted">done properly.</em>
         </h1>
 
-        <div className="flex items-end justify-between pb-10 pt-8">
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 pb-10 pt-8">
           <p className="max-w-sm font-sans text-sm font-light leading-relaxed text-muted">
             MVPs to SaaS platforms — built by a senior team that writes clean
             code, communicates clearly, and ships on time.

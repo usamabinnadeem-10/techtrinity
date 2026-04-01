@@ -66,7 +66,7 @@ export default function AboutPage() {
             </span>
           </div>
 
-          <h1 className="font-serif text-5xl leading-tight tracking-tight text-fg">
+          <h1 className="font-serif text-3xl md:text-5xl leading-tight tracking-tight text-fg">
             We build software. We do it fast.
             <br />
             We do it <em className="text-muted">properly.</em>
@@ -83,11 +83,21 @@ export default function AboutPage() {
       {/* Stats */}
       <section className="border-b border-border py-10">
         <Container>
-          <div className="grid grid-cols-4">
+          <div className="grid grid-cols-2 md:grid-cols-4">
             {stats.map((stat, index) => (
               <div
                 key={stat.description}
-                className={`flex flex-col${index > 0 ? " pl-8" : ""}${index < stats.length - 1 ? " border-r border-border pr-8" : ""}`}
+                className={[
+                  "flex flex-col border-border p-6",
+                  index < 2 ? "border-b md:border-b-0" : "",
+                  index % 2 === 0
+                    ? "border-r"
+                    : index < stats.length - 1
+                      ? "md:border-r"
+                      : "",
+                ]
+                  .filter(Boolean)
+                  .join(" ")}
               >
                 <span className="font-serif text-4xl text-fg">
                   {stat.metric}
@@ -104,31 +114,8 @@ export default function AboutPage() {
       {/* Founder */}
       <section className="border-b border-border py-14">
         <Container>
-          <div className="grid grid-cols-3 gap-12">
-            <div className="col-span-2">
-              <span className="mb-4 block font-mono text-xs uppercase tracking-widest text-muted">
-                Founder
-              </span>
-              <span className="font-serif text-3xl text-fg">
-                {founder.name}
-              </span>
-              <p className="mt-1 font-mono text-xs uppercase tracking-widest text-muted">
-                {founder.role}
-              </p>
-              <p className="mt-6 max-w-lg font-sans text-sm font-light leading-relaxed text-muted">
-                {founder.bio}
-              </p>
-              <blockquote className="mt-8 border-l-2 border-border pl-5">
-                <p className="font-sans text-sm font-light italic leading-relaxed text-muted">
-                  Bigger agencies juggle 20 clients at once. Your project gets
-                  whoever is available, not whoever is best. At TechTrinity, we
-                  take on a small number of projects at a time and dedicate
-                  ourselves fully to each one.
-                </p>
-              </blockquote>
-            </div>
-
-            <div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
+            <div className="md:order-last">
               <div className="flex h-24 w-24 items-center justify-center border border-border bg-surface font-mono text-lg text-muted">
                 UBN
               </div>
@@ -158,6 +145,29 @@ export default function AboutPage() {
                 Upwork ↗
               </a>
             </div>
+
+            <div className="md:col-span-2 md:order-first">
+              <span className="mb-4 block font-mono text-xs uppercase tracking-widest text-muted">
+                Founder
+              </span>
+              <span className="font-serif text-3xl text-fg">
+                {founder.name}
+              </span>
+              <p className="mt-1 font-mono text-xs uppercase tracking-widest text-muted">
+                {founder.role}
+              </p>
+              <p className="mt-6 max-w-lg font-sans text-sm font-light leading-relaxed text-muted">
+                {founder.bio}
+              </p>
+              <blockquote className="mt-8 border-l-2 border-border pl-5">
+                <p className="font-sans text-sm font-light italic leading-relaxed text-muted">
+                  Bigger agencies juggle 20 clients at once. Your project gets
+                  whoever is available, not whoever is best. At TechTrinity, we
+                  take on a small number of projects at a time and dedicate
+                  ourselves fully to each one.
+                </p>
+              </blockquote>
+            </div>
           </div>
         </Container>
       </section>
@@ -186,7 +196,7 @@ export default function AboutPage() {
           <span className="mb-8 block font-mono text-xs uppercase tracking-widest text-muted">
             How we work
           </span>
-          <div className="grid grid-cols-2 gap-0">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-0">
             {values.map((value) => (
               <div key={value.title} className="border border-border p-8">
                 <h3 className="mb-3 font-sans text-sm font-medium text-fg">

@@ -17,7 +17,7 @@ export function StackStrip() {
       <Container>
         <div
           role="list"
-          className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1"
+          className="flex flex-wrap items-center justify-center gap-x-3 gap-y-2 text-center"
         >
           {ITEMS.map((item, i) => (
             <span
@@ -25,7 +25,7 @@ export function StackStrip() {
               role="listitem"
               className="flex items-center gap-4"
             >
-              <span className="font-mono text-xs uppercase tracking-widest text-muted">
+              <span className="font-mono text-[10px] md:text-xs uppercase tracking-widest text-muted">
                 {item}
               </span>
               {i < ITEMS.length - 1 && (

@@ -5,14 +5,14 @@ export function CtaSection() {
   return (
     <section className="border-t border-border py-16">
       <Container>
-        <div className="flex items-start justify-between">
+        <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-8">
           <h2 className="max-w-md font-serif text-4xl tracking-tight text-fg">
             Have a project in mind?
             <br />
             <em className="text-muted">Let&apos;s talk.</em>
           </h2>
 
-          <div className="flex flex-col items-end">
+          <div className="flex flex-col items-start md:items-end">
             <a
               href="mailto:usama@techtrinity.ai"
               className="font-mono text-sm text-muted transition-colors hover:text-fg"

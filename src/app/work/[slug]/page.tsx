@@ -78,7 +78,7 @@ export default async function CaseStudyPage({ params }: Props) {
           <span className="font-mono text-xs uppercase tracking-widest text-muted">
             {project.category} · {project.year}
           </span>
-          <h1 className="mt-3 font-serif text-5xl tracking-tight text-fg">
+          <h1 className="mt-3 font-serif text-3xl md:text-5xl tracking-tight text-fg">
             {project.name}
           </h1>
           <p className="mt-4 max-w-2xl font-sans text-lg font-light text-muted">
@@ -108,16 +108,11 @@ export default async function CaseStudyPage({ params }: Props) {
 
         {/* Outcomes */}
         <section className="border-b border-border py-10">
-          <div
-            className="grid"
-            style={{
-              gridTemplateColumns: `repeat(${project.outcomes.length}, 1fr)`,
-            }}
-          >
+          <div className="grid grid-cols-1 md:grid-cols-3">
             {project.outcomes.map((outcome, index) => (
               <div
                 key={outcome.description}
-                className={`px-6${index < project.outcomes.length - 1 ? " border-r border-border" : ""}${index === 0 ? " pl-0" : ""}`}
+                className={`px-0 pb-6 md:px-6 md:pb-0${index < project.outcomes.length - 1 ? " border-b border-border md:border-b-0 md:border-r" : ""}${index === 0 ? " md:pl-0" : ""}`}
               >
                 <p className="font-serif text-4xl text-fg">
                   {outcome.metric}
