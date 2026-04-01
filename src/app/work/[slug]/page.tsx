@@ -112,7 +112,7 @@ export default async function CaseStudyPage({ params }: Props) {
             {project.outcomes.map((outcome, index) => (
               <div
                 key={outcome.description}
-                className={`px-0 pb-6 md:px-6 md:pb-0${index < project.outcomes.length - 1 ? " border-b border-border md:border-b-0 md:border-r" : ""}${index === 0 ? " md:pl-0" : ""}`}
+                className={`px-0 pb-6 md:px-6 md:pb-0${index < project.outcomes.length - 1 ? " border-b border-border md:border-b-0 md:border-r" : ""}${index === 0 ? " md:pl-0" : ""}${index === project.outcomes.length - 1 ? " md:pr-0" : ""}`}
               >
                 <p className="font-serif text-4xl text-fg">
                   {outcome.metric}
@@ -146,15 +146,15 @@ export default async function CaseStudyPage({ params }: Props) {
         </section>
 
         {/* Features */}
-        <section className="border-b border-border py-12">
+        <section className="py-12">
           <span className="font-mono text-xs uppercase tracking-widest text-muted">
             What we built
           </span>
-          <div className="mt-6 grid grid-cols-1 gap-0 md:grid-cols-2">
+          <div className="mt-6 grid grid-cols-1 md:grid-cols-2 border-t border-l border-border">
             {project.features.map((feature) => (
               <div
                 key={feature.title}
-                className="border border-border p-6"
+                className="border-b border-r border-border p-6"
               >
                 <p className="font-sans text-sm font-medium text-fg">
                   {feature.title}
