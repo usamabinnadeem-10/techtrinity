@@ -9,7 +9,7 @@ type ServiceFaqProps = {
 
 export function ServiceFaq({ faqs }: ServiceFaqProps) {
   return (
-    <section className="border-b border-border py-12">
+    <section className="py-12">
       <h2 className="font-serif text-2xl text-fg">
         Frequently asked questions
       </h2>
