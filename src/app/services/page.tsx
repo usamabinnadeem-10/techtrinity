@@ -50,14 +50,14 @@ export default function ServicesPage() {
         </Container>
       </section>
 
-      <section className="border-b border-border">
+      <section>
         <Container>
           <div className="grid grid-cols-1 md:grid-cols-3 md:divide-x md:divide-border">
             {SERVICES.map((service, index) => (
               <Link
                 key={service.slug}
                 href={`/services/${service.slug}`}
-                className="group flex flex-col gap-4 border-b border-border px-6 py-10 transition-colors hover:bg-surface md:border-b-0 md:last:border-b-0"
+                className="group flex flex-col gap-4 border-b border-border px-6 py-10 transition-colors last:border-b-0 hover:bg-surface md:border-b-0"
               >
                 <span className="font-mono text-xs text-muted">
                   {String(index + 1).padStart(2, "0")}
