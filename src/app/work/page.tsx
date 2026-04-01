@@ -62,7 +62,7 @@ export default function WorkPage() {
                   href={`/work/${project.slug}`}
                   className="group flex flex-col gap-4 border-b border-border p-8 transition-colors hover:bg-surface md:[&:nth-last-child(-n+2)]:border-b-0 md:odd:border-r md:odd:border-border"
                 >
-                  <div className="flex items-baseline justify-between gap-4">
+                  <div className="flex flex-col gap-1 md:flex-row md:items-baseline md:justify-between md:gap-4">
                     <span className="font-serif text-xl text-fg">
                       {project.name}
                     </span>
