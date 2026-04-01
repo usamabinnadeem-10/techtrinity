@@ -36,8 +36,8 @@ export async function submitContactForm(
 
   try {
     await resend.emails.send({
-      from: 'TechTrinity Contact <contact@techtrinity.ai>',
-      to: 'usama@techtrinity.ai',
+      from: 'TechTrinity Contact <info@techtrinity.ai>',
+      to: 'usamabinnadeem10@gmail.com',
       replyTo: email,
       subject: `New enquiry from ${name}${company ? ` — ${company}` : ''}`,
       text: `
@@ -57,7 +57,7 @@ ${message}
   } catch {
     return {
       status: 'error',
-      message: 'Something went wrong. Please try emailing us directly at usama@techtrinity.ai'
+      message: 'Something went wrong. Please try emailing us directly at info@techtrinity.ai'
     }
   }
 }
