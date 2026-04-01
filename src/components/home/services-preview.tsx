@@ -27,7 +27,7 @@ const SERVICES = [
 
 export function ServicesPreview() {
   return (
-    <section className="border-t border-b border-border">
+    <section className="border-t border-border">
       <Container>
         <div className="flex items-baseline justify-between border-b border-border pt-10 pb-8">
           <h2 className="font-serif text-2xl text-fg">What we build</h2>
@@ -41,7 +41,7 @@ export function ServicesPreview() {
             <Link
               key={service.number}
               href={service.href}
-              className="group flex flex-col gap-3 px-4 py-6 md:px-6 md:py-8 border-b border-border md:border-b-0 transition-colors hover:bg-surface"
+              className="group flex flex-col gap-3 px-4 py-6 md:px-6 md:py-8 border-b border-border last:border-b-0 md:border-b-0 transition-colors hover:bg-surface"
             >
               <span className="font-mono text-xs text-muted">
                 {service.number}

@@ -40,7 +40,7 @@ export function ProcessSection() {
 
         <div className="grid grid-cols-1 md:grid-cols-4 md:divide-x divide-border border-t border-border py-10">
           {STEPS.map((step) => (
-            <div key={step.number} className="flex flex-col gap-3 px-0 md:px-6 border-b border-border md:border-b-0">
+            <div key={step.number} className="flex flex-col gap-3 px-0 py-6 md:px-6 md:py-0 border-b border-border last:border-b-0 md:border-b-0">
               <span className="font-mono text-xs uppercase text-muted">
                 {step.number}
               </span>

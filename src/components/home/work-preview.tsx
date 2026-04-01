@@ -20,7 +20,7 @@ export function WorkPreview() {
             <Link
               key={project.slug}
               href={`/work/${project.slug}`}
-              className="flex flex-col gap-4 border-b border-border md:border-b-0 p-5 md:p-8 transition-colors hover:bg-surface"
+              className="flex flex-col gap-4 border-b border-border last:border-b-0 md:border-b-0 p-5 md:p-8 transition-colors hover:bg-surface"
             >
               <div className="flex flex-col gap-1">
                 <span className="font-serif text-lg text-fg">
