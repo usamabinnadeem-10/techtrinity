@@ -196,9 +196,9 @@ export default function AboutPage() {
           <span className="mb-8 block font-mono text-xs uppercase tracking-widest text-muted">
             How we work
           </span>
-          <div className="-my-px grid grid-cols-1 md:-mx-px md:grid-cols-2">
+          <div className="grid grid-cols-1 border-t border-l border-border md:grid-cols-2">
             {values.map((value) => (
-              <div key={value.title} className="my-px border border-border p-8 md:mx-px">
+              <div key={value.title} className="border-b border-r border-border p-8">
                 <h3 className="mb-3 font-sans text-sm font-medium text-fg">
                   {value.title}
                 </h3>
