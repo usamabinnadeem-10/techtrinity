@@ -110,11 +110,13 @@
     color: var(--color-muted);
   }
   .prose-content code {
+    display: block !important;
     font-family: var(--font-mono);
     font-size: 0.8125rem;
     background: var(--color-surface);
-    padding: 0.15em 0.4em;
+    padding: 0.8em;
     color: var(--color-fg);
+    border-radius: 4px;
   }
   .prose-content hr {
     border: none;
