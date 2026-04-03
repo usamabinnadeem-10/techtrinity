@@ -109,14 +109,28 @@
     font-style: italic;
     color: var(--color-muted);
   }
-  .prose-content code {
-    display: block !important;
+  .prose-content pre {
+    overflow-x: auto;
+    border-radius: 4px;
+    margin: 1.5rem 0;
+  }
+  .prose-content pre.shiki {
+    background-color: var(--color-surface);
+    padding: 1em;
+  }
+  .prose-content pre code {
+    display: block;
     font-family: var(--font-mono);
     font-size: 0.8125rem;
+    line-height: 1.7;
+    background: none;
+  }
+  .prose-content :not(pre) > code {
+    font-family: var(--font-mono);
+    font-size: 0.875em;
     background: var(--color-surface);
-    padding: 0.8em;
-    color: var(--color-fg);
-    border-radius: 4px;
+    padding: 0.15em 0.4em;
+    border-radius: 3px;
   }
   .prose-content hr {
     border: none;
