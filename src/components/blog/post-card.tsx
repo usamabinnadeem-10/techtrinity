@@ -1,13 +1,10 @@
 import Link from 'next/link'
+import type { PostListItem } from '@/lib/blog'
 
-import type { Post } from '@/lib/blog'
-
-export function PostCard({ post }: { post: Post }) {
-  const cleanSlug = post.slug.replace('posts/', '')
-
+export function PostCard({ post }: { post: PostListItem }) {
   return (
     <Link
-      href={`/blog/${cleanSlug}`}
+      href={`/blog/${post.slug}`}
       className="block border border-border p-6 md:p-8 hover:bg-surface transition-colors"
     >
       <div className="flex items-center gap-2">
@@ -21,7 +18,7 @@ export function PostCard({ post }: { post: Post }) {
             day: 'numeric',
           })}
         </time>
-        {post.tags.slice(0, 2).map((tag) => (
+        {(post.tags ?? []).slice(0, 2).map((tag) => (
           <span
             key={tag}
             className="font-mono text-xs border border-border text-muted px-2 py-1"
