@@ -4,8 +4,8 @@ interface PostHeaderProps {
   title: string
   description: string
   publishedAt: string
-  updatedAt?: string
-  tags: string[]
+  updatedAt?: string | null
+  tags: string[] | null
   author: string
 }
 
@@ -38,7 +38,7 @@ export function PostHeader({
       </nav>
 
       <div className="mt-6 flex flex-wrap gap-2">
-        {tags.map((tag) => (
+        {(tags ?? []).map((tag) => (
           <span
             key={tag}
             className="font-mono text-xs border border-border text-muted px-2 py-1"

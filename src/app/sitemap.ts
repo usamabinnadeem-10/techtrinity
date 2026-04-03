@@ -1,7 +1,8 @@
 import type { MetadataRoute } from 'next'
-import { getAllPosts } from '@/lib/blog'
+import { ALL_POSTS_QUERY, type PostListItem } from '@/lib/blog'
+import { sanityFetch } from '@/sanity/lib/live'
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://techtrinity.ai'
 
   const staticEntries: MetadataRoute.Sitemap = [
@@ -43,13 +44,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ]
 
-  const posts = getAllPosts()
-  const blogEntries: MetadataRoute.Sitemap = posts.map((post) => ({
-    url: `${baseUrl}/blog/${post.slug.replace('posts/', '')}`,
-    lastModified: post.updatedAt ?? post.publishedAt,
-    changeFrequency: 'monthly' as const,
-    priority: 0.7,
-  }))
+  const { data: posts } = await sanityFetch({
+    query: ALL_POSTS_QUERY,
+    perspective: 'published',
+    stega: false,
+  })
+
+  const blogEntries: MetadataRoute.Sitemap = (posts as PostListItem[]).map(
+    (post) => ({
+      url: `${baseUrl}/blog/${post.slug}`,
+      lastModified: post.updatedAt ?? post.publishedAt,
+      changeFrequency: 'monthly' as const,
+      priority: 0.7,
+    })
+  )
 
   return [...staticEntries, ...blogEntries]
 }
