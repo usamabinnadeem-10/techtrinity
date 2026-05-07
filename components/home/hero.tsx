@@ -2,7 +2,13 @@ import { LinkButton } from "./button";
 import { Gallery, type GalleryImage } from "./gallery";
 import { EditorialLabel } from "./label";
 
-const TRUSTED = ["Canonical", "Xenia", "Hirecinch"];
+const STATS = [
+  "8+ Products Shipped",
+  "React, Django & Node",
+  "Ex-Canonical Engineers",
+  "US / UK / AU Clients",
+  "Senior-Only Team",
+];
 
 const PRODUCT_IMAGES: GalleryImage[] = [
   {
@@ -73,20 +79,22 @@ export function Hero() {
           </div>
         </div>
 
-        <div className="hero-fade mt-22 flex flex-wrap items-center gap-7 border-t border-border pt-9 [animation-delay:1.2s]">
-          <EditorialLabel tone="muted" className="whitespace-nowrap">
-            Trusted by teams working with
-          </EditorialLabel>
-          <div className="flex flex-wrap items-center gap-7 mb-0.5">
-            {TRUSTED.map((name) => (
-              <span
-                key={name}
-                className="font-display text-[17px] font-bold tracking-[-0.02em] text-muted-foreground transition-colors hover:text-foreground"
-              >
-                {name}
+        <div className="hero-fade mt-22 flex flex-wrap items-center gap-x-5 gap-y-2.5 border-t border-border pt-9 [animation-delay:1.2s]">
+          {STATS.map((stat, i) => (
+            <div key={stat} className="flex items-center gap-x-5">
+              {i > 0 && (
+                <span
+                  aria-hidden
+                  className="select-none text-[15px] font-light text-border"
+                >
+                  |
+                </span>
+              )}
+              <span className="font-display text-[14px] font-semibold tracking-[-0.01em] text-muted-foreground transition-colors hover:text-foreground">
+                {stat}
               </span>
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
       </section>
     </div>

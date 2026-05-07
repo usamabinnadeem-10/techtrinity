@@ -7,7 +7,7 @@ const FOOTER_LINKS = [
   { href: "#", label: "Blog" },
   { href: "#cta-sec", label: "Contact" },
   { href: "#", label: "LinkedIn" },
-  { href: "https://github.com/usamabinnadeem-10", label: "GitHub" },
+  // { href: "https://github.com/usamabinnadeem-10", label: "GitHub" },
 ];
 
 export function SiteFooter() {

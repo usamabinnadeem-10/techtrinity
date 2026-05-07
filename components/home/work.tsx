@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { EditorialLabel } from "./label";
 
@@ -5,26 +6,50 @@ type Project = {
   name: string;
   description: string;
   href: string;
+  image?: {
+    src: string;
+    alt: string;
+    width: number;
+    height: number;
+  };
 };
 
 const PROJECTS: Project[] = [
+  {
+    name: "EasyAccounts ERP",
+    description:
+      "Cloud-native multi-tenant ERP system for wholesale textile trading businesses.",
+    href: "#",
+    image: {
+      src: "/easyaccounts/product-cost-trace.png",
+      alt: "EasyAccounts ERP product cost trace interface",
+      width: 3456,
+      height: 1916,
+    },
+  },
   {
     name: "Xenia ERP",
     description:
       "A full-scale enterprise resource planning system built for complex operational workflows.",
     href: "#",
+    image: {
+      src: "/xenia/documents.png",
+      alt: "Xenia ERP documents interface",
+      width: 1440,
+      height: 900,
+    },
   },
   {
     name: "Hirecinch",
     description:
       "A modern hiring platform designed to streamline candidate evaluation and team collaboration.",
     href: "#",
-  },
-  {
-    name: "Jewelicate",
-    description:
-      "A Next.js + NestJS e-commerce platform for a premium jewellery brand with complex inventory needs.",
-    href: "#",
+    image: {
+      src: "/hirecinch/applicants.png",
+      alt: "Hirecinch applicants dashboard",
+      width: 1433,
+      height: 895,
+    },
   },
 ];
 
@@ -65,18 +90,15 @@ export function Work() {
               View Case Study <span aria-hidden>→</span>
             </Link>
           </div>
-          <div className="relative h-[260px] overflow-hidden rounded-md border border-border bg-background md:h-[300px]">
-            <span aria-hidden className="grid-bg absolute inset-0 opacity-60" />
-            <div className="relative flex h-full items-center justify-center">
-              <div className="text-center">
-                <p className="font-display text-[30px] font-bold tracking-[-0.02em] text-muted-foreground">
-                  Canonical
-                </p>
-                <p className="mt-2 font-mono text-[11px] tracking-[0.1em] text-muted-foreground">
-                  ACADEMY PLATFORM
-                </p>
-              </div>
-            </div>
+          <div className="relative overflow-hidden rounded-md border border-border bg-background">
+            <Image
+              src="/canonical/purchase.png"
+              alt="Canonical Academy purchase flow"
+              width={3456}
+              height={1984}
+              sizes="(min-width: 768px) 540px, 100vw"
+              className="h-auto w-full"
+            />
           </div>
         </article>
 
@@ -89,8 +111,30 @@ export function Work() {
           {PROJECTS.map((project) => (
             <article
               key={project.name}
-              className="bg-card p-10 transition-colors duration-300 hover:bg-card-elevated"
+              className="flex flex-col bg-card p-10 transition-colors duration-300 hover:bg-card-elevated"
             >
+              <div className="relative mb-9 aspect-video w-full overflow-hidden rounded-sm border border-border bg-transparent">
+                {project.image ? (
+                  <Image
+                    src={project.image.src}
+                    alt={project.image.alt}
+                    fill
+                    sizes="(min-width: 768px) 360px, 100vw"
+                    className="object-cover object-top"
+                  />
+                ) : (
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="text-center">
+                      <p className="font-display text-[22px] font-bold tracking-[-0.02em] text-muted-foreground">
+                        {project.name}
+                      </p>
+                      <p className="mt-1.5 font-mono text-[10px] tracking-widest text-muted-foreground">
+                        CASE STUDY · SOON
+                      </p>
+                    </div>
+                  </div>
+                )}
+              </div>
               <h3 className="font-display text-[24px] font-bold tracking-[-0.02em]">
                 {project.name}
               </h3>
@@ -99,7 +143,7 @@ export function Work() {
               </p>
               <Link
                 href={project.href}
-                className="mt-6 inline-flex items-center gap-1.5 font-mono text-[12px] tracking-[0.04em] text-muted-foreground transition-colors hover:text-primary"
+                className="mt-auto inline-flex items-center gap-1.5 self-start pt-6 font-mono text-[12px] tracking-[0.04em] text-muted-foreground transition-colors hover:text-primary"
               >
                 View Project →
               </Link>

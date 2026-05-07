@@ -27,10 +27,6 @@ export function Gallery({ images, className }: Props) {
     setIndex((i) => (i + 1) % total);
   }, [total]);
 
-  const prev = useCallback(() => {
-    setIndex((i) => (i - 1 + total) % total);
-  }, [total]);
-
   useEffect(() => {
     if (single) return;
     const id = window.setInterval(next, AUTOPLAY_INTERVAL_MS);
@@ -40,7 +36,7 @@ export function Gallery({ images, className }: Props) {
   if (total === 0) return null;
 
   return (
-    <div className={cn("flex w-full flex-col items-end gap-6", className)}>
+    <div className={cn("flex w-full flex-col items-center gap-6", className)}>
       <div className="relative aspect-2614/1666 w-full">
         {images.map((img, i) => (
           <Image
@@ -60,61 +56,47 @@ export function Gallery({ images, className }: Props) {
         ))}
       </div>
 
-      <div className="flex items-center gap-2.5">
-        <ArrowButton
-          direction="left"
-          onClick={prev}
-          disabled={single}
-          label="Previous image"
-        />
-        <ArrowButton
-          direction="right"
-          onClick={next}
-          disabled={single}
-          label="Next image"
-        />
-      </div>
+      {!single && (
+        <div className="flex items-center gap-2.5" role="tablist" aria-label="Product gallery">
+          {images.map((img, i) => (
+            <Dot
+              key={img.src}
+              active={i === index}
+              onClick={() => setIndex(i)}
+              label={`Show ${img.alt}`}
+            />
+          ))}
+        </div>
+      )}
     </div>
   );
 }
 
-type ArrowButtonProps = {
-  direction: "left" | "right";
+type DotProps = {
+  active: boolean;
   onClick: () => void;
-  disabled: boolean;
   label: string;
 };
 
-function ArrowButton({ direction, onClick, disabled, label }: ArrowButtonProps) {
+function Dot({ active, onClick, label }: DotProps) {
   return (
     <button
       type="button"
       onClick={onClick}
-      disabled={disabled}
       aria-label={label}
-      className="inline-flex h-11 w-11 items-center justify-center rounded-sm bg-primary text-primary-foreground transition-[background-color,transform,opacity] duration-200 hover:bg-[#cfff72] hover:-translate-y-px focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:translate-y-0 disabled:hover:bg-primary"
+      aria-selected={active}
+      role="tab"
+      className="group inline-flex h-6 w-6 items-center justify-center focus-visible:outline-none"
     >
-      <ArrowIcon direction={direction} />
+      <span
+        className={cn(
+          "block rounded-full transition-[width,height,background-color] duration-300 ease-out",
+          "group-focus-visible:ring-2 group-focus-visible:ring-ring group-focus-visible:ring-offset-2 group-focus-visible:ring-offset-background",
+          active
+            ? "h-2.5 w-6 bg-primary"
+            : "h-2.5 w-2.5 bg-border group-hover:bg-muted-foreground",
+        )}
+      />
     </button>
-  );
-}
-
-function ArrowIcon({ direction }: { direction: "left" | "right" }) {
-  return (
-    <svg
-      width="18"
-      height="18"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2.25"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden
-      className={cn(direction === "left" && "rotate-180")}
-    >
-      <path d="M5 12h14" />
-      <path d="m12 5 7 7-7 7" />
-    </svg>
   );
 }
