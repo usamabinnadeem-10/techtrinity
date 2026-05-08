@@ -82,12 +82,21 @@ export const ALL_POST_SLUGS_QUERY = /* groq */ `
   *[_type == "post" && defined(slug.current)]{ "slug": slug.current }
 `;
 
+export const ALL_POSTS_SITEMAP_QUERY = /* groq */ `
+  *[_type == "post" && defined(slug.current) && defined(publishedAt)]{
+    "slug": slug.current,
+    publishedAt,
+    _updatedAt
+  }
+`;
+
 export const POST_BY_SLUG_QUERY = /* groq */ `
   *[_type == "post" && slug.current == $slug][0]{
     _id,
     title,
     "slug": slug.current,
     publishedAt,
+    _updatedAt,
     excerpt,
     category,
     readTime,

@@ -42,9 +42,9 @@ export function CaseArchitecture({ caseStudy }: Props) {
               <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">
                 {String(i + 1).padStart(2, "0")} · Layer
               </p>
-              <h4 className="mt-5 font-display text-[22px] font-bold tracking-[-0.015em]">
+              <h3 className="mt-5 font-display text-[22px] font-bold tracking-[-0.015em]">
                 {detail.title}
-              </h4>
+              </h3>
               <p className="mt-3 text-[14px] font-light leading-[1.75] text-muted">
                 {detail.body}
               </p>
@@ -130,14 +130,14 @@ function LayerCard({ layer }: { layer: Layer }) {
       )}
     >
       <div className="flex items-center justify-between gap-4">
-        <h4
+        <h3
           className={cn(
             "font-display text-[18px] font-bold tracking-[-0.015em]",
             isPrimary ? "text-primary" : "text-foreground",
           )}
         >
           {layer.title}
-        </h4>
+        </h3>
         <span
           aria-hidden
           className={cn(

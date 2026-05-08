@@ -46,9 +46,9 @@ export function CaseScorecard({ caseStudy }: Props) {
               <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
                 {String(i + 1).padStart(2, "0")}
               </p>
-              <h4 className="mt-5 font-display text-[20px] font-bold tracking-[-0.015em]">
+              <h3 className="mt-5 font-display text-[20px] font-bold tracking-[-0.015em]">
                 {card.title}
-              </h4>
+              </h3>
               <p className="mt-3 text-[14px] font-light leading-[1.75] text-muted">
                 {card.body}
               </p>

@@ -11,9 +11,17 @@ import { ALL_POSTS_QUERY, sanityFetch } from "@/lib/sanity";
 import type { PostListItem } from "@/lib/blog-types";
 
 export const metadata: Metadata = {
-  title: "Blog — TechTrinity",
+  title: "Blog",
   description:
     "Practical writing for non-technical founders and the engineers who build with them.",
+  alternates: { canonical: "/blog" },
+  openGraph: {
+    title: "Blog — TechTrinity",
+    description:
+      "Practical writing for non-technical founders and the engineers who build with them.",
+    url: "/blog",
+    type: "website",
+  },
 };
 
 export const revalidate = 60;

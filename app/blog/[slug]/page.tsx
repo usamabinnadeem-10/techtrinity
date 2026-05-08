@@ -21,12 +21,15 @@ import {
 import { isSanityConfigured } from "@/sanity/env";
 import { urlForImage } from "@/lib/sanity-image";
 import type { Post, PostListItem } from "@/lib/blog-types";
+import {
+  absoluteUrl,
+  breadcrumbSchema,
+  JsonLd,
+  SITE_NAME,
+  SITE_URL,
+} from "@/lib/site";
 
 type RouteParams = { slug: string };
-
-const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ||
-  "https://techtrinity.ai";
 
 export const revalidate = 60;
 
@@ -56,26 +59,27 @@ export async function generateMetadata({
   });
 
   if (!post) {
-    return { title: "Post — TechTrinity" };
+    return { title: "Post" };
   }
 
   const title = post.seoTitle || post.title;
   const description = post.seoDescription || post.excerpt;
-  const url = `${SITE_URL}/blog/${post.slug}`;
+  const path = `/blog/${post.slug}`;
   const ogImage = post.coverImage?.asset?._id
     ? urlForImage(post.coverImage).width(1200).height(630).fit("crop").url()
     : undefined;
 
   return {
-    title: `${title} — TechTrinity`,
+    title,
     description,
-    alternates: { canonical: url },
+    alternates: { canonical: path },
     openGraph: {
       title,
       description,
-      url,
+      url: path,
       type: "article",
       publishedTime: post.publishedAt,
+      modifiedTime: post._updatedAt,
       authors: post.author?.name ? [post.author.name] : undefined,
       images: ogImage ? [{ url: ogImage, width: 1200, height: 630 }] : undefined,
     },
@@ -84,6 +88,44 @@ export async function generateMetadata({
       title,
       description,
       images: ogImage ? [ogImage] : undefined,
+    },
+  };
+}
+
+function blogPostingSchema(post: Post): Record<string, unknown> {
+  const url = absoluteUrl(`/blog/${post.slug}`);
+  const ogImage = post.coverImage?.asset?._id
+    ? urlForImage(post.coverImage).width(1200).height(630).fit("crop").url()
+    : undefined;
+  const authorPhoto = post.author?.photo?.asset?._id
+    ? urlForImage(post.author.photo).width(400).height(400).fit("crop").url()
+    : undefined;
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    mainEntityOfPage: { "@type": "WebPage", "@id": url },
+    url,
+    headline: post.title,
+    description: post.seoDescription || post.excerpt,
+    image: ogImage ? [ogImage] : undefined,
+    datePublished: post.publishedAt,
+    dateModified: post._updatedAt || post.publishedAt,
+    articleSection: post.category,
+    author: {
+      "@type": "Person",
+      name: post.author.name,
+      description: post.author.bio,
+      image: authorPhoto,
+    },
+    publisher: {
+      "@type": "Organization",
+      name: SITE_NAME,
+      url: SITE_URL,
+      logo: {
+        "@type": "ImageObject",
+        url: `${SITE_URL}/opengraph-image`,
+      },
     },
   };
 }
@@ -110,10 +152,17 @@ export default async function BlogPostPage({
       tags: ["post"],
     })) ?? [];
 
-  const url = `${SITE_URL}/blog/${post.slug}`;
+  const url = absoluteUrl(`/blog/${post.slug}`);
+
+  const breadcrumbs = breadcrumbSchema([
+    { name: "Home", path: "/" },
+    { name: "Blog", path: "/blog" },
+    { name: post.title, path: `/blog/${post.slug}` },
+  ]);
 
   return (
     <>
+      <JsonLd data={[blogPostingSchema(post), breadcrumbs]} />
       <AmbientBackground />
       <SiteNav />
       <main>

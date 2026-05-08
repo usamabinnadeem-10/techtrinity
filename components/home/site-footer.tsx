@@ -1,13 +1,22 @@
 import Link from "next/link";
 
-const FOOTER_LINKS = [
+type FooterLink = {
+  href: string;
+  label: string;
+  external?: boolean;
+};
+
+const FOOTER_LINKS: FooterLink[] = [
   { href: "/#work", label: "Work" },
   { href: "/services", label: "Services" },
   { href: "/about", label: "About" },
   { href: "/blog", label: "Blog" },
   { href: "/contact", label: "Contact" },
-  { href: "#", label: "LinkedIn" },
-  // { href: "https://github.com/usamabinnadeem-10", label: "GitHub" },
+  {
+    href: "https://www.linkedin.com/company/108867952",
+    label: "LinkedIn",
+    external: true,
+  },
 ];
 
 export function SiteFooter() {
@@ -22,8 +31,9 @@ export function SiteFooter() {
             {FOOTER_LINKS.map((link) => (
               <li key={link.label}>
                 <Link
-                  target="_blank"
                   href={link.href}
+                  target={link.external ? "_blank" : undefined}
+                  rel={link.external ? "noopener noreferrer" : undefined}
                   className="text-[13px] text-muted-foreground transition-colors hover:text-foreground"
                 >
                   {link.label}

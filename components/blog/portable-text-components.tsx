@@ -1,5 +1,8 @@
 import Image from "next/image";
-import type { PortableTextComponents } from "@portabletext/react";
+import type {
+  PortableTextBlock,
+  PortableTextComponents,
+} from "@portabletext/react";
 import { urlForImage } from "@/lib/sanity-image";
 import type { SanityImage } from "@/lib/blog-types";
 
@@ -19,18 +22,50 @@ type InlineImageValue = {
   caption?: string;
 };
 
+function blockToPlainText(block: PortableTextBlock): string {
+  const children = (block.children ?? []) as { text?: string }[];
+  return children
+    .map((child) => child.text ?? "")
+    .join("")
+    .trim();
+}
+
+function slugifyHeading(text: string): string {
+  return text
+    .toLowerCase()
+    .normalize("NFKD")
+    .replace(/[̀-ͯ]/g, "")
+    .replace(/[^a-z0-9\s-]/g, "")
+    .trim()
+    .replace(/\s+/g, "-")
+    .replace(/-+/g, "-")
+    .slice(0, 80);
+}
+
 export const portableTextComponents: PortableTextComponents = {
   block: {
-    h2: ({ children }) => (
-      <h2 className="mt-12 mb-5 font-display text-[32px] font-bold leading-[1.15] tracking-[-0.02em] text-foreground">
-        {children}
-      </h2>
-    ),
-    h3: ({ children }) => (
-      <h3 className="mt-9 mb-4 font-display text-[24px] font-bold leading-[1.2] tracking-[-0.02em] text-foreground">
-        {children}
-      </h3>
-    ),
+    h2: ({ children, value }) => {
+      const id = slugifyHeading(blockToPlainText(value as PortableTextBlock));
+      return (
+        <h2
+          id={id || undefined}
+          className="mt-12 mb-5 scroll-mt-24 font-display text-[32px] font-bold leading-[1.15] tracking-[-0.02em] text-foreground"
+        >
+          {children}
+        </h2>
+      );
+    },
+    h3: ({ children, value }) => {
+      const id = slugifyHeading(blockToPlainText(value as PortableTextBlock));
+      return (
+        <h3
+          id={id || undefined}
+          className="mt-9 mb-4 scroll-mt-24 font-display text-[24px] font-bold leading-[1.2] tracking-[-0.02em] text-foreground"
+        >
+          {children}
+        </h3>
+      );
+    },
     normal: ({ children }) => (
       <p className="my-5 text-[17px] font-light leading-[1.85] text-muted">
         {children}

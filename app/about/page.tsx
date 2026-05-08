@@ -11,9 +11,17 @@ import { RevealController } from "@/components/home/reveal-controller";
 import { SiteFooter } from "@/components/home/site-footer";
 
 export const metadata: Metadata = {
-  title: "About — TechTrinity",
+  title: "About",
   description:
     "We started TechTrinity because founders deserve better. A small, senior team built on real engineering experience — not freelance projects and side builds.",
+  alternates: { canonical: "/about" },
+  openGraph: {
+    title: "About — TechTrinity",
+    description:
+      "A small, senior team built on real engineering experience — not freelance projects and side builds.",
+    url: "/about",
+    type: "website",
+  },
 };
 
 export default function AboutPage() {

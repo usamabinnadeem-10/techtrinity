@@ -10,9 +10,17 @@ import { ServicesHeader } from "@/components/services/services-header";
 import { ServicesProcess } from "@/components/services/services-process";
 
 export const metadata: Metadata = {
-  title: "Services — TechTrinity",
+  title: "Services",
   description:
     "Four focused services for non-technical SaaS founders — Product Sprint, Build-Only, Growth Retainer, and Technical Audit. Clear scope, fixed process, no surprises.",
+  alternates: { canonical: "/services" },
+  openGraph: {
+    title: "Services — TechTrinity",
+    description:
+      "Four focused services for non-technical SaaS founders — Product Sprint, Build-Only, Growth Retainer, and Technical Audit.",
+    url: "/services",
+    type: "website",
+  },
 };
 
 export default function ServicesPage() {

@@ -18,7 +18,18 @@ import { CasePlatform } from "@/components/case-study/case-platform";
 import { CaseReview } from "@/components/case-study/case-review";
 import { CaseScorecard } from "@/components/case-study/case-scorecard";
 import { CaseSpotlight } from "@/components/case-study/case-spotlight";
-import { getAllCaseStudySlugs, getCaseStudy } from "@/lib/case-studies";
+import {
+  getAllCaseStudySlugs,
+  getCaseStudy,
+  type CaseStudy,
+} from "@/lib/case-studies";
+import {
+  absoluteUrl,
+  breadcrumbSchema,
+  JsonLd,
+  SITE_NAME,
+  SITE_URL,
+} from "@/lib/site";
 
 type RouteParams = { slug: string };
 
@@ -34,11 +45,60 @@ export async function generateMetadata({
   const { slug } = await params;
   const caseStudy = getCaseStudy(slug);
   if (!caseStudy) {
-    return { title: "Case Study — TechTrinity" };
+    return { title: "Case Study" };
   }
+  const description = caseStudy.headline.join(" ");
+  const path = `/work/${slug}`;
+  const heroImage = caseStudy.hero.image.src.startsWith("http")
+    ? caseStudy.hero.image.src
+    : absoluteUrl(caseStudy.hero.image.src);
   return {
-    title: `${caseStudy.name} — TechTrinity`,
+    title: caseStudy.name,
+    description,
+    alternates: { canonical: path },
+    openGraph: {
+      title: `${caseStudy.name} — Case Study`,
+      description,
+      url: path,
+      type: "article",
+      images: [{ url: heroImage }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${caseStudy.name} — Case Study`,
+      description,
+      images: [heroImage],
+    },
+  };
+}
+
+function caseStudySchema(caseStudy: CaseStudy): Record<string, unknown> {
+  const url = absoluteUrl(`/work/${caseStudy.slug}`);
+  const heroImage = caseStudy.hero.image.src.startsWith("http")
+    ? caseStudy.hero.image.src
+    : absoluteUrl(caseStudy.hero.image.src);
+  return {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: caseStudy.name,
     description: caseStudy.headline.join(" "),
+    url,
+    mainEntityOfPage: { "@type": "WebPage", "@id": url },
+    image: [heroImage],
+    publisher: {
+      "@type": "Organization",
+      name: SITE_NAME,
+      url: SITE_URL,
+      logo: {
+        "@type": "ImageObject",
+        url: `${SITE_URL}/opengraph-image`,
+      },
+    },
+    author: {
+      "@type": "Organization",
+      name: SITE_NAME,
+      url: SITE_URL,
+    },
   };
 }
 
@@ -51,8 +111,15 @@ export default async function CaseStudyPage({
   const caseStudy = getCaseStudy(slug);
   if (!caseStudy) notFound();
 
+  const breadcrumbs = breadcrumbSchema([
+    { name: "Home", path: "/" },
+    { name: "Work", path: "/#work" },
+    { name: caseStudy.name, path: `/work/${caseStudy.slug}` },
+  ]);
+
   return (
     <>
+      <JsonLd data={[caseStudySchema(caseStudy), breadcrumbs]} />
       <AmbientBackground />
       <SiteNav />
       <main>

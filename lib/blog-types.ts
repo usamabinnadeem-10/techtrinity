@@ -46,6 +46,7 @@ export type Post = PostListItem & {
   author: Author;
   seoTitle?: string | null;
   seoDescription?: string | null;
+  _updatedAt?: string;
 };
 
 export const CATEGORY_SLUGS: Record<PostCategory, string> = {

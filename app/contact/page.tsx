@@ -9,9 +9,17 @@ import { ContactForm } from "@/components/contact/contact-form";
 import { ContactHeader } from "@/components/contact/contact-header";
 
 export const metadata: Metadata = {
-  title: "Contact — TechTrinity",
+  title: "Contact",
   description:
     "Tell us about your product or book a 30-minute discovery call with the TechTrinity team.",
+  alternates: { canonical: "/contact" },
+  openGraph: {
+    title: "Contact — TechTrinity",
+    description:
+      "Tell us about your product or book a 30-minute discovery call with the TechTrinity team.",
+    url: "/contact",
+    type: "website",
+  },
 };
 
 export default function ContactPage() {
