@@ -7,9 +7,9 @@ import { LinkButton } from "./button";
 
 const NAV_LINKS = [
   { href: "/#work", label: "Work" },
-  { href: "/#services", label: "Services" },
-  { href: "/#about", label: "About" },
-  { href: "#", label: "Blog" },
+  { href: "/services", label: "Services" },
+  { href: "/about", label: "About" },
+  { href: "/blog", label: "Blog" },
 ];
 
 export function SiteNav() {

@@ -1,12 +1,14 @@
 import type { MetadataRoute } from "next";
 import { getAllCaseStudySlugs } from "@/lib/case-studies";
+import { ALL_POST_SLUGS_QUERY, sanityClient } from "@/lib/sanity";
+import { isSanityConfigured } from "@/sanity/env";
 import { getAllServiceSlugs } from "@/lib/services";
 
 const BASE_URL =
   process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ||
   "https://techtrinity.ai";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date();
 
   const staticRoutes: MetadataRoute.Sitemap = [
@@ -21,6 +23,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: now,
       changeFrequency: "monthly",
       priority: 0.9,
+    },
+    {
+      url: `${BASE_URL}/blog`,
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 0.8,
     },
     {
       url: `${BASE_URL}/contact`,
@@ -48,5 +56,22 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }),
   );
 
-  return [...staticRoutes, ...serviceRoutes, ...caseStudyRoutes];
+  let postRoutes: MetadataRoute.Sitemap = [];
+  if (isSanityConfigured) {
+    try {
+      const slugs = await sanityClient
+        .withConfig({ useCdn: false })
+        .fetch<{ slug: string }[]>(ALL_POST_SLUGS_QUERY);
+      postRoutes = slugs.map(({ slug }) => ({
+        url: `${BASE_URL}/blog/${slug}`,
+        lastModified: now,
+        changeFrequency: "monthly",
+        priority: 0.6,
+      }));
+    } catch (error) {
+      console.error("Failed to fetch post slugs for sitemap:", error);
+    }
+  }
+
+  return [...staticRoutes, ...serviceRoutes, ...caseStudyRoutes, ...postRoutes];
 }
