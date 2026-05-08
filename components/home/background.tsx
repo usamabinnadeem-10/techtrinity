@@ -68,7 +68,7 @@ export function AmbientBackground() {
           orb.y,
           orb.r,
         );
-        gradient.addColorStop(0, `rgba(${orb.rgb},0.065)`);
+        gradient.addColorStop(0, `rgba(${orb.rgb},0.04)`);
         gradient.addColorStop(1, "rgba(0,0,0,0)");
         ctx.beginPath();
         ctx.arc(orb.x, orb.y, orb.r, 0, Math.PI * 2);

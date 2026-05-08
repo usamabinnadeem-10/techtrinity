@@ -79,18 +79,22 @@ export function Hero() {
           </div>
         </div>
 
-        <div className="hero-fade mt-22 flex flex-wrap items-center gap-x-5 gap-y-2.5 border-t border-border pt-9 [animation-delay:1.2s]">
+        <div className="hero-fade mt-14 flex flex-col gap-3 border-t border-border pt-7 lg:mt-22 lg:flex-row lg:flex-wrap lg:items-center lg:gap-x-5 lg:gap-y-2.5 lg:pt-9 [animation-delay:1.2s]">
           {STATS.map((stat, i) => (
             <div key={stat} className="flex items-center gap-x-5">
               {i > 0 && (
                 <span
                   aria-hidden
-                  className="select-none text-[15px] font-light text-border"
+                  className="hidden select-none text-[15px] font-light text-border lg:inline"
                 >
                   |
                 </span>
               )}
-              <span className="font-display text-[14px] font-semibold tracking-[-0.01em] text-muted-foreground transition-colors hover:text-foreground">
+              <span className="flex items-center gap-3 font-display text-[14px] font-semibold tracking-[-0.01em] text-muted-foreground transition-colors hover:text-foreground">
+                <span
+                  aria-hidden
+                  className="block h-px w-3.5 bg-primary lg:hidden"
+                />
                 {stat}
               </span>
             </div>
