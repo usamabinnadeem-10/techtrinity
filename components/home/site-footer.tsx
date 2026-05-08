@@ -5,7 +5,7 @@ const FOOTER_LINKS = [
   { href: "/#services", label: "Services" },
   { href: "/#about", label: "About" },
   { href: "#", label: "Blog" },
-  { href: "/#cta-sec", label: "Contact" },
+  { href: "/contact", label: "Contact" },
   { href: "#", label: "LinkedIn" },
   // { href: "https://github.com/usamabinnadeem-10", label: "GitHub" },
 ];
