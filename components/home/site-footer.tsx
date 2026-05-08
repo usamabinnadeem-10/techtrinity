@@ -1,11 +1,11 @@
 import Link from "next/link";
 
 const FOOTER_LINKS = [
-  { href: "#work", label: "Work" },
-  { href: "#services", label: "Services" },
-  { href: "#about", label: "About" },
+  { href: "/#work", label: "Work" },
+  { href: "/#services", label: "Services" },
+  { href: "/#about", label: "About" },
   { href: "#", label: "Blog" },
-  { href: "#cta-sec", label: "Contact" },
+  { href: "/#cta-sec", label: "Contact" },
   { href: "#", label: "LinkedIn" },
   // { href: "https://github.com/usamabinnadeem-10", label: "GitHub" },
 ];

@@ -6,9 +6,9 @@ import { cn } from "@/lib/cn";
 import { LinkButton } from "./button";
 
 const NAV_LINKS = [
-  { href: "#work", label: "Work" },
-  { href: "#services", label: "Services" },
-  { href: "#about", label: "About" },
+  { href: "/#work", label: "Work" },
+  { href: "/#services", label: "Services" },
+  { href: "/#about", label: "About" },
   { href: "#", label: "Blog" },
 ];
 
@@ -49,13 +49,13 @@ export function SiteNav() {
           </li>
         ))}
         <li>
-          <LinkButton href="#cta-sec" variant="accent">
+          <LinkButton href="/#cta-sec" variant="accent">
             Book a Call
           </LinkButton>
         </li>
       </ul>
       <Link
-        href="#cta-sec"
+        href="/#cta-sec"
         className="md:hidden inline-flex items-center rounded-sm bg-primary px-4 py-2 text-sm font-medium text-primary-foreground"
       >
         Book a Call

@@ -19,31 +19,31 @@ const PROJECTS: Project[] = [
     name: "EasyAccounts ERP",
     description:
       "Cloud-native multi-tenant ERP system for wholesale textile trading businesses.",
-    href: "#",
+    href: "/work/easyaccounts",
     image: {
-      src: "/easyaccounts/product-cost-trace.png",
+      src: "/easyaccounts/reports-product-cost-trace.png",
       alt: "EasyAccounts ERP product cost trace interface",
-      width: 3456,
-      height: 1916,
+      width: 1465,
+      height: 812,
     },
   },
   {
-    name: "Xenia ERP",
+    name: "Xenia",
     description:
-      "A full-scale enterprise resource planning system built for complex operational workflows.",
-    href: "#",
+      "Frontline operations platform for multi-location businesses — tasks, checklists, audits, and team comms.",
+    href: "/work/xenia",
     image: {
-      src: "/xenia/documents.png",
-      alt: "Xenia ERP documents interface",
-      width: 1440,
-      height: 900,
+      src: "/xenia/checklist-builder.png",
+      alt: "Xenia template builder interface",
+      width: 1465,
+      height: 812,
     },
   },
   {
-    name: "Hirecinch",
+    name: "Hirecinch ATS",
     description:
       "A modern hiring platform designed to streamline candidate evaluation and team collaboration.",
-    href: "#",
+    href: "/work/hirecinch",
     image: {
       src: "/hirecinch/applicants.png",
       alt: "Hirecinch applicants dashboard",
@@ -84,7 +84,7 @@ export function Work() {
               Ubuntu.
             </p>
             <Link
-              href="#"
+              href="/work/canonical-academy"
               className="mt-9 inline-flex items-center gap-2.5 border-b border-border pb-1 text-sm font-medium text-foreground transition-colors hover:border-primary hover:text-primary"
             >
               View Case Study <span aria-hidden>→</span>
@@ -145,7 +145,7 @@ export function Work() {
                 href={project.href}
                 className="mt-auto inline-flex items-center gap-1.5 self-start pt-6 font-mono text-[12px] tracking-[0.04em] text-muted-foreground transition-colors hover:text-primary"
               >
-                View Project →
+                View Case Study →
               </Link>
             </article>
           ))}

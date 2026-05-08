@@ -23,15 +23,15 @@ const TEAM: TeamMember[] = [
     signature: "u·nadeem",
     field: "Systems / Strategy",
     hue: { from: "#102414", to: "#04090a", accent: "#b8ff57" },
-    // image: { src: "/team/usama.webp", alt: "Portrait of Usama Nadeem" },
+    image: { src: "/team/usama_hf.png", alt: "Portrait of Usama Nadeem" },
   },
   {
-    name: "Alex Mercier",
+    name: "Faiq Khan",
     role: "Design Direction",
     bio: "A decade across editorial, product, and identity. Believes screens should feel as considered as print.",
-    initials: "AM",
+    initials: "FK",
     index: "02",
-    signature: "a·mercier",
+    signature: "f·khan",
     field: "Brand / Interface",
     hue: { from: "#1f1734", to: "#080612", accent: "#c7a8ff" },
   },
@@ -67,9 +67,6 @@ export function Team() {
               No agency layers, no offshoring, no hand-offs. The names on this
               page are the same hands writing the code that ships to your
               users.
-            </p>
-            <p className="mt-5 font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
-              Masthead · MMXXVI · No. {TEAM.length.toString().padStart(2, "0")}
             </p>
           </div>
         </div>
@@ -267,9 +264,6 @@ export function Team() {
         >
           <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
             Small senior team · No juniors hidden behind a logo
-          </p>
-          <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
-            Available for engagements — Q3 / Q4 · 2026
           </p>
         </div>
       </div>
