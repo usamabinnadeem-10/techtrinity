@@ -5,11 +5,11 @@ export const SITE_URL =
 export const SITE_NAME = "TechTrinity";
 
 export const SITE_DESCRIPTION =
-  "From idea to product, done right. We design and build SaaS products on a modern stack and stay accountable until ship.";
+  "From idea to product, done right. We design and build SaaS products on a modern stack and stay accountable until it ships.";
 
 export const ORG_LEGAL_NAME = "TechTrinity";
 
-export const ORG_LOGO_URL = `${SITE_URL}/opengraph-image`;
+export const ORG_LOGO_URL = `${SITE_URL}/opengraph-image.png`;
 
 export const ORG_CONTACT_EMAIL = "info@techtrinity.ai";
 

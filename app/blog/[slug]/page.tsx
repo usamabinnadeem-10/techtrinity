@@ -124,7 +124,7 @@ function blogPostingSchema(post: Post): Record<string, unknown> {
       url: SITE_URL,
       logo: {
         "@type": "ImageObject",
-        url: `${SITE_URL}/opengraph-image`,
+        url: `${SITE_URL}/opengraph-image.png`,
       },
     },
   };
