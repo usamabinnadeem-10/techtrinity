@@ -4,7 +4,7 @@ export function BackNav() {
   return (
     <div className="mx-auto max-w-[1240px] px-6 pt-32 md:px-12 md:pt-36">
       <Link
-        href="/work"
+        href="/#work"
         className="group inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground transition-colors hover:text-primary"
       >
         <svg
