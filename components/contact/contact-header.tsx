@@ -9,7 +9,7 @@ export function ContactHeader() {
           Start a <em className="italic text-primary">conversation.</em>
         </h1>
         <p className="mx-auto mt-7 max-w-[480px] text-[16px] font-light leading-[1.7] text-muted">
-          Tell us about your product and we&apos;ll get back to you within 24
+          Tell us about your product and we&apos;ll get back to you within 6-8
           hours. Or skip the form and book a call directly.
         </p>
       </div>

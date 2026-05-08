@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { EditorialLabel } from "./label";
 
 type Service = {
@@ -5,6 +6,7 @@ type Service = {
   title: string;
   description: string;
   price: string;
+  slug: string;
 };
 
 const SERVICES: Service[] = [
@@ -14,6 +16,7 @@ const SERVICES: Service[] = [
     description:
       "Design + development from scratch. You bring the idea. We bring everything else — UX, UI, and a working product. 8–16 weeks.",
     price: "Starting at $20,000",
+    slug: "product-sprint",
   },
   {
     num: "02",
@@ -21,6 +24,7 @@ const SERVICES: Service[] = [
     description:
       "Already have Figma designs? We build fast and clean on React/Next.js with Node or Django backends. No overhead, just execution.",
     price: "Starting at $12,000",
+    slug: "build-only",
   },
   {
     num: "03",
@@ -28,6 +32,7 @@ const SERVICES: Service[] = [
     description:
       "A dedicated team, monthly. No re-briefing, no handoffs, no strangers in your codebase. Minimum 3-month commitment.",
     price: "Starting at $4,500/month",
+    slug: "growth-retainer",
   },
   {
     num: "04",
@@ -35,6 +40,7 @@ const SERVICES: Service[] = [
     description:
       "Inherited a codebase? We review it honestly and tell you exactly what's broken, what's a risk, and what to fix first.",
     price: "Starting at $1,500",
+    slug: "technical-audit",
   },
 ];
 
@@ -60,7 +66,7 @@ export function Services() {
           {SERVICES.map((service) => (
             <article
               key={service.num}
-              className="group relative bg-card p-10 transition-colors duration-300 hover:bg-card-elevated md:p-12"
+              className="group relative flex flex-col bg-card p-10 transition-colors duration-300 hover:bg-card-elevated md:p-12"
             >
               <span
                 aria-hidden
@@ -75,9 +81,15 @@ export function Services() {
               <p className="mt-3.5 text-[15px] font-light leading-[1.75] text-muted">
                 {service.description}
               </p>
-              <span className="mt-7 inline-block rounded-full border border-ring bg-primary-soft px-4 py-1.5 font-mono text-[12px] tracking-[0.04em] text-primary">
+              <span className="mt-7 inline-block self-start rounded-full border border-ring bg-primary-soft px-4 py-1.5 font-mono text-[12px] tracking-[0.04em] text-primary">
                 {service.price}
               </span>
+              <Link
+                href={`/services/${service.slug}`}
+                className="mt-auto inline-flex items-center gap-1.5 self-start pt-7 font-mono text-[12px] tracking-[0.04em] text-muted-foreground transition-colors hover:text-primary"
+              >
+                View Details →
+              </Link>
             </article>
           ))}
         </div>
