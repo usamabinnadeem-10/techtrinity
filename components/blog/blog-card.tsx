@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { urlForImage } from "@/lib/sanity-image";
+import sanityLoader from "@/lib/sanity-loader";
 import type { PostListItem } from "@/lib/blog-types";
 
 type Props = {
@@ -23,6 +24,7 @@ export function BlogCard({ post }: Props) {
         <div className="relative aspect-[16/9] w-full overflow-hidden bg-card-elevated">
           {coverSrc ? (
             <Image
+              loader={sanityLoader}
               src={coverSrc}
               alt={cover.alt || post.title}
               fill

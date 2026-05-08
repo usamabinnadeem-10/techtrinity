@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { urlForImage } from "@/lib/sanity-image";
+import sanityLoader from "@/lib/sanity-loader";
 import { formatPublishedDate } from "@/lib/format";
 import type { Post } from "@/lib/blog-types";
 
@@ -38,6 +39,7 @@ export function BlogPostHeader({ post }: Props) {
               {authorPhotoSrc ? (
                 <span className="relative inline-block size-7 overflow-hidden rounded-full border border-border">
                   <Image
+                    loader={sanityLoader}
                     src={authorPhotoSrc}
                     alt={authorPhoto?.alt || author.name}
                     fill
@@ -60,6 +62,7 @@ export function BlogPostHeader({ post }: Props) {
         <div className="mx-auto mt-14 max-w-[1100px]">
           <div className="relative w-full overflow-hidden rounded-xl border border-border bg-card-elevated">
             <Image
+              loader={sanityLoader}
               src={coverSrc}
               alt={cover.alt || post.title}
               width={1600}

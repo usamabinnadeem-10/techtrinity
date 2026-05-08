@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { urlForImage } from "@/lib/sanity-image";
+import sanityLoader from "@/lib/sanity-loader";
 import type { Author } from "@/lib/blog-types";
 
 type Props = {
@@ -18,6 +19,7 @@ export function BlogAuthorCard({ author }: Props) {
         {photoSrc ? (
           <div className="relative size-16 shrink-0 overflow-hidden rounded-full border border-border md:size-20">
             <Image
+              loader={sanityLoader}
               src={photoSrc}
               alt={photo?.alt || author.name}
               fill

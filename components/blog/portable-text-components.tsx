@@ -4,6 +4,7 @@ import type {
   PortableTextComponents,
 } from "@portabletext/react";
 import { urlForImage } from "@/lib/sanity-image";
+import sanityLoader from "@/lib/sanity-loader";
 import type { SanityImage } from "@/lib/blog-types";
 
 type LinkValue = {
@@ -141,6 +142,7 @@ export const portableTextComponents: PortableTextComponents = {
         <figure className="my-10">
           <div className="relative w-full overflow-hidden rounded-lg border border-border bg-card-elevated">
             <Image
+              loader={sanityLoader}
               src={src}
               alt={data.alt}
               width={width}

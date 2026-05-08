@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { urlForImage } from "@/lib/sanity-image";
+import sanityLoader from "@/lib/sanity-loader";
 import type { PostListItem } from "@/lib/blog-types";
 
 type Props = {
@@ -44,6 +45,7 @@ export function BlogFeatured({ post }: Props) {
               {authorPhotoSrc ? (
                 <span className="relative inline-block size-7 overflow-hidden rounded-full border border-border">
                   <Image
+                    loader={sanityLoader}
                     src={authorPhotoSrc}
                     alt={authorPhoto?.alt || author.name}
                     fill
@@ -69,6 +71,7 @@ export function BlogFeatured({ post }: Props) {
       >
         {coverSrc ? (
           <Image
+            loader={sanityLoader}
             src={coverSrc}
             alt={cover.alt || post.title}
             fill
