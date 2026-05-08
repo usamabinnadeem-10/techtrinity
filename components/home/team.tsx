@@ -34,16 +34,18 @@ const TEAM: TeamMember[] = [
     signature: "f·khan",
     field: "Brand / Interface",
     hue: { from: "#1f1734", to: "#080612", accent: "#c7a8ff" },
+    image: { src: "/team/faiq4.png", alt: "Portrait of Faiq Khan" },
   },
   {
-    name: "Sara Okafor",
+    name: "Abdullah Mujahid",
     role: "Systems Engineering",
     bio: "Distributed systems and the unglamorous infra that holds them up. Writes in graphs, ships in receipts.",
-    initials: "SO",
+    initials: "AM",
     index: "03",
-    signature: "s·okafor",
+    signature: "a·mujahid",
     field: "Infra / Reliability",
     hue: { from: "#241710", to: "#0a0604", accent: "#ffb16b" },
+    image: { src: "/team/abdullah.png", alt: "Portrait of Abdullah Mujahid" },
   },
 ];
 
