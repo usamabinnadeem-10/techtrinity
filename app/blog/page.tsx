@@ -30,7 +30,6 @@ export default async function BlogIndexPage() {
   const posts =
     (await sanityFetch<PostListItem[]>({
       query: ALL_POSTS_QUERY,
-      tags: ["post", "author"],
     })) ?? [];
 
   return (
