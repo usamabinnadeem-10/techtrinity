@@ -12,36 +12,28 @@ type PostSitemapEntry = {
 };
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const now = new Date();
-
   const staticRoutes: MetadataRoute.Sitemap = [
     {
       url: `${SITE_URL}/`,
-      lastModified: now,
+      lastModified: new Date("2026-05-10"),
       changeFrequency: "weekly",
       priority: 1,
     },
     {
       url: `${SITE_URL}/services`,
-      lastModified: now,
+      lastModified: new Date("2026-05-10"),
       changeFrequency: "monthly",
       priority: 0.9,
     },
     {
       url: `${SITE_URL}/about`,
-      lastModified: now,
+      lastModified: new Date("2026-05-10"),
       changeFrequency: "monthly",
       priority: 0.8,
     },
     {
-      url: `${SITE_URL}/blog`,
-      lastModified: now,
-      changeFrequency: "weekly",
-      priority: 0.8,
-    },
-    {
       url: `${SITE_URL}/contact`,
-      lastModified: now,
+      lastModified: new Date("2026-05-10"),
       changeFrequency: "monthly",
       priority: 0.7,
     },
@@ -50,7 +42,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const serviceRoutes: MetadataRoute.Sitemap = getAllServiceSlugs().map(
     (slug) => ({
       url: `${SITE_URL}/services/${slug}`,
-      lastModified: now,
+      lastModified: new Date("2026-05-10"),
       changeFrequency: "monthly",
       priority: 0.8,
     }),
@@ -59,12 +51,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const caseStudyRoutes: MetadataRoute.Sitemap = getAllCaseStudySlugs().map(
     (slug) => ({
       url: `${SITE_URL}/work/${slug}`,
-      lastModified: now,
+      lastModified: new Date("2026-05-10"),
       changeFrequency: "monthly",
       priority: 0.7,
     }),
   );
 
+  let blogIndexLastModified = new Date("2026-05-10");
   let postRoutes: MetadataRoute.Sitemap = [];
   if (isSanityConfigured) {
     try {
@@ -77,10 +70,25 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         changeFrequency: "monthly",
         priority: 0.6,
       }));
+      if (entries.length > 0) {
+        blogIndexLastModified = postRoutes.reduce((latest, post) =>
+          (post.lastModified as Date) > latest ? (post.lastModified as Date) : latest,
+          postRoutes[0].lastModified as Date,
+        );
+      }
     } catch (error) {
       console.error("Failed to fetch post slugs for sitemap:", error);
     }
   }
 
-  return [...staticRoutes, ...serviceRoutes, ...caseStudyRoutes, ...postRoutes];
+  const blogIndexRoute: MetadataRoute.Sitemap = [
+    {
+      url: `${SITE_URL}/blog`,
+      lastModified: blogIndexLastModified,
+      changeFrequency: "weekly",
+      priority: 0.8,
+    },
+  ];
+
+  return [...staticRoutes, ...blogIndexRoute, ...serviceRoutes, ...caseStudyRoutes, ...postRoutes];
 }
