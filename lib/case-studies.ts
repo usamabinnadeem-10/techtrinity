@@ -575,7 +575,7 @@ CASE_STUDIES.xenia = {
     ],
     body: [
       "Xenia is an AI-powered operations execution platform used by restaurants, retail chains, and hospitality businesses to manage tasks, checklists, audits, work orders, and team communication across multiple locations.",
-      "I joined as a Full-Stack Engineer when the company had raised approximately $1M in seed funding. Over two years, I contributed to core features across the platform — from performance infrastructure to billing architecture to user-facing product features that helped unlock new customer segments.",
+      "We joined as Full-Stack Engineers when the company had raised approximately $1M in seed funding. Over two years, we contributed to core features across the platform — from performance infrastructure to billing architecture to user-facing product features that helped unlock new customer segments.",
       "The platform has since raised a $12M Series A.",
     ],
   },
@@ -602,7 +602,7 @@ CASE_STUDIES.xenia = {
     ],
   },
   platform: {
-    label: "What I Built",
+    label: "What We Built",
     headline: ["Core infrastructure,", "shipped across two years."],
     startWithCopy: true,
     rows: [
@@ -763,8 +763,8 @@ CASE_STUDIES.easyaccounts = {
       "real business.",
     ],
     body: [
-      "EasyAccounts started as a solution to a problem I knew firsthand — managing a multi-branch textile wholesale business without the right tools meant manual ledgers, disconnected spreadsheets, and no reliable view of financial health.",
-      "I built EasyAccounts from scratch as a full-scale ERP purpose-built for the operational complexity of wholesale trading. It's live across 50+ branches, processing real transaction volume every day.",
+      "EasyAccounts started as a solution to a problem we knew firsthand — managing a multi-branch textile wholesale business without the right tools meant manual ledgers, disconnected spreadsheets, and no reliable view of financial health.",
+      "We built EasyAccounts from scratch as a full-scale ERP purpose-built for the operational complexity of wholesale trading. It's live across 50+ branches, processing real transaction volume every day.",
       "The system handles the complete business lifecycle — purchasing, sales, inventory, financial reporting, cheque management, and a 172-permission access control system — all in one platform.",
     ],
   },
