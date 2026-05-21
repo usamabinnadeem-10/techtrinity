@@ -65,7 +65,7 @@ export function Hero() {
             </p>
 
             <div className="hero-rise-sm mt-12 flex flex-wrap items-center gap-3.5 [animation-delay:0.8s]">
-              <LinkButton href="#cta-sec" variant="accent" size="lg">
+              <LinkButton href="/contact" variant="accent" size="lg">
                 Book a Free Discovery Call
               </LinkButton>
               <LinkButton href="#work" variant="ghost" size="lg">
