@@ -30,7 +30,7 @@ export default function ContactPage() {
       <main>
         <ContactHeader />
 
-        <section className="mx-auto max-w-[1240px] px-6 pb-20 md:px-12">
+        <section className="mx-auto max-w-[1240px] px-6 pb-12 md:px-12 md:pb-20">
           <div className="grid gap-12 md:gap-0 md:grid-cols-[55fr_45fr] md:divide-x md:divide-border">
             <div className="order-2 md:order-1 md:pr-10 lg:pr-14">
               <EditorialLabel tone="primary" className="mb-6 block">
