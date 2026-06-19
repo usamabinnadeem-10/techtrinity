@@ -12,12 +12,12 @@ import { ServicesProcess } from "@/components/services/services-process";
 export const metadata: Metadata = {
   title: "Services",
   description:
-    "Four focused services for non-technical SaaS founders — Product Sprint, Build-Only, Growth Retainer, and Technical Audit. Clear scope, fixed process, no surprises.",
+    "Four focused services for wholesale, distribution, and operations businesses — custom software built around how you actually work. Clear scope, fixed process, no surprises.",
   alternates: { canonical: "/services" },
   openGraph: {
     title: "Services — TechTrinity",
     description:
-      "Four focused services for non-technical SaaS founders — Product Sprint, Build-Only, Growth Retainer, and Technical Audit.",
+      "Four focused services for wholesale, distribution, and operations businesses — custom software built around how you actually work.",
     url: "/services",
     type: "website",
   },

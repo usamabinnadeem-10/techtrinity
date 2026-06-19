@@ -8,8 +8,8 @@ export function Problem() {
           <div data-reveal>
             <EditorialLabel>We get it.</EditorialLabel>
             <h2 className="mt-4 font-display text-[clamp(34px,3.8vw,58px)] font-bold leading-[1.08] tracking-[-0.025em]">
-              Most founders don&apos;t fail because of a{" "}
-              <em className="italic text-primary">bad idea.</em>
+              Spreadsheets made sense.{" "}
+              <em className="italic text-primary">Until they didn&apos;t.</em>
             </h2>
           </div>
           <div
@@ -18,15 +18,15 @@ export function Problem() {
             className="space-y-5 text-[17px] font-light leading-[1.85] text-muted"
           >
             <p>
-              You&apos;ve probably heard the stories — or lived one. A
-              freelancer who disappeared mid-project. An agency that delivered a
-              codebase nobody can maintain. Six months and $40,000 later,
-              nothing to show investors.
+              Stock errors that take days to reconcile. Three spreadsheets that
+              were supposed to talk to each other but never do. A new hire who
+              exposes just how fragile the whole system really is.
             </p>
             <p>
-              We built TechTrinity because that story is too common. You need a
-              partner who treats your product like it matters — because to you,
-              it does.
+              We built TechTrinity to replace the patchwork — with software
+              designed around your exact operations, because we map them before
+              we build. Simple enough that your team will actually use it. Solid
+              enough to grow with your business.
             </p>
           </div>
         </div>

@@ -14,7 +14,7 @@ const SERVICES: Service[] = [
     num: "01",
     title: "Product Sprint",
     description:
-      "Design + development from scratch. You bring the idea. We bring everything else — UX, UI, and a working product. 8–16 weeks.",
+      "End-to-end custom software. You walk us through your operations. We design and build the system that replaces the spreadsheets and legacy tools slowing your team down. 8–16 weeks.",
     price: "Starting at $20,000",
     slug: "product-sprint",
   },
@@ -22,7 +22,7 @@ const SERVICES: Service[] = [
     num: "02",
     title: "Build-Only",
     description:
-      "Already have Figma designs? We build fast and clean on React/Next.js with Node or Django backends. No overhead, just execution.",
+      "Already have your process mapped out? We build fast and clean on React/Next.js with Node or Django backends. No overhead, no rework — just execution on a defined scope.",
     price: "Starting at $12,000",
     slug: "build-only",
   },
@@ -30,7 +30,7 @@ const SERVICES: Service[] = [
     num: "03",
     title: "Growth Retainer",
     description:
-      "A dedicated team, monthly. No re-briefing, no handoffs, no strangers in your codebase. Minimum 3-month commitment.",
+      "A dedicated team, every month. No re-briefing, no handoffs, no strangers in your system. We stay in your codebase and keep evolving it as your operations grow. Minimum 3-month commitment.",
     price: "Starting at $4,500/month",
     slug: "growth-retainer",
   },
@@ -38,7 +38,7 @@ const SERVICES: Service[] = [
     num: "04",
     title: "Technical Audit",
     description:
-      "Inherited a codebase? We review it honestly and tell you exactly what's broken, what's a risk, and what to fix first.",
+      "Running on software nobody fully understands? We review your current setup honestly — what's broken, what's a liability, and what to fix first.",
     price: "Starting at $1,500",
     slug: "technical-audit",
   },
@@ -49,12 +49,16 @@ export function Services() {
     <section id="services" className="border-t border-border py-28 md:py-32">
       <div className="mx-auto max-w-[1240px] px-6 md:px-12">
         <div className="mb-14" data-reveal>
-          <EditorialLabel>What We Do</EditorialLabel>
+          <EditorialLabel>What We Build</EditorialLabel>
           <h2 className="mt-3.5 font-display text-[clamp(32px,3.4vw,52px)] font-bold leading-[1.05] tracking-[-0.025em]">
             One studio.
             <br />
-            Every stage of your product.
+            Every stage of your operation.
           </h2>
+          <p className="mt-4 max-w-[560px] text-[17px] font-light leading-[1.7] text-muted">
+            A fraction of what a US or UK agency charges for the same scope —
+            quoted upfront, no surprises.
+          </p>
         </div>
 
         <div

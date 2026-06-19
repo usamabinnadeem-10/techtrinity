@@ -12,8 +12,9 @@ export function ServicesCTA() {
             <em className="italic text-primary">service fits?</em>
           </h2>
           <p className="mb-12 text-[17px] font-light leading-[1.75] text-muted">
-            Book a free 30-minute discovery call and we&apos;ll tell you. If
-            we&apos;re not the right team, we&apos;ll say so.
+            Book a free 30-minute call. Tell us what&apos;s slowing your
+            operation down, and we&apos;ll point you to the right service — or
+            tell you honestly if we&apos;re not the right team.
           </p>
           <div className="flex flex-wrap items-center justify-center gap-3.5">
             <LinkButton href="/contact" variant="accent" size="lg">

@@ -13,21 +13,22 @@ export function AboutCanonical() {
             </h2>
             <div className="space-y-5 text-[16px] font-light leading-[1.85] text-muted">
               <p>
-                TechTrinity is built on real engineering experience — not just
-                freelance projects and side builds.
+                TechTrinity isn&apos;t a freelancer who picked up a few projects
+                last quarter. It&apos;s built on production engineering — the
+                kind where downtime and bad data have real consequences.
               </p>
               <p>
-                The foundation is two years inside{" "}
+                Two of those years were inside{" "}
                 <strong className="font-medium text-foreground">
                   Canonical
                 </strong>
-                , one of the world&apos;s most respected open-source companies,
-                working on production systems used by engineers globally.
+                , the company behind Ubuntu, on systems used by engineers
+                worldwide.
               </p>
               <p>
-                That experience shapes how we approach every project — with the
-                same discipline, the same standards, and the same expectation
-                of quality that enterprise engineering demands.
+                That&apos;s the standard we hold every project to — whether
+                it&apos;s a global platform or a stock system for three
+                warehouses. Same discipline. Same care about the details.
               </p>
             </div>
           </div>

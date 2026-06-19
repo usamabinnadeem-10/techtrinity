@@ -12,8 +12,9 @@ export function AboutCTA() {
             <em className="italic text-primary">actually gives a damn?</em>
           </h2>
           <p className="mb-12 text-[17px] font-light leading-[1.75] text-muted">
-            Book a free discovery call. We&apos;ll be honest about whether
-            we&apos;re the right fit.
+            Book a free discovery call. We&apos;ll go deep on how your operation
+            runs and tell you honestly whether we&apos;re the right fit — even
+            if the answer is no.
           </p>
           <div className="flex flex-wrap items-center justify-center gap-3.5">
             <LinkButton href="/contact" variant="accent" size="lg">

@@ -18,8 +18,9 @@ export function AboutTeam() {
           </div>
           <div className="md:justify-self-end md:text-right">
             <p className="text-[15px] font-light leading-[1.8] text-muted md:max-w-[420px]">
-              We keep the team tight so every client gets full attention from
-              the people who actually built their product.
+              We keep the team small on purpose. Every client gets the senior
+              people who actually build the product — not a project manager
+              relaying messages to a team you&apos;ll never meet.
             </p>
           </div>
         </div>
