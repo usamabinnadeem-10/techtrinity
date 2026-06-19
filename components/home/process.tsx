@@ -53,7 +53,8 @@ export function Process() {
             No ghosting.
           </h2>
           <p className="mt-3.5 text-[17px] font-light text-muted">
-            A clear, repeatable process you can hold us to.
+            We move fast because we understand your operation first — a clear,
+            repeatable process you can hold us to.
           </p>
         </div>
 

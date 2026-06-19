@@ -10,7 +10,7 @@
   --color-border: #1e1e1e;
   --color-border-strong: #2a2a2a;
 
-  --color-muted: #888888;
+  --color-muted: #E0E0E0;
   --color-muted-foreground: #565656;
 
   --color-primary: #b8ff57;
@@ -124,6 +124,31 @@
       linear-gradient(90deg, var(--color-border) 1px, transparent 1px);
     background-size: 44px 44px;
   }
+
+  .reel-track {
+    display: flex;
+    width: max-content;
+    will-change: transform;
+    animation: reel-marquee var(--dur, 60s) linear infinite;
+  }
+  .reel-track[data-dir="reverse"] {
+    animation-direction: reverse;
+  }
+}
+
+/* The track holds the card set rendered twice; translating by -50% lands the
+   duplicate exactly where the original began, so the marquee loops seamlessly.
+   Each card carries its own trailing gap (margin) so the half-width is exact. */
+@keyframes reel-marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* Reduced motion is toggled in JS (see screen-reel.tsx): the reel holds still as
+   a tilted wall of screens rather than scrolling. */
+[data-reduced="true"] .reel-track {
+  animation: none;
 }
 
 @keyframes hero-rise {

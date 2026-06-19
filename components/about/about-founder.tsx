@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-const CHIPS = ["Ex-Canonical", "5+ Years Production Engineering"];
+const CHIPS = ["Built EasyAccounts — Live in 50+ Branches", "Ex-Canonical Engineer"];
 
 export function AboutFounder() {
   return (
@@ -93,50 +93,52 @@ export function AboutFounder() {
 
           <div data-reveal data-reveal-delay="1">
             <h2 className="font-display text-[clamp(30px,3.4vw,50px)] font-bold leading-[1.05] tracking-[-0.025em]">
-              Built by someone who&apos;s{" "}
-              <em className="italic text-primary">been on both sides.</em>
+              Built by an operator,{" "}
+              <em className="italic text-primary">not just a developer.</em>
             </h2>
 
             <div className="mt-7 space-y-5 text-[16px] font-light leading-[1.85] text-muted">
               <p>
-                I&apos;ve spent years building real products for real companies
-                — including two years at{" "}
+                For three years I built and ran{" "}
+                <strong className="font-medium text-foreground">
+                  EasyAccounts
+                </strong>{" "}
+                — a custom ERP for a wholesale business that was tracking
+                inventory on spreadsheets and backing up to USB sticks. Today it
+                runs live across{" "}
+                <strong className="font-medium text-foreground">
+                  50+ branches
+                </strong>
+                . You learn operational software the only way that sticks: by
+                living with the consequences of every decision.
+              </p>
+              <p>
+                Before that, two years at{" "}
                 <strong className="font-medium text-foreground">
                   Canonical
-                </strong>
-                , the company behind Ubuntu, where I worked on the platform
-                that has processed over{" "}
+                </strong>{" "}
+                — the company behind Ubuntu — on a platform that&apos;s run
+                over{" "}
                 <strong className="font-medium text-foreground">
                   10,000 professional certifications
                 </strong>
-                .
-              </p>
-              <p>
-                Before that I built{" "}
-                <strong className="font-medium text-foreground">Hirecinch</strong>
-                , an ATS that reduced recruiter time by 30%. I contributed core
-                infrastructure to{" "}
+                . I also built core infrastructure for{" "}
                 <strong className="font-medium text-foreground">Xenia</strong>{" "}
-                as it scaled from $1M to a $12M Series A. I built{" "}
-                <strong className="font-medium text-foreground">
-                  EasyAccounts
-                </strong>
-                , a production ERP live across 50+ branches.
+                as it grew from $1M to a $12M Series A. The engineering is
+                enterprise-grade. The difference is who it&apos;s for.
               </p>
               <p>
-                I started TechTrinity because I kept seeing the same story —
-                a founder with a real idea, a real market, and real budget,
-                getting handed a broken product by an agency that took the
-                money and disappeared.
+                I started TechTrinity because the same story kept repeating — a
+                business owner with a real operational problem, a real budget,
+                and real urgency, handed software built to win a proposal, not
+                to survive a Monday-morning stock count.
               </p>
               <p>
-                Quality engineering isn&apos;t just about clean code. It&apos;s
-                about understanding what a founder actually needs — something
-                that works, that can grow, and that doesn&apos;t fall apart
-                the moment the agency stops answering emails.
-              </p>
-              <p>
-                That&apos;s what TechTrinity exists to deliver.
+                What&apos;s different here happens before any code gets written.
+                We sit with your operation first — how stock moves, where the
+                numbers break, what your team will actually open every day.
+                That&apos;s the only way to build something that gets used
+                instead of abandoned.
               </p>
             </div>
 

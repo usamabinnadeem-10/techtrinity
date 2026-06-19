@@ -14,7 +14,7 @@ export function ServiceDetailProcess({ steps }: Props) {
           <h2 className="mt-4 font-display text-[clamp(32px,4vw,56px)] font-bold leading-[1.04] tracking-[-0.03em]">
             From first message
             <br />
-            to <em className="italic text-primary">first commit.</em>
+            to <em className="italic text-primary">software that fits.</em>
           </h2>
         </div>
 

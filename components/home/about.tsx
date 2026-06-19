@@ -7,7 +7,7 @@ type Stat = {
 };
 
 const STATS: Stat[] = [
-  { value: "8", accent: "+", label: "Products shipped across 3 countries" },
+  { value: "3", accent: "", label: "Countries shipped to: US, UK, AU" },
   { value: "5", accent: "+", label: "Years building production systems" },
   { value: "1", accent: ":1", label: "Direct founder access. Always." },
 ];
@@ -24,8 +24,8 @@ export function About() {
             </h2>
             <div className="space-y-4 text-[16px] font-light leading-[1.85] text-muted">
               <p>
-                TechTrinity was founded by a software engineer with experience
-                at <strong className="font-medium text-foreground">Canonical</strong> —
+                TechTrinity is built by engineers with experience at{" "}
+                <strong className="font-medium text-foreground">Canonical</strong> —
                 the company behind Ubuntu — and a track record of building
                 production systems from the ground up.
               </p>

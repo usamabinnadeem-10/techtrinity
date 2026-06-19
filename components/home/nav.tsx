@@ -33,9 +33,9 @@ export function SiteNav() {
     >
       <Link
         href="/"
-        className="font-display text-[21px] font-bold tracking-tight text-foreground"
+        className="font-display text-[44px] font-bold tracking-tight text-primary"
       >
-        TechTrinity
+        tt.
       </Link>
       <ul className="hidden items-center gap-9 md:flex">
         {NAV_LINKS.map((link) => (

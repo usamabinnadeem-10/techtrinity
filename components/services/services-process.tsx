@@ -11,25 +11,25 @@ const STEPS: Step[] = [
     num: "01",
     title: "You reach out",
     description:
-      "Fill in the contact form or book a call directly. Tell us what you're building and what you need.",
+      "Fill in the contact form or book a call. Tell us what's slowing your operation down and what you'd like to fix.",
   },
   {
     num: "02",
     title: "Discovery call",
     description:
-      "A free 30-minute call. We learn your product, timeline, and constraints. Honest fit assessment — we'll tell you if we're not the right team.",
+      "A free 30-minute call. We learn how your business runs, your timeline, and your budget — and tell you honestly if we're not the right fit.",
   },
   {
     num: "03",
     title: "Proposal",
     description:
-      "A written document within 5 business days. Scope, timeline, price, and what's explicitly not included. Nothing starts without your sign-off.",
+      "A written proposal within 5 business days. Scope, timeline, fixed price, and exactly what's not included. Nothing starts without your sign-off.",
   },
   {
     num: "04",
     title: "Kick-off",
     description:
-      "A 60-minute session to align on tools, communication, and first deliverables. Then we build.",
+      "A 60-minute session to map your workflows in detail and agree how we'll work together. Then we build.",
   },
 ];
 
@@ -42,7 +42,7 @@ export function ServicesProcess() {
           <h2 className="mt-4 font-display text-[clamp(34px,4vw,60px)] font-bold leading-[1.04] tracking-[-0.03em]">
             From first message
             <br />
-            to <em className="italic text-primary">first commit.</em>
+            to <em className="italic text-primary">software that fits.</em>
           </h2>
         </div>
 

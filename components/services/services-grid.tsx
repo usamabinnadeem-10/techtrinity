@@ -14,7 +14,7 @@ const SERVICES: Service[] = [
     num: "01",
     title: "Product Sprint",
     description:
-      "Design + development from scratch. You bring the idea — we bring the UX, UI, and working product.",
+      "The full build. Walk us through how your operation runs, and we design and build the one system that replaces the spreadsheets and aging tools slowing it down.",
     price: "Starting at $20,000",
     timeline: "8–16 weeks",
     href: "/services/product-sprint",
@@ -23,7 +23,7 @@ const SERVICES: Service[] = [
     num: "02",
     title: "Build-Only",
     description:
-      "Already have Figma designs? We build fast and clean on React/Next.js with Node or Django.",
+      "You already know exactly what you need. We build that one system — clean, fast, and ready to use — on a defined scope, with no discovery phase to pay for.",
     price: "Starting at $12,000",
     timeline: "6–12 weeks",
     href: "/services/build-only",
@@ -32,7 +32,7 @@ const SERVICES: Service[] = [
     num: "03",
     title: "Growth Retainer",
     description:
-      "A dedicated team monthly. No re-briefing, no handoffs, no strangers in your codebase.",
+      "Software is never finished. As you add locations, products, and people, we keep your system fitting — improvements and fixes every month, from the same team.",
     price: "Starting at $4,500/month",
     timeline: "3-month minimum",
     href: "/services/growth-retainer",
@@ -41,7 +41,7 @@ const SERVICES: Service[] = [
     num: "04",
     title: "Technical Audit",
     description:
-      "Inherited a codebase? We review it honestly and tell you what's broken, what's a risk, and what to fix first.",
+      "Running software nobody fully understands? We review what you have and tell you plainly what's broken, what's costing you, and whether to fix it or start fresh.",
     price: "Starting at $1,500",
     timeline: "1 week",
     href: "/services/technical-audit",
@@ -88,7 +88,7 @@ export function ServicesGrid() {
 
             <div className="mt-10 flex items-center justify-between border-t border-border pt-6">
               <span className="font-mono text-[12px] uppercase tracking-[0.16em] text-muted-foreground transition-colors duration-300 group-hover:text-foreground">
-                Learn More
+                View Details
               </span>
               <span
                 aria-hidden

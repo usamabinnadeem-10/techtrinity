@@ -1,106 +1,89 @@
 import { LinkButton } from "./button";
-import { Gallery, type GalleryImage } from "./gallery";
 import { EditorialLabel } from "./label";
+import { ScreenReel } from "./screen-reel";
 
 const STATS = [
-  "8+ Products Shipped",
-  "React, Django & Node",
+  "5+ Years in Production",
+  "Inventory & Operations Software",
   "Ex-Canonical Engineers",
   "US / UK / AU Clients",
   "Senior-Only Team",
 ];
 
-const PRODUCT_IMAGES: GalleryImage[] = [
-  {
-    src: "/easyaccounts-laptop.webp",
-    alt: "EasyAccounts product interface",
-    width: 2614,
-    height: 1666,
-  },
-  {
-    src: "/canonical-academy-laptop.webp",
-    alt: "Canonical Academy product interface",
-    width: 2614,
-    height: 1666,
-  },
-  {
-    src: "/xenia-laptop.webp",
-    alt: "Xenia product interface",
-    width: 2614,
-    height: 1666,
-  },
-  {
-    src: "/hirecinch-laptop.webp",
-    alt: "Hirecinch product interface",
-    width: 2614,
-    height: 1666,
-  },
-];
-
 export function Hero() {
   return (
-    <div className="mx-auto max-w-[1240px] px-6 md:px-12">
-      <section
-        id="hero"
-        className="flex min-h-screen flex-col justify-center pt-36 pb-24"
-      >
-        <div className="flex flex-col gap-12 lg:flex-row lg:items-center lg:gap-16 xl:gap-20">
-          <div className="flex-1">
-            <div className="hero-rise-sm mb-8 [animation-delay:0.15s]">
-              <EditorialLabel>Boutique SaaS Product Studio</EditorialLabel>
-            </div>
+    <section
+      id="hero"
+      className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-6 pt-36 pb-20 text-center md:px-12"
+    >
+      <ScreenReel />
 
-            <h1 className="hero-rise max-w-[880px] font-display text-[clamp(60px,7.5vw,116px)] font-black leading-[0.95] tracking-[-0.04em] [animation-delay:0.35s]">
-              From Idea
-              <br />
-              to Product—
-              <br />
-              <em className="font-bold italic text-primary">Done Right.</em>
-            </h1>
+      {/* Base scrim never reaches full transparency, so the reel stays a faint
+          ghost everywhere — corners, nav, and logo included — while a deeper
+          vignette behind the headline keeps the copy at full contrast. */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 [background:radial-gradient(ellipse_75%_65%_at_50%_42%,rgba(9,9,9,0.92),rgba(9,9,9,0.66)_55%,rgba(9,9,9,0.52)_100%)]"
+      />
+      {/* Top fade darkens the strip under the transparent nav so the logo and
+          links read cleanly against the reel. */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 top-0 h-44 [background:linear-gradient(to_bottom,#090909,transparent)]"
+      />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-44 [background:linear-gradient(to_top,#090909,transparent)]"
+      />
 
-            <p className="hero-rise-sm mt-9 max-w-[500px] text-[18px] font-light leading-[1.7] text-muted [animation-delay:0.6s]">
-              We&apos;re a boutique product studio for non-technical founders.
-              We design and build SaaS products on a modern stack — and we stay
-              accountable until it ships.
-            </p>
-
-            <div className="hero-rise-sm mt-12 flex flex-wrap items-center gap-3.5 [animation-delay:0.8s]">
-              <LinkButton href="/contact" variant="accent" size="lg">
-                Book a Free Discovery Call
-              </LinkButton>
-              <LinkButton href="#work" variant="ghost" size="lg">
-                See Our Work
-              </LinkButton>
-            </div>
-          </div>
-
-          <div className="hero-fade hidden w-110 shrink-0 lg:block xl:w-120 [animation-delay:1s]">
-            <Gallery images={PRODUCT_IMAGES} />
-          </div>
+      <div className="relative z-10 flex w-full max-w-[920px] flex-col items-center">
+        <div className="hero-rise-sm mb-8 [animation-delay:0.15s]">
+          <EditorialLabel>Custom Operations Software</EditorialLabel>
         </div>
 
-        <div className="hero-fade mt-14 flex flex-col gap-3 border-t border-border pt-7 lg:mt-22 lg:flex-row lg:flex-wrap lg:items-center lg:gap-x-5 lg:gap-y-2.5 lg:pt-9 [animation-delay:1.2s]">
-          {STATS.map((stat, i) => (
-            <div key={stat} className="flex items-center gap-x-5">
-              {i > 0 && (
-                <span
-                  aria-hidden
-                  className="hidden select-none text-[15px] font-light text-border lg:inline"
-                >
-                  |
-                </span>
-              )}
-              <span className="flex items-center gap-3 font-display text-[14px] font-semibold tracking-[-0.01em] text-muted-foreground transition-colors hover:text-foreground">
-                <span
-                  aria-hidden
-                  className="block h-px w-3.5 bg-primary lg:hidden"
-                />
-                {stat}
+        <h1 className="hero-rise font-display text-[clamp(56px,8vw,124px)] font-black leading-[0.92] tracking-[-0.04em] [text-wrap:balance] [animation-delay:0.35s]">
+          Built Around How You{" "}
+          <em className="font-bold italic text-primary">Actually Work.</em>
+        </h1>
+
+        <p className="hero-rise-sm mt-8 max-w-[560px] text-[18px] font-light leading-[1.7] text-muted [text-wrap:pretty] [animation-delay:0.6s]">
+          Wholesale, distribution, and multi-location teams lose hours to
+          spreadsheets, stock errors, and systems nobody trusts. We learn how you
+          actually run — then build the inventory, warehouse, and reporting tools
+          that fit it. Not another SaaS template you bend your business around.
+        </p>
+
+        <div className="hero-rise-sm mt-11 flex flex-wrap items-center justify-center gap-3.5 [animation-delay:0.8s]">
+          <LinkButton href="/contact" variant="accent" size="lg">
+            Book a Free Discovery Call
+          </LinkButton>
+          <LinkButton href="#work" variant="ghost" size="lg">
+            See Our Work
+          </LinkButton>
+        </div>
+      </div>
+
+      <div className="hero-fade relative z-10 mt-16 flex w-full max-w-[1080px] flex-col items-center gap-3 border-t border-border pt-7 lg:mt-20 lg:flex-row lg:flex-wrap lg:justify-center lg:gap-x-5 lg:gap-y-2.5 lg:pt-8 [animation-delay:1.2s]">
+        {STATS.map((stat, i) => (
+          <div key={stat} className="flex items-center gap-x-5">
+            {i > 0 && (
+              <span
+                aria-hidden
+                className="hidden select-none text-[15px] font-light text-muted-foreground lg:inline"
+              >
+                |
               </span>
-            </div>
-          ))}
-        </div>
-      </section>
-    </div>
+            )}
+            <span className="flex items-center gap-3 font-display text-[14px] font-semibold tracking-[-0.01em] text-foreground/75 transition-colors hover:text-foreground">
+              <span
+                aria-hidden
+                className="block h-px w-3.5 bg-primary lg:hidden"
+              />
+              {stat}
+            </span>
+          </div>
+        ))}
+      </div>
+    </section>
   );
 }

@@ -16,21 +16,21 @@ type Project = {
 
 const PROJECTS: Project[] = [
   {
-    name: "EasyAccounts ERP",
+    name: "Canonical Academy",
     description:
-      "Cloud-native multi-tenant ERP system for wholesale textile trading businesses.",
-    href: "/work/easyaccounts",
+      "The certification and learning platform for Canonical — the team behind Ubuntu, one of the world's most-used operating systems.",
+    href: "/work/canonical-academy",
     image: {
-      src: "/easyaccounts/reports-product-cost-trace.png",
-      alt: "EasyAccounts ERP product cost trace interface",
-      width: 1465,
-      height: 812,
+      src: "/canonical/purchase.png",
+      alt: "Canonical Academy purchase flow",
+      width: 3456,
+      height: 1984,
     },
   },
   {
     name: "Xenia",
     description:
-      "Frontline operations platform for multi-location businesses — tasks, checklists, audits, and team comms.",
+      "An operations platform for multi-location teams — tasks, checklists, and audits in one place, so nothing slips between sites.",
     href: "/work/xenia",
     image: {
       src: "/xenia/checklist-builder.png",
@@ -42,7 +42,7 @@ const PROJECTS: Project[] = [
   {
     name: "Hirecinch ATS",
     description:
-      "A modern hiring platform designed to streamline candidate evaluation and team collaboration.",
+      "A hiring platform that puts candidates, feedback, and decisions in one place — so teams hire together instead of over email.",
     href: "/work/hirecinch",
     image: {
       src: "/hirecinch/applicants.png",
@@ -58,12 +58,18 @@ export function Work() {
     <section id="work" className="border-t border-border py-28 md:py-32">
       <div className="mx-auto max-w-[1240px] px-6 md:px-12">
         <div className="mb-14" data-reveal>
-          <EditorialLabel>Our Work</EditorialLabel>
+          <EditorialLabel>Selected Work</EditorialLabel>
           <h2 className="mt-3.5 font-display text-[clamp(32px,3.4vw,52px)] font-bold leading-[1.05] tracking-[-0.025em]">
-            Products we&apos;ve designed,
+            Software we shipped —
             <br />
-            built, and shipped.
+            and teams{" "}
+            <em className="font-bold italic text-primary">actually use.</em>
           </h2>
+          <p className="mt-3.5 max-w-[600px] text-[17px] font-light leading-[1.7] text-muted">
+            Production systems in daily use across the US, UK, and Australia. Not
+            prototypes, not slideware — software that&apos;s still running years
+            after launch.
+          </p>
         </div>
 
         <article
@@ -73,18 +79,19 @@ export function Work() {
         >
           <div>
             <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-primary">
-              Featured · Enterprise Platform
+              Featured · Wholesale Inventory &amp; Operations
             </p>
             <h3 className="mt-5 font-display text-[clamp(28px,3vw,48px)] font-bold leading-[1.05] tracking-[-0.025em]">
-              Canonical Academy
+              EasyAccounts ERP
             </h3>
             <p className="mt-3.5 text-[16px] font-light leading-[1.75] text-muted">
-              A certification and learning platform built for one of the
-              world&apos;s leading open-source companies — the team behind
-              Ubuntu.
+              The inventory, stock, and reporting system behind a live wholesale
+              textile operation — built to replace spreadsheets and fragile
+              backups with real-time numbers the whole team trusts. Three years in
+              production and still running.
             </p>
             <Link
-              href="/work/canonical-academy"
+              href="/work/easyaccounts"
               className="mt-9 inline-flex items-center gap-2.5 border-b border-border pb-1 text-sm font-medium text-foreground transition-colors hover:border-primary hover:text-primary"
             >
               View Case Study <span aria-hidden>→</span>
@@ -92,10 +99,10 @@ export function Work() {
           </div>
           <div className="relative overflow-hidden rounded-md border border-border bg-background">
             <Image
-              src="/canonical/purchase.png"
-              alt="Canonical Academy purchase flow"
-              width={3456}
-              height={1984}
+              src="/easyaccounts/reports-product-cost-trace.png"
+              alt="EasyAccounts ERP product cost trace interface"
+              width={1465}
+              height={812}
               sizes="(min-width: 768px) 540px, 100vw"
               className="h-auto w-full"
             />

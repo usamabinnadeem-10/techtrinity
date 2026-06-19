@@ -10,22 +10,22 @@ const VALUES: Value[] = [
   {
     num: "01",
     title: "Honest scoping",
-    body: "We tell you what's realistic before the project starts — not after you've paid the deposit. If your budget doesn't match your scope we'll tell you directly.",
+    body: "We tell you what's realistic before you pay a deposit — not after. If your budget and your scope don't line up, you'll hear it on the first call, not three weeks into the build.",
   },
   {
     num: "02",
     title: "No handoffs to juniors",
-    body: "The senior engineer you meet is the one writing the code. We don't bait and switch with junior developers once the contract is signed.",
+    body: "The senior engineer who scopes your project is the one writing the code. No bait-and-switch to a junior the moment the contract is signed.",
   },
   {
     num: "03",
     title: "Written agreements",
-    body: "Scope, timeline, and price are documented before anything starts. Verbal agreements don't exist at TechTrinity.",
+    body: "Scope, timeline, and price go in writing before anything starts. \"We'll figure it out as we go\" is how projects blow past budget — so we don't work that way.",
   },
   {
     num: "04",
     title: "Accountability after launch",
-    body: "We don't disappear after delivery. Every engagement includes post-launch support and a founder who can actually reach us.",
+    body: "We don't vanish at delivery. Every build includes post-launch support, and a founder you can actually reach when something needs attention.",
   },
 ];
 
@@ -43,8 +43,8 @@ export function AboutValues() {
           </div>
           <div className="md:justify-self-end md:text-right">
             <p className="text-[15px] font-light leading-[1.8] text-muted md:max-w-[380px]">
-              Boundaries we&apos;ve drawn from years of watching agencies do it
-              wrong.
+              Hard lines we&apos;ve drawn from watching too many owners get
+              burned by agencies and freelancers.
             </p>
           </div>
         </div>

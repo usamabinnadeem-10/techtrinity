@@ -13,12 +13,12 @@ import { SiteFooter } from "@/components/home/site-footer";
 export const metadata: Metadata = {
   title: "About",
   description:
-    "We started TechTrinity because founders deserve better. A small, senior team built on real engineering experience — not freelance projects and side builds.",
+    "Custom inventory and operations software for growing distribution and multi-location businesses — built by an operator who's run a live ERP across 50+ branches, not an agency that just launched last week.",
   alternates: { canonical: "/about" },
   openGraph: {
     title: "About — TechTrinity",
     description:
-      "A small, senior team built on real engineering experience — not freelance projects and side builds.",
+      "Custom inventory and operations software for distribution and multi-location businesses — built by an operator who's run a live ERP across 50+ branches.",
     url: "/about",
     type: "website",
   },

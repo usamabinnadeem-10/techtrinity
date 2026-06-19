@@ -1,19 +1,19 @@
 import { EditorialLabel } from "@/components/home/label";
 
 const GOOD_FIT = [
-  "You have a validated idea and real budget",
-  "You want a technical partner, not a vendor",
-  "You value quality over the cheapest quote",
-  "You can make decisions and give feedback",
-  "You're building for the long term",
+  `Your operations have grown past what spreadsheets can manage`,
+  `You want software built around your workflow, not a SaaS template`,
+  `You're the decision-maker — no procurement committee`,
+  `You need it simple enough that your whole team will actually use it`,
+  `You value getting it right over getting the cheapest quote`,
 ];
 
 const BAD_FIT = [
-  "You need someone to build for equity only",
-  "You have no budget but “massive potential”",
-  "You want daily micromanagement",
-  "You need it done in two weeks",
-  "You've already burned three agencies",
+  `You want a SaaS product you can subscribe to monthly`,
+  `Your current system is working fine — no real friction`,
+  `You need it done in two weeks`,
+  `You want to own the IP and resell it to others`,
+  `You've already burned three agencies and haven't reflected on why`,
 ];
 
 export function ServicesFit() {
