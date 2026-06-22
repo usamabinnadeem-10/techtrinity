@@ -8,6 +8,7 @@ import { LinkButton } from "./button";
 const NAV_LINKS = [
   { href: "/#work", label: "Work" },
   { href: "/services", label: "Services" },
+  { href: "/use-cases", label: "Use Cases" },
   { href: "/about", label: "About" },
   { href: "/blog", label: "Blog" },
 ];
