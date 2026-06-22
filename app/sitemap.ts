@@ -3,6 +3,7 @@ import { getAllCaseStudySlugs } from "@/lib/case-studies";
 import { ALL_POSTS_SITEMAP_QUERY, sanityClient } from "@/lib/sanity";
 import { isSanityConfigured } from "@/sanity/env";
 import { getAllServiceSlugs } from "@/lib/services";
+import { getAllUseCaseSlugs } from "@/lib/use-cases";
 import { SITE_URL } from "@/lib/site";
 
 type PostSitemapEntry = {
@@ -37,6 +38,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "monthly",
       priority: 0.7,
     },
+    {
+      url: `${SITE_URL}/use-cases`,
+      lastModified: new Date("2026-06-22"),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
   ];
 
   const serviceRoutes: MetadataRoute.Sitemap = getAllServiceSlugs().map(
@@ -45,6 +52,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: new Date("2026-05-10"),
       changeFrequency: "monthly",
       priority: 0.8,
+    }),
+  );
+
+  const useCaseRoutes: MetadataRoute.Sitemap = getAllUseCaseSlugs().map(
+    (slug) => ({
+      url: `${SITE_URL}/use-cases/${slug}`,
+      lastModified: new Date("2026-06-22"),
+      changeFrequency: "monthly",
+      priority: 0.7,
     }),
   );
 
@@ -90,5 +106,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
   ];
 
-  return [...staticRoutes, ...blogIndexRoute, ...serviceRoutes, ...caseStudyRoutes, ...postRoutes];
+  return [...staticRoutes, ...blogIndexRoute, ...serviceRoutes, ...useCaseRoutes, ...caseStudyRoutes, ...postRoutes];
 }
