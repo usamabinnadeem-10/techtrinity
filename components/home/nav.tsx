@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/cn";
@@ -20,17 +21,21 @@ export function SiteNav() {
   return (
     <nav
       className={cn(
-        "fixed inset-x-0 top-0 z-50 flex items-center justify-between border-b px-6 transition-[background-color,border-color,backdrop-filter] duration-300 md:px-12",
+        "fixed inset-x-0 top-0 z-50 py-1 sm:py-3 flex items-center justify-between border-b px-6 transition-[background-color,border-color,backdrop-filter] duration-300 md:px-12",
         scrolled
           ? "border-border bg-background/85 backdrop-blur-xl supports-[backdrop-filter]:bg-background/70"
           : "border-transparent bg-transparent",
       )}
     >
-      <Link
-        href="/"
-        className="font-display text-[44px] font-bold tracking-tight text-primary"
-      >
-        tt.
+      <Link href="/" aria-label="TechTrinity — home" className="flex items-center">
+        <Image
+          src="/tt-logo.png"
+          alt="TechTrinity"
+          width={1254}
+          height={1254}
+          priority
+          className="h-8 w-8 sm:h-10 sm:w-10"
+        />
       </Link>
       <ul className="hidden items-center gap-9 md:flex">
         {NAV_LINKS.map((link) => (
