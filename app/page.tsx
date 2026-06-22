@@ -3,6 +3,7 @@ import { AmbientBackground } from "@/components/home/background";
 import { CTA } from "@/components/home/cta";
 import { Hero } from "@/components/home/hero";
 import { SiteNav } from "@/components/home/nav";
+import { OperationalPain } from "@/components/home/operational-pain";
 import { Problem } from "@/components/home/problem";
 import { Process } from "@/components/home/process";
 import { RevealController } from "@/components/home/reveal-controller";
@@ -19,6 +20,7 @@ export default function HomePage() {
       <main>
         <Hero />
         <Problem />
+        <OperationalPain />
         <Services />
         <Process />
         <Work />
