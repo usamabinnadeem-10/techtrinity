@@ -21,9 +21,8 @@ export function CaseCTA({ caseStudy }: Props) {
               <CtaHeadline lines={cta.headline} emphasis={cta.emphasis} />
             ) : (
               <>
-                Interested in what a well-architected{" "}
-                <em className="italic text-primary">platform</em> looks like for
-                your product?
+                Need production-grade engineering for a{" "}
+                <em className="italic text-primary">system your team relies on?</em>
               </>
             )}
           </h2>

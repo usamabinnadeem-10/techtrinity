@@ -729,7 +729,7 @@ CASE_STUDIES.xenia = {
     ],
   },
   cta: {
-    headline: ["Want infrastructure that", "scales with your product?"],
+    headline: ["Want infrastructure that", "scales with your operation?"],
     emphasis: "infrastructure",
     showSecondButton: false,
   },
