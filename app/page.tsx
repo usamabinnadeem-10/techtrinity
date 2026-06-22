@@ -10,6 +10,7 @@ import { RevealController } from "@/components/home/reveal-controller";
 import { Services } from "@/components/home/services";
 import { SiteFooter } from "@/components/home/site-footer";
 import { Team } from "@/components/home/team";
+import { WhenCustom } from "@/components/home/when-custom";
 import { Work } from "@/components/home/work";
 
 export default function HomePage() {
@@ -22,6 +23,7 @@ export default function HomePage() {
         <Problem />
         <OperationalPain />
         <Services />
+        <WhenCustom />
         <Process />
         <Work />
         <About />
