@@ -18,7 +18,7 @@ export function ServicesCTA() {
           </p>
           <div className="flex flex-wrap items-center justify-center gap-3.5">
             <LinkButton href="/contact" variant="accent" size="lg">
-              Book a Discovery Call
+              Book a Workflow Review
             </LinkButton>
             <LinkButton href="/contact" variant="ghost" size="lg">
               Send a Message

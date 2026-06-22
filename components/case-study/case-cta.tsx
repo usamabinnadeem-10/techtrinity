@@ -29,7 +29,7 @@ export function CaseCTA({ caseStudy }: Props) {
           </h2>
           <div className="mt-10 flex flex-wrap items-center justify-center gap-3.5">
             <LinkButton href="/#cta-sec" variant="accent" size="lg">
-              Book a Discovery Call
+              Book a Workflow Review
             </LinkButton>
             {showSecondButton && (
               <LinkButton href="/work" variant="ghost" size="lg">

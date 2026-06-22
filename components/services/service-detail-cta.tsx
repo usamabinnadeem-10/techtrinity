@@ -16,9 +16,9 @@ export function ServiceDetailCTA({ prompt, label }: Props) {
             <em className="italic text-primary">{prompt}</em>
           </h2>
           <p className="mx-auto mb-10 max-w-[520px] text-[16px] font-light leading-[1.75] text-muted">
-            Book a free 30-minute call. We&apos;ll learn what&apos;s slowing
-            your operation down and tell you honestly whether we&apos;re the
-            right team.
+            Book a free 30-minute workflow review. We&apos;ll learn how your
+            operation runs today and tell you honestly whether a custom system
+            is the right next step.
           </p>
           <div className="flex flex-wrap items-center justify-center gap-3.5">
             <LinkButton href="/contact" variant="accent" size="lg">
