@@ -73,6 +73,13 @@ export type CaseStudy = {
     url: string;
   };
 
+  whyItMatters?: {
+    label: string;
+    headline: string[];
+    body: string;
+    bullets: string[];
+  };
+
   platform?: {
     label: string;
     headline: string[];
@@ -756,7 +763,7 @@ CASE_STUDIES.easyaccounts = {
     url: "app.easyaccounts.com",
   },
   overview: {
-    label: "The Product",
+    label: "The System",
     headline: [
       "Not a side project.",
       "A real system for a",
@@ -766,6 +773,19 @@ CASE_STUDIES.easyaccounts = {
       "EasyAccounts started as a solution to a problem we knew firsthand — managing a multi-branch textile wholesale business without the right tools meant manual ledgers, disconnected spreadsheets, and no reliable view of financial health.",
       "We built EasyAccounts from scratch as a full-scale ERP purpose-built for the operational complexity of wholesale trading. It's live across 50+ branches, processing real transaction volume every day.",
       "The system handles the complete business lifecycle — purchasing, sales, inventory, financial reporting, cheque management, and a 172-permission access control system — all in one platform.",
+    ],
+  },
+  whyItMatters: {
+    label: "Why It Matters",
+    headline: ["Why this matters for", "owner-led inventory businesses."],
+    body: "EasyAccounts is proof that we understand more than screens and code. It handles the operational details that generic software often misses: units, branches, stock movements, ledgers, permissions, reports, audit trails, and the messy edge cases that appear when real staff use the system every day.",
+    bullets: [
+      "Multi-branch inventory visibility",
+      "Real-time financial reporting",
+      "Stock and cost tracing",
+      "Role-based permissions",
+      "Immutable audit logs",
+      "Reports owners can trust",
     ],
   },
   challenge: {

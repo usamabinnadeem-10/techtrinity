@@ -18,6 +18,7 @@ import { CasePlatform } from "@/components/case-study/case-platform";
 import { CaseReview } from "@/components/case-study/case-review";
 import { CaseScorecard } from "@/components/case-study/case-scorecard";
 import { CaseSpotlight } from "@/components/case-study/case-spotlight";
+import { CaseWhyItMatters } from "@/components/case-study/case-why-it-matters";
 import {
   getAllCaseStudySlugs,
   getCaseStudy,
@@ -127,6 +128,7 @@ export default async function CaseStudyPage({
         <CaseHero caseStudy={caseStudy} />
         {caseStudy.overview && <CaseOverview caseStudy={caseStudy} />}
         {caseStudy.challenge && <CaseChallenge caseStudy={caseStudy} />}
+        {caseStudy.whyItMatters && <CaseWhyItMatters caseStudy={caseStudy} />}
         {caseStudy.architecture && <CaseArchitecture caseStudy={caseStudy} />}
         {caseStudy.flow && <CaseFlow caseStudy={caseStudy} />}
         {caseStudy.platform && <CasePlatform caseStudy={caseStudy} />}
