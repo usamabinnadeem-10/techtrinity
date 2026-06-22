@@ -50,11 +50,12 @@ export type Post = PostListItem & {
 };
 
 export const CATEGORY_SLUGS: Record<PostCategory, string> = {
-  Engineering: "engineering",
-  Product: "product",
-  Founders: "founders",
-  "Case Studies": "case-studies",
-  "Agency Life": "agency-life",
+  "Inventory Accuracy": "inventory-accuracy",
+  "Warehouse Workflows": "warehouse-workflows",
+  "Manual Reporting": "manual-reporting",
+  "Custom vs Off-the-Shelf": "custom-vs-off-the-shelf",
+  "Multi-Location Operations": "multi-location-operations",
+  "Software Audits": "software-audits",
 };
 
 export function categoryToSlug(category: PostCategory): string {
