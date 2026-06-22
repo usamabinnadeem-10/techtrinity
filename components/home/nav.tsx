@@ -4,14 +4,8 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/cn";
 import { LinkButton } from "./button";
-
-const NAV_LINKS = [
-  { href: "/#work", label: "Work" },
-  { href: "/services", label: "Services" },
-  { href: "/use-cases", label: "Use Cases" },
-  { href: "/about", label: "About" },
-  { href: "/blog", label: "Blog" },
-];
+import { MobileMenu } from "./mobile-menu";
+import { NAV_LINKS } from "./nav-links";
 
 export function SiteNav() {
   const [scrolled, setScrolled] = useState(false);
@@ -55,12 +49,7 @@ export function SiteNav() {
           </LinkButton>
         </li>
       </ul>
-      <Link
-        href="/contact"
-        className="md:hidden inline-flex items-center rounded-sm bg-primary px-4 py-2 text-sm font-medium text-primary-foreground"
-      >
-        Book a Call
-      </Link>
+      <MobileMenu />
     </nav>
   );
 }
