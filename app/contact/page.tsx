@@ -9,14 +9,14 @@ import { ContactForm } from "@/components/contact/contact-form";
 import { ContactHeader } from "@/components/contact/contact-header";
 
 export const metadata: Metadata = {
-  title: "Contact",
+  title: { absolute: "Talk to TechTrinity About Your Operations Workflow" },
   description:
-    "Tell us about your product or book a 30-minute discovery call with the TechTrinity team.",
+    "Tell us what is slowing your operation down, or book a 30-minute workflow review with the TechTrinity team.",
   alternates: { canonical: "/contact" },
   openGraph: {
-    title: "Contact — TechTrinity",
+    title: "Talk to TechTrinity About Your Operations Workflow",
     description:
-      "Tell us about your product or book a 30-minute discovery call with the TechTrinity team.",
+      "Tell us what is slowing your operation down, or book a 30-minute workflow review with the TechTrinity team.",
     url: "/contact",
     type: "website",
   },
@@ -40,12 +40,13 @@ export default function ContactPage() {
             </div>
             <div className="order-1 md:order-2 md:pl-10 lg:pl-14">
               <EditorialLabel tone="primary" className="mb-6 block">
-                Book a Discovery Call
+                Book a Workflow Review
               </EditorialLabel>
               <p className="mb-7 max-w-[420px] text-[15px] font-light leading-[1.7] text-muted">
-                Prefer to talk directly? Book a free 30-minute discovery call.
-                No pitch, no pressure — just an honest conversation about your
-                product and whether we&apos;re the right fit.
+                Prefer to talk directly? Book a free 30-minute workflow review.
+                No pitch, no pressure — just an honest conversation about how
+                your stock, orders, warehouse, purchasing, or reporting process
+                works today and whether we can help.
               </p>
               <ContactCalendly />
             </div>

@@ -3,7 +3,10 @@
 import { useState, type FormEvent } from "react";
 import { cn } from "@/lib/cn";
 import {
-  PROJECT_TYPES,
+  WORKFLOW_FOCUS_OPTIONS,
+  ROLE_OPTIONS,
+  BUSINESS_TYPE_OPTIONS,
+  URGENCY_OPTIONS,
   validateContact,
   type ContactErrors,
   type ContactPayload,
@@ -21,7 +24,12 @@ const initialState: ContactPayload = {
   name: "",
   email: "",
   message: "",
-  projectType: "",
+  focus: "",
+  company: "",
+  role: "",
+  tools: "",
+  businessType: "",
+  urgency: "",
 };
 
 type Status = "idle" | "submitting" | "success" | "error";
@@ -133,13 +141,13 @@ export function ContactForm() {
 
       <div>
         <label htmlFor="contact-message" className={fieldLabel}>
-          Tell Us About Your Project
+          Tell us what is slowing your operation down
         </label>
         <textarea
           id="contact-message"
           name="message"
           rows={5}
-          placeholder="What are you building? What's your timeline and budget?"
+          placeholder="Where does your stock, order, warehouse, purchasing, or reporting process break down today?"
           value={values.message}
           onChange={(e) => update("message", e.target.value)}
           aria-invalid={Boolean(errors.message)}
@@ -158,25 +166,25 @@ export function ContactForm() {
       </div>
 
       <div>
-        <label htmlFor="contact-project-type" className={fieldLabel}>
-          What Best Describes Your Project?
+        <label htmlFor="contact-focus" className={fieldLabel}>
+          What best describes the workflow you want to fix?
         </label>
         <div className="relative">
           <select
-            id="contact-project-type"
-            name="projectType"
-            value={values.projectType}
+            id="contact-focus"
+            name="focus"
+            value={values.focus}
             onChange={(e) =>
-              update("projectType", e.target.value as ContactPayload["projectType"])
+              update("focus", e.target.value as ContactPayload["focus"])
             }
             className={cn(
               fieldShell,
               "appearance-none pr-10",
-              !values.projectType && "text-muted/80",
+              !values.focus && "text-muted/80",
             )}
           >
             <option value="">Select an option</option>
-            {PROJECT_TYPES.map((option) => (
+            {WORKFLOW_FOCUS_OPTIONS.map((option) => (
               <option key={option} value={option} className="text-foreground">
                 {option}
               </option>
@@ -195,6 +203,160 @@ export function ContactForm() {
             <path d="M1 1.5 6 6.5 11 1.5" />
           </svg>
         </div>
+      </div>
+
+      <div>
+        <label htmlFor="contact-company" className={fieldLabel}>
+          Company name
+        </label>
+        <input
+          id="contact-company"
+          name="company"
+          type="text"
+          autoComplete="organization"
+          placeholder="Acme Distribution Co."
+          value={values.company}
+          onChange={(e) => update("company", e.target.value)}
+          className={fieldShell}
+        />
+      </div>
+
+      <div>
+        <label htmlFor="contact-role" className={fieldLabel}>
+          Your role
+        </label>
+        <div className="relative">
+          <select
+            id="contact-role"
+            name="role"
+            value={values.role}
+            onChange={(e) =>
+              update("role", e.target.value as ContactPayload["role"])
+            }
+            className={cn(
+              fieldShell,
+              "appearance-none pr-10",
+              !values.role && "text-muted/80",
+            )}
+          >
+            <option value="">Select an option</option>
+            {ROLE_OPTIONS.map((o) => (
+              <option key={o} value={o} className="text-foreground">
+                {o}
+              </option>
+            ))}
+          </select>
+          <svg
+            aria-hidden
+            viewBox="0 0 12 8"
+            className="pointer-events-none absolute right-4 top-1/2 size-3 -translate-y-1/2 text-muted-foreground"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.6"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="M1 1.5 6 6.5 11 1.5" />
+          </svg>
+        </div>
+      </div>
+
+      <div>
+        <label htmlFor="contact-business-type" className={fieldLabel}>
+          Business type
+        </label>
+        <div className="relative">
+          <select
+            id="contact-business-type"
+            name="businessType"
+            value={values.businessType}
+            onChange={(e) =>
+              update(
+                "businessType",
+                e.target.value as ContactPayload["businessType"],
+              )
+            }
+            className={cn(
+              fieldShell,
+              "appearance-none pr-10",
+              !values.businessType && "text-muted/80",
+            )}
+          >
+            <option value="">Select an option</option>
+            {BUSINESS_TYPE_OPTIONS.map((o) => (
+              <option key={o} value={o} className="text-foreground">
+                {o}
+              </option>
+            ))}
+          </select>
+          <svg
+            aria-hidden
+            viewBox="0 0 12 8"
+            className="pointer-events-none absolute right-4 top-1/2 size-3 -translate-y-1/2 text-muted-foreground"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.6"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="M1 1.5 6 6.5 11 1.5" />
+          </svg>
+        </div>
+      </div>
+
+      <div>
+        <label htmlFor="contact-urgency" className={fieldLabel}>
+          How urgent is it?
+        </label>
+        <div className="relative">
+          <select
+            id="contact-urgency"
+            name="urgency"
+            value={values.urgency}
+            onChange={(e) =>
+              update("urgency", e.target.value as ContactPayload["urgency"])
+            }
+            className={cn(
+              fieldShell,
+              "appearance-none pr-10",
+              !values.urgency && "text-muted/80",
+            )}
+          >
+            <option value="">Select an option</option>
+            {URGENCY_OPTIONS.map((o) => (
+              <option key={o} value={o} className="text-foreground">
+                {o}
+              </option>
+            ))}
+          </select>
+          <svg
+            aria-hidden
+            viewBox="0 0 12 8"
+            className="pointer-events-none absolute right-4 top-1/2 size-3 -translate-y-1/2 text-muted-foreground"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.6"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="M1 1.5 6 6.5 11 1.5" />
+          </svg>
+        </div>
+      </div>
+
+      <div>
+        <label htmlFor="contact-tools" className={fieldLabel}>
+          What tools does your team use today?
+        </label>
+        <input
+          id="contact-tools"
+          name="tools"
+          type="text"
+          placeholder="Example: QuickBooks, Xero, Excel, Google Sheets, Shopify, email, WhatsApp, old desktop software, paper notes"
+          value={values.tools}
+          onChange={(e) => update("tools", e.target.value)}
+          className={fieldShell}
+        />
       </div>
 
       {status === "success" ? (
