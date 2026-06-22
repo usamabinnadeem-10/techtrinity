@@ -20,7 +20,7 @@ export function About() {
           <div data-reveal>
             <EditorialLabel>Who We Are</EditorialLabel>
             <h2 className="mt-3.5 mb-6 font-display text-[clamp(30px,3.4vw,50px)] font-bold leading-[1.05] tracking-[-0.025em]">
-              Built by people who&apos;ve shipped real products.
+              Built by people who&apos;ve shipped real systems.
             </h2>
             <div className="space-y-4 text-[16px] font-light leading-[1.85] text-muted">
               <p>
@@ -32,12 +32,12 @@ export function About() {
               <p>
                 We&apos;re a small, senior team. You&apos;ll never be handed off
                 to a junior. The person you speak to in the discovery call is
-                the person building your product.
+                the person mapping and building your system.
               </p>
               <p>
                 We take on a{" "}
                 <strong className="font-medium text-foreground">
-                  small number of projects at a time
+                  small number of operations at a time
                 </strong>{" "}
                 — so every client gets our full attention.
               </p>
