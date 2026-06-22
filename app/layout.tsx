@@ -33,8 +33,9 @@ const dmMono = DM_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: `${SITE_NAME} — Boutique SaaS Product Studio`,
-    template: `%s — ${SITE_NAME}`,
+    default:
+      "Custom Operations Software for Wholesale & Distribution Businesses | TechTrinity",
+    template: `%s | ${SITE_NAME}`,
   },
   description: SITE_DESCRIPTION,
   applicationName: SITE_NAME,
@@ -42,15 +43,17 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     siteName: SITE_NAME,
-    title: `${SITE_NAME} — Boutique SaaS Product Studio`,
-    description: SITE_DESCRIPTION,
+    title: "Custom Operations Software for Inventory-Heavy Businesses",
+    description:
+      "Inventory, warehouse, order, and reporting systems built around how your operation actually runs.",
     url: SITE_URL,
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: `${SITE_NAME} — Boutique SaaS Product Studio`,
-    description: SITE_DESCRIPTION,
+    title: "Custom Operations Software for Inventory-Heavy Businesses",
+    description:
+      "Inventory, warehouse, order, and reporting systems built around how your operation actually runs.",
   },
   robots: {
     index: true,

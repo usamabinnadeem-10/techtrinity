@@ -5,7 +5,7 @@ export const SITE_URL =
 export const SITE_NAME = "TechTrinity";
 
 export const SITE_DESCRIPTION =
-  "From idea to product, done right. We design and build SaaS products on a modern stack and stay accountable until it ships.";
+  "Simple custom operations software for inventory-heavy businesses whose workflows have outgrown spreadsheets, accounting software, and disconnected tools.";
 
 export const ORG_LEGAL_NAME = "TechTrinity";
 
@@ -44,7 +44,8 @@ export function organizationSchema(): Record<string, unknown> {
     legalName: ORG_LEGAL_NAME,
     url: SITE_URL,
     logo: ORG_LOGO_URL,
-    description: SITE_DESCRIPTION,
+    description:
+      "TechTrinity builds custom operations software for inventory-heavy wholesale, distribution, and multi-location businesses.",
     email: ORG_CONTACT_EMAIL,
     contactPoint: {
       "@type": "ContactPoint",
