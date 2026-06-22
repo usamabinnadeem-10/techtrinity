@@ -9,6 +9,7 @@ import {
   SITE_URL,
   websiteSchema,
 } from "@/lib/site";
+import { GoogleAnalytics } from "@/components/analytics/google-analytics";
 
 const fraunces = Fraunces({
   variable: "--font-fraunces",
@@ -80,6 +81,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col">
         <JsonLd data={[organizationSchema(), websiteSchema()]} />
         {children}
+        <GoogleAnalytics />
       </body>
     </html>
   );
