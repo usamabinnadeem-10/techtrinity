@@ -20,7 +20,7 @@ export function SiteNav() {
   return (
     <nav
       className={cn(
-        "fixed inset-x-0 top-0 z-50 flex items-center justify-between border-b px-6 py-5 transition-[background-color,border-color,backdrop-filter] duration-300 md:px-12",
+        "fixed inset-x-0 top-0 z-50 flex items-center justify-between border-b px-6 transition-[background-color,border-color,backdrop-filter] duration-300 md:px-12",
         scrolled
           ? "border-border bg-background/85 backdrop-blur-xl supports-[backdrop-filter]:bg-background/70"
           : "border-transparent bg-transparent",
