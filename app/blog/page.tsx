@@ -11,14 +11,14 @@ import { ALL_POSTS_QUERY, sanityFetch } from "@/lib/sanity";
 import type { PostListItem } from "@/lib/blog-types";
 
 export const metadata: Metadata = {
-  title: "Blog",
+  title: "Inventory, Operations & Custom Software Notes",
   description:
-    "Practical writing for non-technical founders and the engineers who build with them.",
+    "Practical writing for owners of inventory-heavy businesses — stock accuracy, reporting, warehouse workflows, and software decisions.",
   alternates: { canonical: "/blog" },
   openGraph: {
-    title: "Blog — TechTrinity",
+    title: "Inventory, Operations & Custom Software Notes — TechTrinity",
     description:
-      "Practical writing for non-technical founders and the engineers who build with them.",
+      "Practical writing for owners of inventory-heavy businesses — stock accuracy, reporting, warehouse workflows, and software decisions.",
     url: "/blog",
     type: "website",
   },

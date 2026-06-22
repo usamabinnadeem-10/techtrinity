@@ -7,15 +7,15 @@ export function BlogHeader() {
         <div className="hero-rise-sm [animation-delay:0.1s]">
           <EditorialLabel>The Blog</EditorialLabel>
           <h1 className="mt-4 font-display text-[clamp(40px,5.5vw,76px)] font-black leading-[0.98] tracking-[-0.04em]">
-            Thinking out loud about
+            Notes on inventory, operations,
             <br />
-            SaaS, product, and{" "}
-            <em className="italic font-bold text-primary">engineering.</em>
+            and <em className="italic font-bold text-primary">custom software.</em>
           </h1>
         </div>
         <p className="hero-rise-sm max-w-95 text-[17px] font-normal leading-normal text-muted text-balance [animation-delay:0.3s] md:pb-2">
-          Practical writing for non-technical founders and the engineers who
-          build with them.
+          Practical writing for owners and operators of inventory-heavy
+          businesses — about stock accuracy, reporting, warehouse workflows,
+          software decisions, and what to fix before you build.
         </p>
       </div>
     </section>

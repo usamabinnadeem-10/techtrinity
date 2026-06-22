@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState, useEffect } from "react";
+import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
 import { cn } from "@/lib/cn";
 import {
@@ -68,7 +69,22 @@ export function BlogList({ posts }: Props) {
     <div className="space-y-16">
       <CategoryFilter active={filter} onChange={handleFilterChange} />
 
-      {posts.length === 0 ? null : (
+      {posts.length === 0 ? (
+        <div className="max-w-[640px] space-y-7">
+          <p className="text-[17px] font-light leading-[1.8] text-muted">
+            We&apos;re preparing practical guides for owner-led wholesale,
+            distribution, and inventory-heavy businesses. Start with the
+            EasyAccounts case study to see the kind of operational problems we
+            build around.
+          </p>
+          <Link
+            href="/work/easyaccounts"
+            className="inline-flex items-center gap-2 border-b border-border pb-1 text-sm font-medium text-foreground transition-colors hover:border-primary hover:text-primary"
+          >
+            Read the EasyAccounts Case Study <span aria-hidden>→</span>
+          </Link>
+        </div>
+      ) : (
         <>
           {featured ? <BlogFeatured post={featured} /> : null}
 
