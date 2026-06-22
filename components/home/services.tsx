@@ -12,33 +12,33 @@ type Service = {
 const SERVICES: Service[] = [
   {
     num: "01",
-    title: "Product Sprint",
+    title: "Complete Operations System Build",
     description:
-      "End-to-end custom software. You walk us through your operations. We design and build the system that replaces the spreadsheets and legacy tools slowing your team down. 8–16 weeks.",
+      "For businesses running stock, orders, purchasing, and reporting across spreadsheets, accounting software, and warehouse notes. We map the workflow, design the system, build it, and help your team launch. 8–16 weeks.",
     price: "Starting at $20,000",
     slug: "product-sprint",
   },
   {
     num: "02",
-    title: "Build-Only",
+    title: "Defined Workflow Build",
     description:
-      "Already have your process mapped out? We build fast and clean on React/Next.js with Node or Django backends. No overhead, no rework — just execution on a defined scope.",
+      "Already know the exact workflow you need fixed? We build one focused system — stock lookup, order tracking, purchasing, reporting, transfers, or another defined operational workflow — without a long discovery phase.",
     price: "Starting at $12,000",
     slug: "build-only",
   },
   {
     num: "03",
-    title: "Growth Retainer",
+    title: "Ongoing Operations Improvements",
     description:
-      "A dedicated team, every month. No re-briefing, no handoffs, no strangers in your system. We stay in your codebase and keep evolving it as your operations grow. Minimum 3-month commitment.",
+      "For live systems your team already relies on. We stay close to the codebase and keep improving it as you add products, people, locations, and new ways of working.",
     price: "Starting at $4,500/month",
     slug: "growth-retainer",
   },
   {
     num: "04",
-    title: "Technical Audit",
+    title: "Existing System Audit",
     description:
-      "Running on software nobody fully understands? We review your current setup honestly — what's broken, what's a liability, and what to fix first.",
+      "Running software nobody fully understands? We review the code, data, security, reliability, and workflow fit — then tell you what to fix, what to replace, and what to leave alone.",
     price: "Starting at $1,500",
     slug: "technical-audit",
   },
@@ -56,8 +56,8 @@ export function Services() {
             Every stage of your operation.
           </h2>
           <p className="mt-4 max-w-[560px] text-[17px] font-light leading-[1.7] text-muted">
-            A fraction of what a US or UK agency charges for the same scope —
-            quoted upfront, no surprises.
+            Clear fixed-scope pricing agreed upfront — built by a senior team
+            that maps the operation before writing code.
           </p>
         </div>
 

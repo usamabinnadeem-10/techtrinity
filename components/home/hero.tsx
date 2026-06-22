@@ -55,7 +55,7 @@ export function Hero() {
 
         <div className="hero-rise-sm mt-11 flex flex-wrap items-center justify-center gap-3.5 [animation-delay:0.8s]">
           <LinkButton href="/contact" variant="accent" size="lg">
-            Book a Free Discovery Call
+            Book a Workflow Review
           </LinkButton>
           <LinkButton href="#work" variant="ghost" size="lg">
             See Our Work

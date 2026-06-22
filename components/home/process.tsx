@@ -11,7 +11,7 @@ const STEPS: Step[] = [
     num: "01",
     title: "Discovery Call",
     description:
-      "Free. We learn your product, your timeline, your constraints. If we're a fit, we'll tell you. If we're not, we'll tell you that too.",
+      "Free. We learn your operation, your timeline, your constraints. If we're a fit, we'll tell you. If we're not, we'll tell you that too.",
   },
   {
     num: "02",

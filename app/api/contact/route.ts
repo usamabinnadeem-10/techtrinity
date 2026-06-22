@@ -1,6 +1,9 @@
 import { Resend } from "resend";
 import {
-  PROJECT_TYPES,
+  WORKFLOW_FOCUS_OPTIONS,
+  ROLE_OPTIONS,
+  BUSINESS_TYPE_OPTIONS,
+  URGENCY_OPTIONS,
   validateContact,
   type ContactPayload,
 } from "@/lib/contact";
@@ -8,12 +11,18 @@ import {
 const TO_EMAIL = "info@techtrinity.ai";
 const FROM_EMAIL = process.env.CONTACT_FROM_EMAIL ?? "TechTrinity <onboarding@resend.dev>";
 
-function isProjectType(value: unknown): value is ContactPayload["projectType"] {
-  if (value === "") return true;
+function inEnum<T extends readonly string[]>(
+  options: T,
+  value: unknown,
+): value is T[number] | "" {
+  if (value === "" || value === undefined) return true;
   return (
-    typeof value === "string" &&
-    (PROJECT_TYPES as readonly string[]).includes(value)
+    typeof value === "string" && (options as readonly string[]).includes(value)
   );
+}
+
+function asString(value: unknown): string {
+  return typeof value === "string" ? value : "";
 }
 
 function parseBody(body: unknown): ContactPayload | null {
@@ -23,7 +32,10 @@ function parseBody(body: unknown): ContactPayload | null {
     typeof b.name !== "string" ||
     typeof b.email !== "string" ||
     typeof b.message !== "string" ||
-    !isProjectType(b.projectType)
+    !inEnum(WORKFLOW_FOCUS_OPTIONS, b.focus) ||
+    !inEnum(ROLE_OPTIONS, b.role) ||
+    !inEnum(BUSINESS_TYPE_OPTIONS, b.businessType) ||
+    !inEnum(URGENCY_OPTIONS, b.urgency)
   ) {
     return null;
   }
@@ -31,7 +43,12 @@ function parseBody(body: unknown): ContactPayload | null {
     name: b.name,
     email: b.email,
     message: b.message,
-    projectType: b.projectType,
+    focus: (b.focus as ContactPayload["focus"]) ?? "",
+    company: asString(b.company),
+    role: (b.role as ContactPayload["role"]) ?? "",
+    tools: asString(b.tools),
+    businessType: (b.businessType as ContactPayload["businessType"]) ?? "",
+    urgency: (b.urgency as ContactPayload["urgency"]) ?? "",
   };
 }
 
@@ -45,14 +62,22 @@ function escapeHtml(value: string): string {
 }
 
 function buildEmailHtml(payload: ContactPayload): string {
-  const projectType = payload.projectType || "Not specified";
+  const row = (label: string, value: string) =>
+    value
+      ? `<tr><td style="padding: 6px 0; color: #666; width: 150px;">${escapeHtml(label)}</td><td style="padding: 6px 0;">${escapeHtml(value)}</td></tr>`
+      : "";
   return `
     <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; max-width: 560px; margin: 0 auto; padding: 24px; color: #111;">
       <h2 style="margin: 0 0 16px; font-size: 18px;">New enquiry from ${escapeHtml(payload.name)}</h2>
       <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
-        <tr><td style="padding: 6px 0; color: #666; width: 130px;">Name</td><td style="padding: 6px 0;">${escapeHtml(payload.name)}</td></tr>
+        ${row("Name", payload.name)}
         <tr><td style="padding: 6px 0; color: #666;">Email</td><td style="padding: 6px 0;"><a href="mailto:${escapeHtml(payload.email)}">${escapeHtml(payload.email)}</a></td></tr>
-        <tr><td style="padding: 6px 0; color: #666;">Project type</td><td style="padding: 6px 0;">${escapeHtml(projectType)}</td></tr>
+        ${row("Company", payload.company)}
+        ${row("Role", payload.role)}
+        ${row("Business type", payload.businessType)}
+        ${row("Workflow focus", payload.focus || "Not specified")}
+        ${row("Current tools", payload.tools)}
+        ${row("Urgency", payload.urgency)}
       </table>
       <h3 style="margin: 24px 0 8px; font-size: 14px; color: #666;">Message</h3>
       <div style="white-space: pre-wrap; font-size: 14px; line-height: 1.55; padding: 16px; background: #f6f6f6; border-radius: 6px;">${escapeHtml(payload.message)}</div>
@@ -96,8 +121,8 @@ export async function POST(request: Request) {
     );
   }
 
-  const projectTypeLabel = payload.projectType || "General";
-  const subject = `New enquiry from ${payload.name.trim()} — ${projectTypeLabel}`;
+  const focusLabel = payload.focus || "General";
+  const subject = `New enquiry from ${payload.name.trim()} — ${focusLabel}`;
 
   try {
     const resend = new Resend(apiKey);

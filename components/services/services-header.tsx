@@ -14,10 +14,9 @@ export function ServicesHeader() {
           </h1>
         </div>
         <p className="hero-rise-sm max-w-[560px] text-[16px] font-light leading-[1.75] text-muted [animation-delay:0.3s] md:pb-3">
-          Custom software for wholesale, distribution, and multi-location
-          businesses — built around how your operation already runs, not forced
-          into someone else&apos;s template. Four ways to work with us, each
-          with a clear scope and a fixed price agreed before we start.
+          For wholesale, distribution, light manufacturing, and multi-location
+          businesses whose stock, order, warehouse, purchasing, and reporting
+          workflows have outgrown spreadsheets and disconnected tools.
         </p>
       </div>
     </section>

@@ -20,7 +20,7 @@ export function Team() {
             <p className="text-[15px] font-light leading-[1.8] text-muted md:max-w-[420px]">
               No agency layers, no offshoring, no hand-offs. The names on this
               page are the same hands writing the code that ships to your
-              users.
+              team.
             </p>
           </div>
         </div>

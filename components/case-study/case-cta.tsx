@@ -21,15 +21,14 @@ export function CaseCTA({ caseStudy }: Props) {
               <CtaHeadline lines={cta.headline} emphasis={cta.emphasis} />
             ) : (
               <>
-                Interested in what a well-architected{" "}
-                <em className="italic text-primary">platform</em> looks like for
-                your product?
+                Need production-grade engineering for a{" "}
+                <em className="italic text-primary">system your team relies on?</em>
               </>
             )}
           </h2>
           <div className="mt-10 flex flex-wrap items-center justify-center gap-3.5">
             <LinkButton href="/#cta-sec" variant="accent" size="lg">
-              Book a Discovery Call
+              Book a Workflow Review
             </LinkButton>
             {showSecondButton && (
               <LinkButton href="/work" variant="ghost" size="lg">

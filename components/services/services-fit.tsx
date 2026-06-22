@@ -1,19 +1,21 @@
 import { EditorialLabel } from "@/components/home/label";
 
 const GOOD_FIT = [
-  `Your operations have grown past what spreadsheets can manage`,
+  `Your operation has grown past what spreadsheets can manage`,
+  `Stock, orders, purchasing, or reports are split across too many places`,
+  `The owner or ops team cannot fully trust the numbers`,
   `You want software built around your workflow, not a SaaS template`,
-  `You're the decision-maker — no procurement committee`,
-  `You need it simple enough that your whole team will actually use it`,
-  `You value getting it right over getting the cheapest quote`,
+  `You need something simple enough that warehouse/admin staff will actually use it`,
+  `You're the decision-maker or can bring the decision-maker into the process`,
 ];
 
 const BAD_FIT = [
-  `You want a SaaS product you can subscribe to monthly`,
-  `Your current system is working fine — no real friction`,
-  `You need it done in two weeks`,
-  `You want to own the IP and resell it to others`,
-  `You've already burned three agencies and haven't reflected on why`,
+  `A standard SaaS tool already fits your workflow well`,
+  `There's no real operational friction yet`,
+  `You only want the cheapest developer`,
+  `You need a rushed two-week build for a complex workflow`,
+  `You want to resell the software as a SaaS product`,
+  `You cannot give access to the people who actually run the process`,
 ];
 
 export function ServicesFit() {

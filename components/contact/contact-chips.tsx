@@ -44,8 +44,7 @@ const GitHubIcon = (
 
 const CHIPS: Chip[] = [
   { href: "mailto:info@techtrinity.ai", label: "info@techtrinity.ai", icon: MailIcon },
-  { href: "https://www.linkedin.com/company/techtrinity", label: "LinkedIn", icon: LinkedInIcon },
-  { href: "https://github.com/techtrinity", label: "GitHub", icon: GitHubIcon },
+  { href: "https://www.linkedin.com/company/108867952", label: "LinkedIn", icon: LinkedInIcon },
 ];
 
 export function ContactChips() {

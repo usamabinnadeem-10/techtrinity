@@ -65,12 +65,13 @@ export async function generateMetadata({
   }
   const description = trimDescription(service.overview[0]);
   const path = `/services/${slug}`;
+  const metaTitle = service.metaTitle ?? service.title;
   return {
-    title: service.title,
+    title: metaTitle,
     description,
     alternates: { canonical: path },
     openGraph: {
-      title: `${service.title} — ${SITE_NAME}`,
+      title: `${metaTitle} — ${SITE_NAME}`,
       description,
       url: path,
       type: "website",

@@ -2,11 +2,12 @@ import { DocumentTextIcon, ImageIcon } from "@sanity/icons";
 import { defineArrayMember, defineField, defineType } from "sanity";
 
 export const POST_CATEGORIES = [
-  "Engineering",
-  "Product",
-  "Founders",
-  "Case Studies",
-  "Agency Life",
+  "Inventory Accuracy",
+  "Warehouse Workflows",
+  "Manual Reporting",
+  "Custom vs Off-the-Shelf",
+  "Multi-Location Operations",
+  "Software Audits",
 ] as const;
 
 export const post = defineType({

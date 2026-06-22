@@ -8,17 +8,17 @@ export function AboutCTA() {
         <div data-reveal className="mx-auto max-w-[760px] text-center">
           <EditorialLabel>Let&apos;s Talk</EditorialLabel>
           <h2 className="mt-3.5 mb-7 font-display text-[clamp(38px,5.2vw,76px)] font-black leading-[0.96] tracking-[-0.04em]">
-            Want to work with a team that{" "}
-            <em className="italic text-primary">actually gives a damn?</em>
+            Want a team that understands the operational mess{" "}
+            <em className="italic text-primary">before writing code?</em>
           </h2>
           <p className="mb-12 text-[17px] font-light leading-[1.75] text-muted">
-            Book a free discovery call. We&apos;ll go deep on how your operation
-            runs and tell you honestly whether we&apos;re the right fit — even
-            if the answer is no.
+            Book a free workflow review. We&apos;ll go deep on how your
+            operation runs and tell you honestly whether we&apos;re the right
+            fit — even if the answer is no.
           </p>
           <div className="flex flex-wrap items-center justify-center gap-3.5">
             <LinkButton href="/contact" variant="accent" size="lg">
-              Book a Discovery Call
+              Book a Workflow Review
             </LinkButton>
           </div>
           <p className="mt-6 text-sm text-muted-foreground">

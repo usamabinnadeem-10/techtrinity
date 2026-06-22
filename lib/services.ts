@@ -19,6 +19,7 @@ export type ServiceDetail = {
   slug: string;
   num: string;
   title: string;
+  metaTitle?: string;
   headlineLead: string;
   headlineTail: string;
   meta: ServiceMeta[];
@@ -64,18 +65,19 @@ export const SERVICE_DETAILS: ServiceDetail[] = [
   {
     slug: "product-sprint",
     num: "01",
-    title: "Product Sprint",
-    headlineLead: "Product Sprint.",
-    headlineTail: "The complete system.",
+    title: "Complete Operations System Build",
+    metaTitle: "Complete Operations System Build",
+    headlineLead: "Complete Operations",
+    headlineTail: "System Build.",
     meta: [
       { label: "Starting at", value: "$20,000" },
       { label: "Timeline", value: "8–16 weeks" },
       { label: "Best for", value: "Your whole operation" },
     ],
     overview: [
-      "You're running your operation on spreadsheets, a handful of tools, and a few things only one person knows how to do. Product Sprint replaces all of it with one system built around the way you already work — from the first discovery session to software your team logs into on day one.",
-      "It's our most complete engagement. You bring deep knowledge of your business; we handle everything else — mapping your workflows, designing the system, building it, and supporting your team through launch.",
-      "It's the same approach we used to build a live inventory and warehouse system for a wholesale business that had been losing data on USB sticks. It has run every day for over three years.",
+      "You're running stock, orders, purchasing, reporting, and warehouse work across spreadsheets, accounting software, email, and a few things only one person knows how to do.",
+      "The Complete Operations System Build replaces the fragile patchwork with one focused system built around how your business already works. We map the process first, design the screens your team will actually use, build the system, and support the launch.",
+      "This is the right engagement when the problem is bigger than one screen or one report. You bring deep knowledge of the operation; we turn it into software that gives your team trusted data and clearer workflows.",
     ],
     included: [
       "Discovery and scoping — we map exactly how your operation runs (1–2 weeks)",
@@ -87,36 +89,37 @@ export const SERVICE_DETAILS: ServiceDetail[] = [
       "Two weeks of support after launch while your team settles in",
     ],
     notIncluded: [
-      "Ongoing changes after launch — that's the Growth Retainer",
+      "Ongoing changes after launch — that's Ongoing Operations Improvements",
       "Third-party costs like hosting fees, subscriptions, or paid integrations",
       "Marketing, SEO, or content",
       "Mobile apps, unless we scope one in separately",
     ],
     process: SHARED_PROCESS,
     idealFor:
-      "Owners of wholesale, distribution, or multi-location businesses whose operation has outgrown spreadsheets and aging software — and who want one system built properly around how they actually work.",
+      "Owners of wholesale, distribution, light manufacturing, or multi-location businesses whose operation has outgrown spreadsheets, aging tools, or disconnected SaaS — and who want one system built properly around how the team actually works.",
     priceDetail: [
       "Projects start at $20,000. The final price depends on how much you need the system to do.",
       "The full price is agreed in writing before any work begins — no hourly surprises.",
       "50% to start, 50% on delivery.",
     ],
-    ctaPrompt: "Ready to replace the spreadsheets?",
-    ctaLabel: "Book a Discovery Call",
+    ctaPrompt: "Ready to replace the spreadsheet patchwork?",
+    ctaLabel: "Book a Workflow Review",
   },
   {
     slug: "build-only",
     num: "02",
-    title: "Build-Only",
-    headlineLead: "Build-Only.",
-    headlineTail: "Defined scope, built fast.",
+    title: "Defined Workflow Build",
+    metaTitle: "Defined Workflow Software Build",
+    headlineLead: "Defined Workflow",
+    headlineTail: "Build.",
     meta: [
       { label: "Starting at", value: "$12,000" },
       { label: "Timeline", value: "6–12 weeks" },
       { label: "Best for", value: "One defined system" },
     ],
     overview: [
-      "Sometimes you already know exactly what you need — a single system to handle one part of your operation, clearly defined, with nothing left to figure out. Build-Only is for that. We take a tight, agreed scope and build it cleanly, without the time or cost of a full discovery phase.",
-      "It's the fastest way to get one well-defined system into your team's hands — built properly, ready to use, and easy to extend later if you decide you want more.",
+      "Sometimes you already know exactly what needs to be fixed: a stock lookup tool, order tracking workflow, purchase planning screen, reporting dashboard, warehouse transfer process, or another specific part of the operation.",
+      "Defined Workflow Build is for one clearly scoped system. We build it cleanly, connect it where needed, and put it into your team's hands without turning it into a full ERP project.",
     ],
     included: [
       "The system built to your agreed scope — clean and ready for daily use",
@@ -127,40 +130,41 @@ export const SERVICE_DETAILS: ServiceDetail[] = [
       "Two weeks of support after launch",
     ],
     notIncluded: [
-      "A full discovery phase to work out what to build — that's the Product Sprint",
+      "A full discovery phase to work out what to build — that's the Complete Operations System Build",
       "Reworking the plan once the scope is agreed (changes mid-build are quoted separately)",
       "Third-party costs like hosting fees or paid integrations",
       "Mobile apps, unless we scope one in separately",
     ],
     callout: {
       label: "Requirement",
-      title: "A clearly defined scope.",
-      body: "Build-Only works because there's nothing left to figure out — you know what you need and we build it. If the scope still has open questions, we'll flag it in the proposal and suggest starting with a short discovery instead.",
+      title: "A clearly defined workflow.",
+      body: "This service works when the workflow is already understood. If the process still has open questions, hidden edge cases, or multiple teams disagreeing on how it should work, we'll flag that and recommend starting with a short workflow discovery instead.",
     },
     idealFor:
-      "Owners who already know exactly the one system they need built and can describe it clearly — and who want it done fast, without paying for discovery they don't need.",
+      "Owners or operations teams who can clearly describe one workflow that needs to be built or replaced — and want it delivered without paying for a full discovery phase.",
     priceDetail: [
       "Projects start at $12,000. The final price depends on how much the system has to do.",
       "The full price is agreed in writing before any work begins.",
       "50% to start, 50% on delivery.",
     ],
-    ctaPrompt: "Know exactly what you need?",
-    ctaLabel: "Book a Discovery Call",
+    ctaPrompt: "Know the exact workflow you need?",
+    ctaLabel: "Book a Workflow Review",
   },
   {
     slug: "growth-retainer",
     num: "03",
-    title: "Growth Retainer",
-    headlineLead: "Growth Retainer.",
-    headlineTail: "Your team. Monthly.",
+    title: "Ongoing Operations Improvements",
+    metaTitle: "Ongoing Operations Software Improvements",
+    headlineLead: "Ongoing Operations",
+    headlineTail: "Improvements.",
     meta: [
       { label: "Starting at", value: "$4,500/month" },
       { label: "Minimum", value: "3 months" },
       { label: "Best for", value: "Software that keeps growing" },
     ],
     overview: [
-      "Your system is live and your team relies on it. But your business keeps moving — you add a location, a product line, a new way of working — and the software has to keep up. The Growth Retainer gives you a dedicated team every month to do exactly that, without the cost and headache of hiring.",
-      "The same people who know your system, month after month. No re-explaining how your business works, no handoffs, no strangers learning it from scratch.",
+      "Your system is live and your team relies on it. But the business keeps changing — new locations, new product lines, new reports, new approval steps, new edge cases.",
+      "Ongoing Operations Improvements gives you a senior team that already understands your system and keeps improving it month after month, without the cost and delay of hiring or re-explaining everything to a new developer.",
     ],
     included: [
       "A set block of development time every month",
@@ -182,37 +186,39 @@ export const SERVICE_DETAILS: ServiceDetail[] = [
       body: "Keeping a system fitting your business takes continuity, not a one-month dip-in. We ask for three months to start; after that it runs monthly, with 30 days' notice to stop whenever you need.",
     },
     idealFor:
-      "Owners with a live system who want it to keep improving as the business grows — without hiring a full-time developer or starting over with someone new each time.",
+      "Owners with a live operations system who want it to keep improving as the business grows — without hiring a full-time developer or starting over with someone new each time.",
     priceDetail: [
       "Retainers start at $4,500/month.",
       "The price scales with how much time you need each month.",
       "Invoiced monthly, in advance.",
     ],
-    ctaPrompt: "Already live and ready to grow?",
-    ctaLabel: "Book a Discovery Call",
+    ctaPrompt: "Already live and ready to keep improving?",
+    ctaLabel: "Book a Workflow Review",
   },
   {
     slug: "technical-audit",
     num: "04",
-    title: "Technical Audit",
-    headlineLead: "Technical Audit.",
-    headlineTail: "Know what you have.",
+    title: "Existing System Audit",
+    metaTitle: "Existing Operations Software Audit",
+    headlineLead: "Existing System",
+    headlineTail: "Audit.",
     meta: [
       { label: "Starting at", value: "$1,500" },
       { label: "Turnaround", value: "1 week" },
     ],
     overview: [
-      "You're running software someone else built — or sold you — and you're not sure what you actually have. Before you spend another dollar on it, you need a straight answer: is it solid, is it costing you, and is it worth fixing or better to start over?",
-      "The Technical Audit gives you that answer in plain English — a written assessment from a senior engineer who has no reason to tell you it's fine when it isn't.",
+      "You're running software someone else built, an old internal system, or an off-the-shelf tool that has been patched around your operation for years. You're not sure whether to fix it, replace it, or stop investing in it.",
+      "The Existing System Audit gives you a plain-English assessment of the code, data, security, reliability, and workflow fit — so you know what is broken, what matters, and what to do next.",
     ],
     included: [
-      "A full review of how the software is built and held together",
-      "A security check — where your data could be at risk",
-      "Whether it can handle more orders, products, and users as you grow",
-      "Out-of-date or risky parts that could fail or cost you later",
-      "How your data is stored and whether it's safe",
-      "A written report in plain English, with problems ranked by how urgent they are",
-      "A 30-minute call to walk you through what we found and what to do next",
+      "Review of current software structure and maintainability",
+      "Security and data-risk check",
+      "Review of database/data model where access is provided",
+      "Workflow-fit assessment: where the software does not match how the team works",
+      "Reliability and performance risks",
+      "Integration risks",
+      "Plain-English report ranked by urgency",
+      "30-minute walkthrough call",
     ],
     notIncluded: [
       "Fixing what we find — that's a separate piece of work",
@@ -225,14 +231,14 @@ export const SERVICE_DETAILS: ServiceDetail[] = [
       body: "Delivered within 5 business days of getting access. Every issue is ranked — Critical, High, Medium, Low — and each one explains what it is, why it matters to your business, and what to do about it.",
     },
     idealFor:
-      "Owners who inherited or paid for software that isn't working the way it should — and who want an honest second opinion before they put more money into it.",
+      "Owners who inherited, bought, or commissioned software that no longer fits the operation — and want an honest second opinion before spending more money on it.",
     priceDetail: [
       "Starts at $1,500 for most small to mid-size systems.",
       "Larger or more complex software is quoted individually.",
       "Paid in full upfront, given the short turnaround.",
     ],
     ctaPrompt: "Not sure what you're running?",
-    ctaLabel: "Book a Discovery Call",
+    ctaLabel: "Book a Workflow Review",
   },
 ];
 
