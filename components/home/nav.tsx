@@ -34,6 +34,7 @@ export function SiteNav() {
           width={1254}
           height={1254}
           priority
+          sizes="(min-width: 640px) 40px, 32px"
           className="h-8 w-8 sm:h-10 sm:w-10"
         />
       </Link>
