@@ -24,7 +24,7 @@ export function About() {
             </h2>
             <div className="space-y-4 text-[16px] font-light leading-[1.85] text-muted">
               <p>
-                TechTrinity is built by engineers with experience at{" "}
+                TechTrinity was founded by an engineer with experience at{" "}
                 <strong className="font-medium text-foreground">Canonical</strong> —
                 the company behind Ubuntu — and a track record of building
                 production systems from the ground up.

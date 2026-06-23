@@ -16,13 +16,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticRoutes: MetadataRoute.Sitemap = [
     {
       url: `${SITE_URL}/`,
-      lastModified: new Date("2026-05-10"),
+      lastModified: new Date("2026-06-23"),
       changeFrequency: "weekly",
       priority: 1,
     },
     {
       url: `${SITE_URL}/services`,
-      lastModified: new Date("2026-05-10"),
+      lastModified: new Date("2026-06-23"),
       changeFrequency: "monthly",
       priority: 0.9,
     },
@@ -49,7 +49,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const serviceRoutes: MetadataRoute.Sitemap = getAllServiceSlugs().map(
     (slug) => ({
       url: `${SITE_URL}/services/${slug}`,
-      lastModified: new Date("2026-05-10"),
+      lastModified: new Date("2026-06-23"),
       changeFrequency: "monthly",
       priority: 0.8,
     }),
