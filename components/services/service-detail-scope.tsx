@@ -29,6 +29,9 @@ export function ServiceDetailScope({ included, notIncluded }: Props) {
                 </li>
               ))}
             </ul>
+            <p className="mt-8 border-t border-border pt-6 font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
+              React · Next.js · Node.js · Django · PostgreSQL · Cloud
+            </p>
           </div>
 
           <div className="bg-card p-8 md:p-12">

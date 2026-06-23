@@ -5,7 +5,7 @@ import { ScreenReel } from "./screen-reel";
 const STATS = [
   "5+ Years in Production",
   "Inventory & Operations Software",
-  "Ex-Canonical Engineers",
+  "Ex-Canonical Founder",
   "US / UK / AU Clients",
   "Senior-Only Team",
 ];
