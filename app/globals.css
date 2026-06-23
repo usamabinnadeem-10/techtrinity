@@ -134,6 +134,43 @@
   .reel-track[data-dir="reverse"] {
     animation-direction: reverse;
   }
+
+  /* One-shot scanner sweep across the 404 record card. Top is animated (rather
+     than transform) so it tracks any card height; the card clips the overflow. */
+  .scan-line {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 2px;
+    pointer-events: none;
+    opacity: 0;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      var(--color-primary),
+      transparent
+    );
+    box-shadow: 0 0 16px rgb(184 255 87 / 0.55);
+    animation: scan-sweep 1.5s cubic-bezier(0.22, 1, 0.36, 1) 0.55s forwards;
+  }
+}
+
+@keyframes scan-sweep {
+  0% {
+    top: 0%;
+    opacity: 0;
+  }
+  12% {
+    opacity: 0.9;
+  }
+  88% {
+    opacity: 0.9;
+  }
+  100% {
+    top: 100%;
+    opacity: 0;
+  }
 }
 
 /* The track holds the card set rendered twice; translating by -50% lands the
