@@ -13,11 +13,16 @@ export function ServicesHeader() {
             <em className="italic font-bold text-primary">One studio.</em>
           </h1>
         </div>
-        <p className="hero-rise-sm max-w-[560px] text-[16px] font-light leading-[1.75] text-muted [animation-delay:0.3s] md:pb-3">
-          For wholesale, distribution, light manufacturing, and multi-location
-          businesses whose stock, order, warehouse, purchasing, and reporting
-          workflows have outgrown spreadsheets and disconnected tools.
-        </p>
+        <div className="hero-rise-sm [animation-delay:0.3s] md:pb-3">
+          <p className="max-w-[560px] text-[16px] font-light leading-[1.75] text-muted">
+            For wholesale, distribution, light manufacturing, and multi-location
+            businesses whose stock, order, warehouse, purchasing, and reporting
+            workflows have outgrown spreadsheets and disconnected tools.
+          </p>
+          <p className="mt-6 font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
+            React · Next.js · Node.js · Django · PostgreSQL · Cloud
+          </p>
+        </div>
       </div>
     </section>
   );

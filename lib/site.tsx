@@ -45,8 +45,23 @@ export function organizationSchema(): Record<string, unknown> {
     url: SITE_URL,
     logo: ORG_LOGO_URL,
     description:
-      "TechTrinity builds custom operations software for inventory-heavy wholesale, distribution, and multi-location businesses.",
+      "TechTrinity builds custom operations software for inventory-heavy wholesale, distribution, and multi-location businesses using modern web technologies including React, Next.js, Node.js, Django, PostgreSQL, and cloud infrastructure.",
     email: ORG_CONTACT_EMAIL,
+    knowsAbout: [
+      "Custom operations software",
+      "Inventory management software",
+      "Warehouse and stock workflows",
+      "Purchasing and order workflows",
+      "Reporting and analytics dashboards",
+      "Internal tools",
+      "React",
+      "Next.js",
+      "Node.js",
+      "Django",
+      "Python",
+      "PostgreSQL",
+      "Cloud infrastructure",
+    ],
     contactPoint: {
       "@type": "ContactPoint",
       email: ORG_CONTACT_EMAIL,
@@ -54,6 +69,44 @@ export function organizationSchema(): Record<string, unknown> {
       availableLanguage: ["English"],
     },
     sameAs: ORG_SAME_AS,
+  };
+}
+
+export function operationsServiceSchema(): Record<string, unknown> {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: "Custom Operations Software Development",
+    serviceType: "Custom operations software development",
+    provider: { "@type": "Organization", name: SITE_NAME, url: SITE_URL },
+    areaServed: "Worldwide",
+    description:
+      "TechTrinity builds custom operations software for inventory-heavy businesses using React, Next.js, Node.js, Django, PostgreSQL, and modern cloud infrastructure — covering inventory, warehouse, purchasing, and reporting workflows.",
+  };
+}
+
+export function disambiguationFaqSchema(): Record<string, unknown> {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: [
+      {
+        "@type": "Question",
+        name: "What does TechTrinity build?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "TechTrinity builds custom operations software for inventory-heavy wholesale, distribution, and multi-location businesses — inventory, warehouse, purchasing, and reporting systems built with React, Next.js, Node.js, Django, PostgreSQL, and modern cloud infrastructure.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "Does TechTrinity work with Laravel?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "No. TechTrinity does not offer Laravel or PHP development. We build custom operations software using React, Next.js, Node.js, Django, PostgreSQL, and modern cloud infrastructure.",
+        },
+      },
+    ],
   };
 }
 

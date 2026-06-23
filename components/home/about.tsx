@@ -30,6 +30,15 @@ export function About() {
                 production systems from the ground up.
               </p>
               <p>
+                We build with modern, well-supported web technology —{" "}
+                <strong className="font-medium text-foreground">
+                  React, Next.js, Node.js, Django, and PostgreSQL
+                </strong>{" "}
+                on cloud infrastructure — chosen so your system stays fast,
+                secure, and easy to extend for years, not locked into a
+                template.
+              </p>
+              <p>
                 We&apos;re a small, senior team. You&apos;ll never be handed off
                 to a junior. The person you speak to in the discovery call is
                 the person mapping and building your system.

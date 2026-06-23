@@ -12,10 +12,16 @@ import { SiteFooter } from "@/components/home/site-footer";
 import { Team } from "@/components/home/team";
 import { WhenCustom } from "@/components/home/when-custom";
 import { Work } from "@/components/home/work";
+import {
+  disambiguationFaqSchema,
+  JsonLd,
+  operationsServiceSchema,
+} from "@/lib/site";
 
 export default function HomePage() {
   return (
     <>
+      <JsonLd data={[operationsServiceSchema(), disambiguationFaqSchema()]} />
       <AmbientBackground />
       <SiteNav />
       <main>
