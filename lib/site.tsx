@@ -13,6 +13,8 @@ export const ORG_LOGO_URL = `${SITE_URL}/tt-logo.png`;
 
 export const ORG_CONTACT_EMAIL = "info@techtrinity.ai";
 
+export const ORG_CONTACT_PHONE = "+12513732320";
+
 // Stable @id anchors so entities can reference each other across the
 // separate JSON-LD blocks rendered on a page (Organization <-> Person <-> WebSite).
 export const ORG_ID = `${SITE_URL}/#organization`;
@@ -72,6 +74,7 @@ export function organizationSchema(): Record<string, unknown> {
     description:
       "TechTrinity builds custom operations software for inventory-heavy wholesale, distribution, and multi-location businesses using modern web technologies including React, Next.js, Node.js, Django, PostgreSQL, and cloud infrastructure.",
     email: ORG_CONTACT_EMAIL,
+    telephone: ORG_CONTACT_PHONE,
     founder: { "@id": PERSON_ID },
     knowsAbout: [
       "Custom operations software",
@@ -91,6 +94,7 @@ export function organizationSchema(): Record<string, unknown> {
     contactPoint: {
       "@type": "ContactPoint",
       email: ORG_CONTACT_EMAIL,
+      telephone: ORG_CONTACT_PHONE,
       contactType: "customer support",
       availableLanguage: ["English"],
     },
