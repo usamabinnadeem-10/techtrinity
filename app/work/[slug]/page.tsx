@@ -27,9 +27,9 @@ import {
 import {
   absoluteUrl,
   breadcrumbSchema,
+  easyAccountsSchema,
   JsonLd,
-  SITE_NAME,
-  SITE_URL,
+  ORG_ID,
 } from "@/lib/site";
 
 type RouteParams = { slug: string };
@@ -86,20 +86,8 @@ function caseStudySchema(caseStudy: CaseStudy): Record<string, unknown> {
     url,
     mainEntityOfPage: { "@type": "WebPage", "@id": url },
     image: [heroImage],
-    publisher: {
-      "@type": "Organization",
-      name: SITE_NAME,
-      url: SITE_URL,
-      logo: {
-        "@type": "ImageObject",
-        url: `${SITE_URL}/opengraph-image.png`,
-      },
-    },
-    author: {
-      "@type": "Organization",
-      name: SITE_NAME,
-      url: SITE_URL,
-    },
+    publisher: { "@id": ORG_ID },
+    author: { "@id": ORG_ID },
   };
 }
 
@@ -120,7 +108,13 @@ export default async function CaseStudyPage({
 
   return (
     <>
-      <JsonLd data={[caseStudySchema(caseStudy), breadcrumbs]} />
+      <JsonLd
+        data={[
+          caseStudySchema(caseStudy),
+          breadcrumbs,
+          ...(caseStudy.slug === "easyaccounts" ? [easyAccountsSchema()] : []),
+        ]}
+      />
       <AmbientBackground />
       <SiteNav />
       <main>

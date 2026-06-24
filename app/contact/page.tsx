@@ -7,6 +7,7 @@ import { ContactChips } from "@/components/contact/contact-chips";
 import { ContactMinimalFooter } from "@/components/contact/contact-footer";
 import { ContactForm } from "@/components/contact/contact-form";
 import { ContactHeader } from "@/components/contact/contact-header";
+import { breadcrumbSchema, JsonLd } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: { absolute: "Talk to TechTrinity About Your Operations Workflow" },
@@ -25,6 +26,12 @@ export const metadata: Metadata = {
 export default function ContactPage() {
   return (
     <>
+      <JsonLd
+        data={breadcrumbSchema([
+          { name: "Home", path: "/" },
+          { name: "Contact", path: "/contact" },
+        ])}
+      />
       <AmbientBackground />
       <SiteNav />
       <main>

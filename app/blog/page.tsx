@@ -9,6 +9,7 @@ import { BlogHeader } from "@/components/blog/blog-header";
 import { BlogList } from "@/components/blog/blog-list";
 import { ALL_POSTS_QUERY, sanityFetch } from "@/lib/sanity";
 import type { PostListItem } from "@/lib/blog-types";
+import { breadcrumbSchema, JsonLd } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Inventory, Operations & Custom Software Notes",
@@ -34,6 +35,12 @@ export default async function BlogIndexPage() {
 
   return (
     <>
+      <JsonLd
+        data={breadcrumbSchema([
+          { name: "Home", path: "/" },
+          { name: "Blog", path: "/blog" },
+        ])}
+      />
       <AmbientBackground />
       <SiteNav />
       <main>
