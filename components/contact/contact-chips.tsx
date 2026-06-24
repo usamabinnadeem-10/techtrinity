@@ -42,8 +42,24 @@ const GitHubIcon = (
   </svg>
 );
 
+const PhoneIcon = (
+  <svg
+    aria-hidden
+    viewBox="0 0 16 16"
+    className="size-3.5"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.4"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <path d="M2.5 2.5h3l1.5 3.5-1.75 1.25c.85 1.7 2.25 3.1 3.95 3.95L10.5 9.5l3.5 1.5v3c0 .28-.22.5-.5.5C5.75 14.5 1.5 10.25 1.5 5c0-.28.22-.5.5-.5Z" />
+  </svg>
+);
+
 const CHIPS: Chip[] = [
   { href: "mailto:info@techtrinity.ai", label: "info@techtrinity.ai", icon: MailIcon },
+  { href: "tel:+12513732320", label: "+1 (251) 373-2320", icon: PhoneIcon },
   { href: "https://www.linkedin.com/company/108867952", label: "LinkedIn", icon: LinkedInIcon },
 ];
 
