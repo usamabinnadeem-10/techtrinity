@@ -8,6 +8,7 @@ import { ServicesFit } from "@/components/services/services-fit";
 import { ServicesGrid } from "@/components/services/services-grid";
 import { ServicesHeader } from "@/components/services/services-header";
 import { ServicesProcess } from "@/components/services/services-process";
+import { breadcrumbSchema, JsonLd } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Services",
@@ -26,6 +27,12 @@ export const metadata: Metadata = {
 export default function ServicesPage() {
   return (
     <>
+      <JsonLd
+        data={breadcrumbSchema([
+          { name: "Home", path: "/" },
+          { name: "Services", path: "/services" },
+        ])}
+      />
       <AmbientBackground />
       <SiteNav />
       <main>

@@ -7,6 +7,7 @@ import { SiteNav } from "@/components/home/nav";
 import { RevealController } from "@/components/home/reveal-controller";
 import { SiteFooter } from "@/components/home/site-footer";
 import { USE_CASES } from "@/lib/use-cases";
+import { breadcrumbSchema, JsonLd } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Operations Software Use Cases for Inventory-Heavy Businesses",
@@ -25,6 +26,12 @@ export const metadata: Metadata = {
 export default function UseCasesPage() {
   return (
     <>
+      <JsonLd
+        data={breadcrumbSchema([
+          { name: "Home", path: "/" },
+          { name: "Use Cases", path: "/use-cases" },
+        ])}
+      />
       <AmbientBackground />
       <SiteNav />
       <main>

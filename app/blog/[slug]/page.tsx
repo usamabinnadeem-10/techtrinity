@@ -24,9 +24,10 @@ import type { Post, PostListItem } from "@/lib/blog-types";
 import {
   absoluteUrl,
   breadcrumbSchema,
+  isFounderAuthor,
   JsonLd,
-  SITE_NAME,
-  SITE_URL,
+  ORG_ID,
+  PERSON_ID,
 } from "@/lib/site";
 
 type RouteParams = { slug: string };
@@ -112,21 +113,15 @@ function blogPostingSchema(post: Post): Record<string, unknown> {
     datePublished: post.publishedAt,
     dateModified: post._updatedAt || post.publishedAt,
     articleSection: post.category,
-    author: {
-      "@type": "Person",
-      name: post.author.name,
-      description: post.author.bio,
-      image: authorPhoto,
-    },
-    publisher: {
-      "@type": "Organization",
-      name: SITE_NAME,
-      url: SITE_URL,
-      logo: {
-        "@type": "ImageObject",
-        url: `${SITE_URL}/opengraph-image.png`,
-      },
-    },
+    author: isFounderAuthor(post.author?.name)
+      ? { "@id": PERSON_ID }
+      : {
+          "@type": "Person",
+          name: post.author.name,
+          description: post.author.bio,
+          image: authorPhoto,
+        },
+    publisher: { "@id": ORG_ID },
   };
 }
 

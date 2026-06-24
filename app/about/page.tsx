@@ -9,6 +9,7 @@ import { AmbientBackground } from "@/components/home/background";
 import { SiteNav } from "@/components/home/nav";
 import { RevealController } from "@/components/home/reveal-controller";
 import { SiteFooter } from "@/components/home/site-footer";
+import { breadcrumbSchema, JsonLd } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "About",
@@ -27,6 +28,12 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <>
+      <JsonLd
+        data={breadcrumbSchema([
+          { name: "Home", path: "/" },
+          { name: "About", path: "/about" },
+        ])}
+      />
       <AmbientBackground />
       <SiteNav />
       <main>

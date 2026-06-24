@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Fraunces, Plus_Jakarta_Sans, DM_Mono } from "next/font/google";
 import "./globals.css";
 import {
+  founderPersonSchema,
   JsonLd,
   organizationSchema,
   SITE_DESCRIPTION,
@@ -80,7 +81,9 @@ export default function RootLayout({
       className={`${jakarta.variable} ${fraunces.variable} ${dmMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-        <JsonLd data={[organizationSchema(), websiteSchema()]} />
+        <JsonLd
+          data={[organizationSchema(), websiteSchema(), founderPersonSchema()]}
+        />
         {children}
         <GoogleAnalytics />
       </body>
