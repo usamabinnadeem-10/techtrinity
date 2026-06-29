@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { CookieSettingsLink } from "@/components/analytics/cookie-settings-link";
 
 type FooterLink = {
   href: string;
@@ -47,6 +48,9 @@ export function SiteFooter() {
                 </Link>
               </li>
             ))}
+            <li>
+              <CookieSettingsLink />
+            </li>
           </ul>
           <span className="font-mono text-[13px] text-muted-foreground">
             © 2026 TechTrinity
