@@ -146,4 +146,22 @@ describe("consentInitScript", () => {
     run(consentInitScript());
     expect(consentDefault().analytics_storage).toBe("denied");
   });
+
+  test("falls back to denied when timestamp is not a number (mirrors parseStoredConsent)", () => {
+    localStorage.setItem(
+      CONSENT_STORAGE_KEY,
+      JSON.stringify({ analytics: "granted", version: 1, timestamp: "x" }),
+    );
+    run(consentInitScript());
+    expect(consentDefault().analytics_storage).toBe("denied");
+  });
+
+  test("defaults analytics_storage to denied when stored choice is denied", () => {
+    localStorage.setItem(
+      CONSENT_STORAGE_KEY,
+      JSON.stringify({ analytics: "denied", version: 1, timestamp: 1 }),
+    );
+    run(consentInitScript());
+    expect(consentDefault().analytics_storage).toBe("denied");
+  });
 });

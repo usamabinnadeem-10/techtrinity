@@ -88,7 +88,7 @@ try {
   var raw = window.localStorage.getItem(${JSON.stringify(CONSENT_STORAGE_KEY)});
   if (raw) {
     var parsed = JSON.parse(raw);
-    if (parsed && parsed.version === ${CONSENT_VERSION} && parsed.analytics === 'granted') {
+    if (parsed && parsed.version === ${CONSENT_VERSION} && parsed.analytics === 'granted' && typeof parsed.timestamp === 'number') {
       stored = 'granted';
     }
   }
