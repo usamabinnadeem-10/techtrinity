@@ -126,6 +126,7 @@ export function PrivacyContent() {
                       href={processor.policyUrl}
                       target="_blank"
                       rel="noreferrer"
+                      aria-label={`${processor.name} privacy policy`}
                       className="underline underline-offset-2 transition-colors hover:text-primary"
                     >
                       Policy

@@ -29,6 +29,9 @@ export function ContactCalendly() {
       setLoaded(true);
       return;
     }
+    // Grant-only by design: reveals the widget when functional consent becomes
+    // granted live. A later revoke is not torn down mid-session (the script is
+    // already in the page); rejecting clears it on the next reload.
     const onConsentChange = () => {
       if (readFunctionalConsent() === "granted") setLoaded(true);
     };
