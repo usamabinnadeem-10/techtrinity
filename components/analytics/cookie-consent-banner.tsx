@@ -59,11 +59,11 @@ export function CookieConsentBanner() {
           </div>
 
           <p className="mt-3 text-[15px] font-medium leading-snug text-foreground">
-            Analytics stays off until you accept.
+            Analytics and embedded tools stay off until you accept.
           </p>
           <p className="mt-2 text-[13px] leading-[1.6] text-muted">
-            We use cookies only to see how visitors move through the site. Read
-            more in our{"  "}
+            We use cookies for analytics and for embedded tools like our Calendly
+            scheduler — both stay off until you choose. Read more in our{"  "}
             <Link
               href="/privacy"
               className="text-foreground underline underline-offset-2 transition-colors hover:text-primary"

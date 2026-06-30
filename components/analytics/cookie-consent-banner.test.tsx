@@ -1,5 +1,5 @@
 import { afterEach, beforeEach, expect, test, vi } from "vitest";
-import { act, render, screen, waitFor } from "@testing-library/react";
+import { act, render, screen, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { CONSENT_STORAGE_KEY, COOKIE_OPEN_EVENT } from "@/lib/consent";
 import { CookieConsentBanner } from "./cookie-consent-banner";
@@ -19,21 +19,30 @@ test("shows when no decision is stored", async () => {
   expect(await screen.findByRole("region", { name: /cookie/i })).toBeInTheDocument();
 });
 
-test("stays hidden when a decision already exists", () => {
+test("mentions analytics and embedded tools", async () => {
+  render(<CookieConsentBanner />);
+  const banner = await screen.findByRole("region", { name: /cookie/i });
+  expect(within(banner).getAllByText(/analytics/i).length).toBeGreaterThan(0);
+  expect(within(banner).getAllByText(/embedded tools/i).length).toBeGreaterThan(0);
+});
+
+test("stays hidden when a v2 decision already exists", () => {
   localStorage.setItem(
     CONSENT_STORAGE_KEY,
-    JSON.stringify({ analytics: "denied", version: 1, timestamp: 1 }),
+    JSON.stringify({ analytics: "denied", functional: "denied", version: 2, timestamp: 1 }),
   );
   render(<CookieConsentBanner />);
   expect(screen.queryByRole("region", { name: /cookie/i })).not.toBeInTheDocument();
 });
 
-test("Accept persists granted, updates gtag, and hides the banner", async () => {
+test("Accept persists granted to both categories, updates gtag, and hides the banner", async () => {
   render(<CookieConsentBanner />);
   await screen.findByRole("region", { name: /cookie/i });
   await userEvent.click(screen.getByRole("button", { name: /accept/i }));
 
-  expect(JSON.parse(localStorage.getItem(CONSENT_STORAGE_KEY)!).analytics).toBe("granted");
+  const stored = JSON.parse(localStorage.getItem(CONSENT_STORAGE_KEY)!);
+  expect(stored.analytics).toBe("granted");
+  expect(stored.functional).toBe("granted");
   expect(window.gtag).toHaveBeenCalledWith("consent", "update", {
     analytics_storage: "granted",
   });
@@ -42,12 +51,14 @@ test("Accept persists granted, updates gtag, and hides the banner", async () => 
   );
 });
 
-test("Reject persists denied, updates gtag, and hides the banner", async () => {
+test("Reject persists denied to both categories, updates gtag, and hides the banner", async () => {
   render(<CookieConsentBanner />);
   await screen.findByRole("region", { name: /cookie/i });
   await userEvent.click(screen.getByRole("button", { name: /reject/i }));
 
-  expect(JSON.parse(localStorage.getItem(CONSENT_STORAGE_KEY)!).analytics).toBe("denied");
+  const stored = JSON.parse(localStorage.getItem(CONSENT_STORAGE_KEY)!);
+  expect(stored.analytics).toBe("denied");
+  expect(stored.functional).toBe("denied");
   expect(window.gtag).toHaveBeenCalledWith("consent", "update", {
     analytics_storage: "denied",
   });
@@ -59,7 +70,7 @@ test("Reject persists denied, updates gtag, and hides the banner", async () => {
 test("reopens on the cookie:open event after a decision exists", async () => {
   localStorage.setItem(
     CONSENT_STORAGE_KEY,
-    JSON.stringify({ analytics: "denied", version: 1, timestamp: 1 }),
+    JSON.stringify({ analytics: "denied", functional: "denied", version: 2, timestamp: 1 }),
   );
   render(<CookieConsentBanner />);
   expect(screen.queryByRole("region", { name: /cookie/i })).not.toBeInTheDocument();
