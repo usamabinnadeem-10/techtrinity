@@ -1,11 +1,13 @@
 import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
 import {
+  CONSENT_CHANGED_EVENT,
   CONSENT_STORAGE_KEY,
   CONSENT_VERSION,
   COOKIE_OPEN_EVENT,
   consentInitScript,
   parseStoredConsent,
   readConsent,
+  readFunctionalConsent,
   updateConsent,
   writeConsent,
   type StoredConsent,
@@ -24,8 +26,9 @@ afterEach(() => {
 describe("constants", () => {
   test("expose the agreed values", () => {
     expect(CONSENT_STORAGE_KEY).toBe("tt-cookie-consent");
-    expect(CONSENT_VERSION).toBe(1);
+    expect(CONSENT_VERSION).toBe(2);
     expect(COOKIE_OPEN_EVENT).toBe("cookie:open");
+    expect(CONSENT_CHANGED_EVENT).toBe("consent:changed");
   });
 });
 
@@ -38,21 +41,32 @@ describe("parseStoredConsent", () => {
     expect(parseStoredConsent("{not json")).toBeNull();
   });
 
-  test("returns null on version mismatch", () => {
-    const raw = JSON.stringify({ analytics: "granted", version: 99, timestamp: 1 });
+  test("returns null for a v1 record (re-prompts existing visitors)", () => {
+    const raw = JSON.stringify({ analytics: "granted", version: 1, timestamp: 1 });
+    expect(parseStoredConsent(raw)).toBeNull();
+  });
+
+  test("returns null when functional is missing", () => {
+    const raw = JSON.stringify({ analytics: "granted", version: 2, timestamp: 1 });
     expect(parseStoredConsent(raw)).toBeNull();
   });
 
   test("returns null when analytics value is invalid", () => {
-    const raw = JSON.stringify({ analytics: "maybe", version: 1, timestamp: 1 });
+    const raw = JSON.stringify({ analytics: "maybe", functional: "granted", version: 2, timestamp: 1 });
     expect(parseStoredConsent(raw)).toBeNull();
   });
 
-  test("parses a valid granted record", () => {
-    const raw = JSON.stringify({ analytics: "granted", version: 1, timestamp: 42 });
+  test("returns null when functional value is invalid", () => {
+    const raw = JSON.stringify({ analytics: "granted", functional: "maybe", version: 2, timestamp: 1 });
+    expect(parseStoredConsent(raw)).toBeNull();
+  });
+
+  test("parses a valid two-category record", () => {
+    const raw = JSON.stringify({ analytics: "granted", functional: "denied", version: 2, timestamp: 42 });
     expect(parseStoredConsent(raw)).toEqual({
       analytics: "granted",
-      version: 1,
+      functional: "denied",
+      version: 2,
       timestamp: 42,
     } satisfies StoredConsent);
   });
@@ -66,9 +80,14 @@ describe("readConsent", () => {
   test("returns the stored decision", () => {
     localStorage.setItem(
       CONSENT_STORAGE_KEY,
-      JSON.stringify({ analytics: "denied", version: 1, timestamp: 7 }),
+      JSON.stringify({ analytics: "denied", functional: "denied", version: 2, timestamp: 7 }),
     );
-    expect(readConsent()).toEqual({ analytics: "denied", version: 1, timestamp: 7 });
+    expect(readConsent()).toEqual({
+      analytics: "denied",
+      functional: "denied",
+      version: 2,
+      timestamp: 7,
+    });
   });
 
   test("returns null (never throws) when storage is unavailable", () => {
@@ -80,10 +99,24 @@ describe("readConsent", () => {
 });
 
 describe("writeConsent", () => {
-  test("persists an immutable record and returns it", () => {
+  test("persists an immutable record with both categories set", () => {
     const result = writeConsent("granted", 123);
-    expect(result).toEqual({ analytics: "granted", version: 1, timestamp: 123 });
+    expect(result).toEqual({ analytics: "granted", functional: "granted", version: 2, timestamp: 123 });
     expect(JSON.parse(localStorage.getItem(CONSENT_STORAGE_KEY)!)).toEqual(result);
+  });
+
+  test("sets both categories to denied on reject", () => {
+    const result = writeConsent("denied", 1);
+    expect(result.analytics).toBe("denied");
+    expect(result.functional).toBe("denied");
+  });
+
+  test("dispatches a consent:changed event on write", () => {
+    const handler = vi.fn();
+    window.addEventListener(CONSENT_CHANGED_EVENT, handler);
+    writeConsent("granted", 1);
+    expect(handler).toHaveBeenCalledTimes(1);
+    window.removeEventListener(CONSENT_CHANGED_EVENT, handler);
   });
 
   test("does not throw when storage is unavailable", () => {
@@ -94,8 +127,19 @@ describe("writeConsent", () => {
   });
 });
 
+describe("readFunctionalConsent", () => {
+  test("returns null when nothing is stored", () => {
+    expect(readFunctionalConsent()).toBeNull();
+  });
+
+  test("returns the stored functional value", () => {
+    writeConsent("granted", 1);
+    expect(readFunctionalConsent()).toBe("granted");
+  });
+});
+
 describe("updateConsent", () => {
-  test("calls gtag with the analytics_storage update", () => {
+  test("calls gtag with only the analytics_storage update", () => {
     const gtag = vi.fn();
     (window as { gtag?: typeof gtag }).gtag = gtag;
     updateConsent("granted");
@@ -129,28 +173,28 @@ describe("consentInitScript", () => {
     });
   });
 
-  test("defaults analytics_storage to granted when stored choice is granted", () => {
+  test("defaults analytics_storage to granted when stored v2 choice is granted", () => {
     localStorage.setItem(
       CONSENT_STORAGE_KEY,
-      JSON.stringify({ analytics: "granted", version: 1, timestamp: 1 }),
+      JSON.stringify({ analytics: "granted", functional: "granted", version: 2, timestamp: 1 }),
     );
     run(consentInitScript());
     expect(consentDefault().analytics_storage).toBe("granted");
   });
 
-  test("falls back to denied on version mismatch", () => {
+  test("falls back to denied for a v1 record (version mismatch)", () => {
     localStorage.setItem(
       CONSENT_STORAGE_KEY,
-      JSON.stringify({ analytics: "granted", version: 99, timestamp: 1 }),
+      JSON.stringify({ analytics: "granted", version: 1, timestamp: 1 }),
     );
     run(consentInitScript());
     expect(consentDefault().analytics_storage).toBe("denied");
   });
 
-  test("falls back to denied when timestamp is not a number (mirrors parseStoredConsent)", () => {
+  test("falls back to denied when timestamp is not a number", () => {
     localStorage.setItem(
       CONSENT_STORAGE_KEY,
-      JSON.stringify({ analytics: "granted", version: 1, timestamp: "x" }),
+      JSON.stringify({ analytics: "granted", functional: "granted", version: 2, timestamp: "x" }),
     );
     run(consentInitScript());
     expect(consentDefault().analytics_storage).toBe("denied");
@@ -159,7 +203,7 @@ describe("consentInitScript", () => {
   test("defaults analytics_storage to denied when stored choice is denied", () => {
     localStorage.setItem(
       CONSENT_STORAGE_KEY,
-      JSON.stringify({ analytics: "denied", version: 1, timestamp: 1 }),
+      JSON.stringify({ analytics: "denied", functional: "denied", version: 2, timestamp: 1 }),
     );
     run(consentInitScript());
     expect(consentDefault().analytics_storage).toBe("denied");

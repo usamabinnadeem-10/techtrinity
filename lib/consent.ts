@@ -1,11 +1,13 @@
 export const CONSENT_STORAGE_KEY = "tt-cookie-consent";
-export const CONSENT_VERSION = 1;
+export const CONSENT_VERSION = 2;
 export const COOKIE_OPEN_EVENT = "cookie:open";
+export const CONSENT_CHANGED_EVENT = "consent:changed";
 
 export type ConsentValue = "granted" | "denied";
 
 export type StoredConsent = {
   analytics: ConsentValue;
+  functional: ConsentValue;
   version: number;
   timestamp: number;
 };
@@ -17,22 +19,30 @@ declare global {
   }
 }
 
+function isConsentValue(value: unknown): value is ConsentValue {
+  return value === "granted" || value === "denied";
+}
+
 /**
  * Validate and parse a raw localStorage value into a StoredConsent.
  * Returns null for missing, corrupt, wrong-shape, or version-mismatched
- * data — all of which the caller treats as "no decision yet". Hand-rolled
- * (no Zod) so the same rules can be mirrored by the inline init script,
- * which cannot import modules.
+ * data — all of which the caller treats as "no decision yet". A v1 record
+ * (single `analytics` field, version 1) fails the version check and so
+ * re-prompts the visitor once, which is correct: the consent scope changed.
+ * Hand-rolled (no Zod) so the same rules can be mirrored by the inline init
+ * script, which cannot import modules.
  */
 export function parseStoredConsent(raw: string | null): StoredConsent | null {
   if (!raw) return null;
   try {
     const parsed = JSON.parse(raw) as Partial<StoredConsent>;
     if (parsed?.version !== CONSENT_VERSION) return null;
-    if (parsed.analytics !== "granted" && parsed.analytics !== "denied") return null;
+    if (!isConsentValue(parsed.analytics)) return null;
+    if (!isConsentValue(parsed.functional)) return null;
     if (typeof parsed.timestamp !== "number") return null;
     return {
       analytics: parsed.analytics,
+      functional: parsed.functional,
       version: parsed.version,
       timestamp: parsed.timestamp,
     };
@@ -50,10 +60,20 @@ export function readConsent(): StoredConsent | null {
   }
 }
 
-/** Persist a new decision immutably and return the record. Never throws. */
+/** Read just the functional (embedded-tools) decision, or null if undecided. */
+export function readFunctionalConsent(): ConsentValue | null {
+  return readConsent()?.functional ?? null;
+}
+
+/**
+ * Persist a new decision immutably and return the record. A single broadened
+ * consent sets BOTH categories to the same value. Dispatches `consent:changed`
+ * so live embeds (the Calendly scheduler) can react without a reload. Never throws.
+ */
 export function writeConsent(value: ConsentValue, now: number = Date.now()): StoredConsent {
   const record: StoredConsent = {
     analytics: value,
+    functional: value,
     version: CONSENT_VERSION,
     timestamp: now,
   };
@@ -61,6 +81,11 @@ export function writeConsent(value: ConsentValue, now: number = Date.now()): Sto
     window.localStorage.setItem(CONSENT_STORAGE_KEY, JSON.stringify(record));
   } catch {
     // Storage unavailable — the in-memory decision still drives the UI this session.
+  }
+  try {
+    window.dispatchEvent(new CustomEvent(CONSENT_CHANGED_EVENT, { detail: record }));
+  } catch {
+    // Event dispatch unavailable — setState in callers still updates the live UI.
   }
   return record;
 }
@@ -76,7 +101,8 @@ export function updateConsent(value: ConsentValue): void {
  * dataLayer/gtag, then sets the consent DEFAULT from the stored choice. The
  * parse logic mirrors parseStoredConsent in plain JS because an inline browser
  * script cannot import this module; the storage key and version are interpolated
- * so the format stays single-sourced.
+ * so the format stays single-sourced. Only `analytics` drives the gtag default —
+ * Consent Mode has no Calendly/functional signal.
  */
 export function consentInitScript(): string {
   return `
