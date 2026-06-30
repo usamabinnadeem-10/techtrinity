@@ -49,7 +49,7 @@ export function SiteFooter() {
               </li>
             ))}
             <li>
-              <CookieSettingsLink />
+              <CookieSettingsLink className="text-[13px] text-muted-foreground transition-colors hover:text-foreground" />
             </li>
           </ul>
           <span className="font-mono text-[13px] text-muted-foreground">
