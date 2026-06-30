@@ -11,7 +11,7 @@ export function CookieSettingsLink() {
     <button
       type="button"
       onClick={() => window.dispatchEvent(new CustomEvent(COOKIE_OPEN_EVENT))}
-      className="text-[13px] text-muted-foreground transition-colors hover:text-foreground"
+      className="text-[13px] text-muted transition-colors hover:text-primary"
     >
       Cookie settings
     </button>
