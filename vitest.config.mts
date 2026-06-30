@@ -14,6 +14,8 @@ export default defineConfig({
       provider: "v8",
       include: [
         "lib/consent.ts",
+        "lib/legal/cookie-inventory.ts",
+        "lib/legal/policy-meta.ts",
         "components/analytics/consent-mode-init.tsx",
         "components/analytics/cookie-consent-banner.tsx",
         "components/analytics/cookie-settings-link.tsx",
