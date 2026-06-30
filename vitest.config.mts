@@ -17,6 +17,7 @@ export default defineConfig({
         "components/analytics/consent-mode-init.tsx",
         "components/analytics/cookie-consent-banner.tsx",
         "components/analytics/cookie-settings-link.tsx",
+        "components/contact/contact-calendly.tsx",
         "components/privacy/privacy-content.tsx",
         "components/home/button.tsx",
       ],
