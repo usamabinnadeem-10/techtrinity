@@ -23,6 +23,9 @@ export function ContactCalendly() {
 
   useEffect(() => {
     if (readFunctionalConsent() === "granted") {
+      // Intentional SSR-safe reveal: a one-shot post-mount decision from a
+      // client-only localStorage read, not a render loop.
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setLoaded(true);
       return;
     }

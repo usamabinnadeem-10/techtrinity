@@ -24,6 +24,9 @@ export function CookieConsentBanner() {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
+    // Intentional SSR-safe reveal: a one-shot post-mount decision from a
+    // client-only localStorage read, not a render loop.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     if (readConsent() === null) setVisible(true);
 
     const reopen = () => setVisible(true);
