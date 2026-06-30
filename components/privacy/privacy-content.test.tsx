@@ -39,5 +39,5 @@ test("affirms no advertising and no third-party fonts", () => {
 
 test("lets the visitor reopen cookie settings", () => {
   render(<PrivacyContent />);
-  expect(screen.getAllByRole("button", { name: /cookie settings/i }).length).toBeGreaterThan(0);
+  expect(screen.getAllByRole("button", { name: /cookie settings/i })).toHaveLength(3);
 });
