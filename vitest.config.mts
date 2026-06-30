@@ -1,0 +1,32 @@
+import { defineConfig } from "vitest/config";
+import react from "@vitejs/plugin-react";
+import tsconfigPaths from "vite-tsconfig-paths";
+
+export default defineConfig({
+  plugins: [tsconfigPaths(), react()],
+  test: {
+    environment: "jsdom",
+    globals: true,
+    setupFiles: ["./vitest.setup.ts"],
+    include: ["**/*.test.{ts,tsx}"],
+    exclude: ["node_modules", ".next", "e2e/**"],
+    coverage: {
+      provider: "v8",
+      include: [
+        "lib/consent.ts",
+        "lib/legal/cookie-inventory.ts",
+        "lib/legal/policy-meta.ts",
+        "components/analytics/consent-mode-init.tsx",
+        "components/analytics/cookie-consent-banner.tsx",
+        "components/analytics/cookie-settings-link.tsx",
+        "components/contact/contact-calendly.tsx",
+        "components/privacy/privacy-content.tsx",
+        "components/privacy/policy-header.tsx",
+        "components/privacy/policy-section.tsx",
+        "components/privacy/cookie-table.tsx",
+        "components/home/button.tsx",
+      ],
+      thresholds: { lines: 80, functions: 80, branches: 80, statements: 80 },
+    },
+  },
+});

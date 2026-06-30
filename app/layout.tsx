@@ -11,6 +11,8 @@ import {
   websiteSchema,
 } from "@/lib/site";
 import { GoogleAnalytics } from "@/components/analytics/google-analytics";
+import { ConsentModeInit } from "@/components/analytics/consent-mode-init";
+import { CookieConsentBanner } from "@/components/analytics/cookie-consent-banner";
 
 const fraunces = Fraunces({
   variable: "--font-fraunces",
@@ -81,10 +83,12 @@ export default function RootLayout({
       className={`${jakarta.variable} ${fraunces.variable} ${dmMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
+        <ConsentModeInit />
         <JsonLd
           data={[organizationSchema(), websiteSchema(), founderPersonSchema()]}
         />
         {children}
+        <CookieConsentBanner />
         <GoogleAnalytics />
       </body>
     </html>

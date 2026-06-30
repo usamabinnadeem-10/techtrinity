@@ -61,3 +61,27 @@ export function LinkButton({
     </Link>
   );
 }
+
+type ButtonProps = CommonProps & {
+  type?: "button" | "submit";
+  onClick?: () => void;
+};
+
+export function Button({
+  type = "button",
+  variant = "accent",
+  size = "md",
+  className,
+  children,
+  onClick,
+}: ButtonProps) {
+  return (
+    <button
+      type={type}
+      onClick={onClick}
+      className={cn(base, variants[variant], sizes[size], className)}
+    >
+      {children}
+    </button>
+  );
+}

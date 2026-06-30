@@ -135,6 +135,18 @@
     animation-direction: reverse;
   }
 
+  /* Floating cookie-consent panel. A diffused primary halo sits behind the
+     opaque panel, which masks its center — leaving a ring of light around the
+     card so the notice reads as a small signal on the near-black page. */
+  .consent-enter {
+    animation: consent-enter 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  .consent-halo {
+    background: rgb(184 255 87 / 0.5);
+    filter: blur(28px);
+    animation: consent-halo 5s ease-in-out infinite;
+  }
+
   /* One-shot scanner sweep across the 404 record card. Top is animated (rather
      than transform) so it tracks any card height; the card clips the overflow. */
   .scan-line {
@@ -186,6 +198,32 @@
    a tilted wall of screens rather than scrolling. */
 [data-reduced="true"] .reel-track {
   animation: none;
+}
+
+@keyframes consent-enter {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Slow breathing on the consent halo so the ring draws the eye without nagging.
+   Reduced motion is honored by the global rule below (duration collapses to ~0,
+   leaving a faint static ring at the keyframe's resting opacity). */
+@keyframes consent-halo {
+  0%,
+  100% {
+    opacity: 0.4;
+    transform: scale(0.97);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.03);
+  }
 }
 
 @keyframes hero-rise {
