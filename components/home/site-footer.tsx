@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { CookieSettingsLink } from "@/components/analytics/cookie-settings-link";
 
+import { ORG_ADDRESS_LINE } from "@/lib/site";
+
 type FooterLink = {
   href: string;
   label: string;
@@ -34,6 +36,9 @@ export function SiteFooter() {
               Custom operations software for inventory-heavy businesses that
               have outgrown spreadsheets.
             </span>
+            <address className="max-w-[320px] text-[12px] font-light not-italic leading-[1.6] text-muted-foreground">
+              {ORG_ADDRESS_LINE}
+            </address>
           </div>
           <ul className="flex flex-wrap gap-7">
             {FOOTER_LINKS.map((link) => (
