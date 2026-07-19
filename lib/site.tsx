@@ -15,6 +15,22 @@ export const ORG_CONTACT_EMAIL = "info@techtrinity.ai";
 
 export const ORG_CONTACT_PHONE = "+12513732320";
 
+// Mailing address = the company's US virtual mailbox (VirtualPostMail, Keller TX),
+// not an operating or registered-agent address. The provider confirmed in writing
+// that it may be published in outbound email footers.
+export const ORG_ADDRESS = {
+  street: "1710 Keller Parkway #8550",
+  locality: "Keller",
+  region: "TX",
+  postalCode: "76248",
+  country: "US",
+  // Spelled out for the visible line: the audience is UK-based, so an unqualified
+  // "TX 76248" doesn't read as a country to a non-US recipient.
+  countryName: "USA",
+} as const;
+
+export const ORG_ADDRESS_LINE = `${ORG_ADDRESS.street}, ${ORG_ADDRESS.locality}, ${ORG_ADDRESS.region} ${ORG_ADDRESS.postalCode}, ${ORG_ADDRESS.countryName}`;
+
 // Stable @id anchors so entities can reference each other across the
 // separate JSON-LD blocks rendered on a page (Organization <-> Person <-> WebSite).
 export const ORG_ID = `${SITE_URL}/#organization`;
@@ -75,6 +91,14 @@ export function organizationSchema(): Record<string, unknown> {
       "TechTrinity builds custom operations software for inventory-heavy wholesale, distribution, and multi-location businesses using modern web technologies including React, Next.js, Node.js, Django, PostgreSQL, and cloud infrastructure.",
     email: ORG_CONTACT_EMAIL,
     telephone: ORG_CONTACT_PHONE,
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: ORG_ADDRESS.street,
+      addressLocality: ORG_ADDRESS.locality,
+      addressRegion: ORG_ADDRESS.region,
+      postalCode: ORG_ADDRESS.postalCode,
+      addressCountry: ORG_ADDRESS.country,
+    },
     founder: { "@id": PERSON_ID },
     knowsAbout: [
       "Custom operations software",
