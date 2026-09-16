@@ -7,7 +7,7 @@ import { SiteFooter } from "@/components/home/site-footer";
 import { ServiceDetailBack } from "@/components/services/service-detail-back";
 import { ServiceDetailCallout } from "@/components/services/service-detail-callout";
 import { ServiceDetailCTA } from "@/components/services/service-detail-cta";
-import { ServiceDetailFitPrice } from "@/components/services/service-detail-fit-price";
+import { ServiceDetailFit } from "@/components/services/service-detail-fit";
 import { ServiceDetailHero } from "@/components/services/service-detail-hero";
 import { ServiceDetailOverview } from "@/components/services/service-detail-overview";
 import { ServiceDetailProcess } from "@/components/services/service-detail-process";
@@ -34,19 +34,6 @@ function trimDescription(text: string): string {
   const cut = text.slice(0, META_DESC_LIMIT - 1);
   const lastSpace = cut.lastIndexOf(" ");
   return `${cut.slice(0, lastSpace > 80 ? lastSpace : cut.length).trim()}…`;
-}
-
-function parsePriceUSD(meta: ServiceDetail["meta"]): number | null {
-  const priceEntry = meta.find((m) => /\$/.test(m.value));
-  if (!priceEntry) return null;
-  const match = priceEntry.value.match(/\$([\d,]+)/);
-  if (!match) return null;
-  const numeric = Number(match[1].replace(/,/g, ""));
-  return Number.isFinite(numeric) ? numeric : null;
-}
-
-function isMonthlyPrice(meta: ServiceDetail["meta"]): boolean {
-  return meta.some((m) => /\/month/i.test(m.value));
 }
 
 export function generateStaticParams(): RouteParams[] {
@@ -81,32 +68,6 @@ export async function generateMetadata({
 
 function serviceSchema(service: ServiceDetail): Record<string, unknown> {
   const url = absoluteUrl(`/services/${service.slug}`);
-  const price = parsePriceUSD(service.meta);
-  const monthly = isMonthlyPrice(service.meta);
-
-  const offers = price
-    ? {
-        "@type": "Offer",
-        priceCurrency: "USD",
-        price,
-        url,
-        availability: "https://schema.org/InStock",
-        ...(monthly
-          ? {
-              priceSpecification: {
-                "@type": "UnitPriceSpecification",
-                price,
-                priceCurrency: "USD",
-                referenceQuantity: {
-                  "@type": "QuantitativeValue",
-                  value: 1,
-                  unitCode: "MON",
-                },
-              },
-            }
-          : {}),
-      }
-    : undefined;
 
   return {
     "@context": "https://schema.org",
@@ -125,12 +86,10 @@ function serviceSchema(service: ServiceDetail): Record<string, unknown> {
       "@type": "Audience",
       audienceType: service.idealFor,
     },
-    ...(offers ? { offers } : {}),
   };
 }
 
 function faqSchema(service: ServiceDetail): Record<string, unknown> {
-  const priceAnswer = service.priceDetail.join(" ");
   const includedAnswer = service.included.join("; ");
   const notIncludedAnswer = service.notIncluded.join("; ");
 
@@ -160,14 +119,6 @@ function faqSchema(service: ServiceDetail): Record<string, unknown> {
         acceptedAnswer: {
           "@type": "Answer",
           text: service.idealFor,
-        },
-      },
-      {
-        "@type": "Question",
-        name: `How much does ${service.title} cost?`,
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: priceAnswer,
         },
       },
     ],
@@ -206,10 +157,7 @@ export default async function ServiceDetailPage({
         />
         {service.process && <ServiceDetailProcess steps={service.process} />}
         {service.callout && <ServiceDetailCallout callout={service.callout} />}
-        <ServiceDetailFitPrice
-          idealFor={service.idealFor}
-          priceDetail={service.priceDetail}
-        />
+        <ServiceDetailFit idealFor={service.idealFor} />
         <ServiceDetailCTA prompt={service.ctaPrompt} label={service.ctaLabel} />
       </main>
       <SiteFooter />

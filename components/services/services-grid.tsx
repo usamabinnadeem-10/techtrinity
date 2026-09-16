@@ -4,7 +4,6 @@ type Service = {
   num: string;
   title: string;
   description: string;
-  price: string;
   timeline: string;
   href: string;
 };
@@ -15,7 +14,6 @@ const SERVICES: Service[] = [
     title: "Complete Operations System Build",
     description:
       "The full build. Walk us through how your operation runs, and we design and build the one system that replaces the spreadsheets and aging tools slowing it down.",
-    price: "Starting at $20,000",
     timeline: "8–16 weeks",
     href: "/services/product-sprint",
   },
@@ -24,7 +22,6 @@ const SERVICES: Service[] = [
     title: "Defined Workflow Build",
     description:
       "You already know exactly what you need. We build that one system — clean, fast, and ready to use — on a defined scope, with no discovery phase to pay for.",
-    price: "Starting at $12,000",
     timeline: "6–12 weeks",
     href: "/services/build-only",
   },
@@ -33,7 +30,6 @@ const SERVICES: Service[] = [
     title: "Ongoing Operations Improvements",
     description:
       "Software is never finished. As you add locations, products, and people, we keep your system fitting — improvements and fixes every month, from the same team.",
-    price: "Starting at $4,500/month",
     timeline: "3-month minimum",
     href: "/services/growth-retainer",
   },
@@ -42,7 +38,6 @@ const SERVICES: Service[] = [
     title: "Existing System Audit",
     description:
       "Running software nobody fully understands? We review what you have and tell you plainly what's broken, what's costing you, and whether to fix it or start fresh.",
-    price: "Starting at $1,500",
     timeline: "1 week",
     href: "/services/technical-audit",
   },
@@ -79,12 +74,6 @@ export function ServicesGrid() {
             <p className="mt-4 max-w-[440px] text-[15px] font-light leading-[1.75] text-muted">
               {service.description}
             </p>
-
-            <div className="mt-8">
-              <span className="inline-block rounded-full border border-ring bg-primary-soft px-4 py-1.5 font-mono text-[12px] tracking-[0.04em] text-primary">
-                {service.price}
-              </span>
-            </div>
 
             <div className="mt-10 flex items-center justify-between border-t border-border pt-6">
               <span className="font-mono text-[12px] uppercase tracking-[0.16em] text-muted-foreground transition-colors duration-300 group-hover:text-foreground">

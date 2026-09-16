@@ -29,7 +29,6 @@ export type ServiceDetail = {
   process?: ProcessStep[];
   callout?: CalloutBlock;
   idealFor: string;
-  priceDetail: string[];
   ctaPrompt: string;
   ctaLabel: string;
 };
@@ -70,7 +69,6 @@ export const SERVICE_DETAILS: ServiceDetail[] = [
     headlineLead: "Complete Operations",
     headlineTail: "System Build.",
     meta: [
-      { label: "Starting at", value: "$20,000" },
       { label: "Timeline", value: "8–16 weeks" },
       { label: "Best for", value: "Your whole operation" },
     ],
@@ -97,11 +95,6 @@ export const SERVICE_DETAILS: ServiceDetail[] = [
     process: SHARED_PROCESS,
     idealFor:
       "Owners of wholesale, distribution, light manufacturing, or multi-location businesses whose operation has outgrown spreadsheets, aging tools, or disconnected SaaS — and who want one system built properly around how the team actually works.",
-    priceDetail: [
-      "Projects start at $20,000. The final price depends on how much you need the system to do.",
-      "The full price is agreed in writing before any work begins — no hourly surprises.",
-      "50% to start, 50% on delivery.",
-    ],
     ctaPrompt: "Ready to replace the spreadsheet patchwork?",
     ctaLabel: "Book a Workflow Review",
   },
@@ -113,7 +106,6 @@ export const SERVICE_DETAILS: ServiceDetail[] = [
     headlineLead: "Defined Workflow",
     headlineTail: "Build.",
     meta: [
-      { label: "Starting at", value: "$12,000" },
       { label: "Timeline", value: "6–12 weeks" },
       { label: "Best for", value: "One defined system" },
     ],
@@ -142,11 +134,6 @@ export const SERVICE_DETAILS: ServiceDetail[] = [
     },
     idealFor:
       "Owners or operations teams who can clearly describe one workflow that needs to be built or replaced — and want it delivered without paying for a full discovery phase.",
-    priceDetail: [
-      "Projects start at $12,000. The final price depends on how much the system has to do.",
-      "The full price is agreed in writing before any work begins.",
-      "50% to start, 50% on delivery.",
-    ],
     ctaPrompt: "Know the exact workflow you need?",
     ctaLabel: "Book a Workflow Review",
   },
@@ -158,7 +145,6 @@ export const SERVICE_DETAILS: ServiceDetail[] = [
     headlineLead: "Ongoing Operations",
     headlineTail: "Improvements.",
     meta: [
-      { label: "Starting at", value: "$4,500/month" },
       { label: "Minimum", value: "3 months" },
       { label: "Best for", value: "Software that keeps growing" },
     ],
@@ -187,11 +173,6 @@ export const SERVICE_DETAILS: ServiceDetail[] = [
     },
     idealFor:
       "Owners with a live operations system who want it to keep improving as the business grows — without hiring a full-time developer or starting over with someone new each time.",
-    priceDetail: [
-      "Retainers start at $4,500/month.",
-      "The price scales with how much time you need each month.",
-      "Invoiced monthly, in advance.",
-    ],
     ctaPrompt: "Already live and ready to keep improving?",
     ctaLabel: "Book a Workflow Review",
   },
@@ -202,10 +183,7 @@ export const SERVICE_DETAILS: ServiceDetail[] = [
     metaTitle: "Existing Operations Software Audit",
     headlineLead: "Existing System",
     headlineTail: "Audit.",
-    meta: [
-      { label: "Starting at", value: "$1,500" },
-      { label: "Turnaround", value: "1 week" },
-    ],
+    meta: [{ label: "Turnaround", value: "1 week" }],
     overview: [
       "You're running software someone else built, an old internal system, or an off-the-shelf tool that has been patched around your operation for years. You're not sure whether to fix it, replace it, or stop investing in it.",
       "The Existing System Audit gives you a plain-English assessment of the code, data, security, reliability, and workflow fit — so you know what is broken, what matters, and what to do next.",
@@ -232,11 +210,6 @@ export const SERVICE_DETAILS: ServiceDetail[] = [
     },
     idealFor:
       "Owners who inherited, bought, or commissioned software that no longer fits the operation — and want an honest second opinion before spending more money on it.",
-    priceDetail: [
-      "Starts at $1,500 for most small to mid-size systems.",
-      "Larger or more complex software is quoted individually.",
-      "Paid in full upfront, given the short turnaround.",
-    ],
     ctaPrompt: "Not sure what you're running?",
     ctaLabel: "Book a Workflow Review",
   },
