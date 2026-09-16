@@ -749,9 +749,9 @@ CASE_STUDIES.easyaccounts = {
     "and actually used.",
   ],
   heroStats: [
-    { value: "180,000+", label: "Transactions processed" },
+    { value: "90,000+", label: "Transactions processed" },
     { value: "100,000+", label: "Payments recorded" },
-    { value: "50+", label: "Live branches in production" },
+    { value: "12+", label: "Live branches in production" },
   ],
   hero: {
     image: {
@@ -771,8 +771,8 @@ CASE_STUDIES.easyaccounts = {
     ],
     body: [
       "EasyAccounts started as a solution to a problem we knew firsthand — managing a multi-branch textile wholesale business without the right tools meant manual ledgers, disconnected spreadsheets, and no reliable view of financial health.",
-      "We built EasyAccounts from scratch as a full-scale ERP purpose-built for the operational complexity of wholesale trading. It's live across 50+ branches, processing real transaction volume every day.",
-      "The system handles the complete business lifecycle — purchasing, sales, inventory, financial reporting, cheque management, and a 172-permission access control system — all in one platform.",
+      "We built EasyAccounts from scratch as a full-scale ERP purpose-built for the operational complexity of wholesale trading. It's live across 12+ branches, processing real transaction volume every day.",
+      "The system handles the complete business lifecycle — purchasing, sales, inventory, financial reporting, cheque management, and a 187-permission access control system — all in one platform.",
     ],
   },
   whyItMatters: {
@@ -806,7 +806,7 @@ CASE_STUDIES.easyaccounts = {
       },
       {
         title: "Access control across branches",
-        body: "Different employees across different branches need different levels of access. A 172-permission system was required to ensure every role saw exactly what it needed — nothing more.",
+        body: "Different employees across different branches need different levels of access. A 187-permission system was required to ensure every role saw exactly what it needed — nothing more.",
       },
     ],
   },
@@ -883,7 +883,7 @@ CASE_STUDIES.easyaccounts = {
       },
       {
         label: "Immutable Request Logs",
-        body: "Every action in the system is logged — user, timestamp, path, view name, IP address, device type, browser, OS, and HTTP status. Logs are immutable and append-only. 500 entries load per page with full search and filter capability. Built for accountability across 50+ branches.",
+        body: "Every action in the system is logged — user, timestamp, path, view name, IP address, device type, browser, OS, and HTTP status. Logs are immutable and append-only. 500 entries load per page with full search and filter capability. Built for accountability across 12+ branches.",
         image: {
           src: "/easyaccounts/reports-request-logs.png",
           alt: "EasyAccounts immutable request log audit trail",
@@ -899,8 +899,8 @@ CASE_STUDIES.easyaccounts = {
     headline: ["Built for multi-branch", "operations from day one."],
     cards: [
       {
-        title: "172+ Permissions",
-        body: "Granular role-based access control with 172 individual permissions. Every feature, every report, every action can be enabled or disabled per employee role.",
+        title: "187+ Permissions",
+        body: "Granular role-based access control with 187 individual permissions. Every feature, every report, every action can be enabled or disabled per employee role.",
       },
       {
         title: "Multi-warehouse stock",
@@ -917,7 +917,7 @@ CASE_STUDIES.easyaccounts = {
     headline: ["In production.", "Processing real volume."],
     cards: [
       {
-        primary: "180,000+",
+        primary: "90,000+",
         description: ["Transactions", "processed"],
       },
       {
@@ -925,11 +925,11 @@ CASE_STUDIES.easyaccounts = {
         description: ["Payments", "recorded"],
       },
       {
-        primary: "50+",
+        primary: "12+",
         description: ["Live branches", "in production"],
       },
       {
-        primary: "172+",
+        primary: "187+",
         description: ["Access", "permissions"],
       },
     ],
