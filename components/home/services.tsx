@@ -5,7 +5,6 @@ type Service = {
   num: string;
   title: string;
   description: string;
-  price: string;
   slug: string;
 };
 
@@ -15,7 +14,6 @@ const SERVICES: Service[] = [
     title: "Complete Operations System Build",
     description:
       "For businesses running stock, orders, purchasing, and reporting across spreadsheets, accounting software, and warehouse notes. We map the workflow, design the system, build it, and help your team launch. 8–16 weeks.",
-    price: "Starting at $20,000",
     slug: "product-sprint",
   },
   {
@@ -23,7 +21,6 @@ const SERVICES: Service[] = [
     title: "Defined Workflow Build",
     description:
       "Already know the exact workflow you need fixed? We build one focused system — stock lookup, order tracking, purchasing, reporting, transfers, or another defined operational workflow — without a long discovery phase.",
-    price: "Starting at $12,000",
     slug: "build-only",
   },
   {
@@ -31,7 +28,6 @@ const SERVICES: Service[] = [
     title: "Ongoing Operations Improvements",
     description:
       "For live systems your team already relies on. We stay close to the codebase and keep improving it as you add products, people, locations, and new ways of working.",
-    price: "Starting at $4,500/month",
     slug: "growth-retainer",
   },
   {
@@ -39,7 +35,6 @@ const SERVICES: Service[] = [
     title: "Existing System Audit",
     description:
       "Running software nobody fully understands? We review the code, data, security, reliability, and workflow fit — then tell you what to fix, what to replace, and what to leave alone.",
-    price: "Starting at $1,500",
     slug: "technical-audit",
   },
 ];
@@ -85,9 +80,6 @@ export function Services() {
               <p className="mt-3.5 text-[15px] font-light leading-[1.75] text-muted">
                 {service.description}
               </p>
-              <span className="mt-7 inline-block self-start rounded-full border border-ring bg-primary-soft px-4 py-1.5 font-mono text-[12px] tracking-[0.04em] text-primary">
-                {service.price}
-              </span>
               <Link
                 href={`/services/${service.slug}`}
                 className="mt-auto inline-flex items-center gap-1.5 self-start pt-7 font-mono text-[12px] tracking-[0.04em] text-muted-foreground transition-colors hover:text-primary"
