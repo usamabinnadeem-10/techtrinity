@@ -11,6 +11,7 @@ import {
   getAllUseCaseSlugs,
   getUseCase,
 } from "@/lib/use-cases";
+import { BOOK_HREF, PRIMARY_CTA_LABEL } from "@/lib/offer";
 import { breadcrumbSchema, JsonLd } from "@/lib/site";
 
 type RouteParams = { slug: string };
@@ -74,8 +75,13 @@ export default async function UseCaseDetailPage({
               {useCase.subhead}
             </p>
             <div className="mt-10">
-              <LinkButton href="/contact" variant="accent" size="lg">
-                Book a Workflow Review
+              <LinkButton
+                href={BOOK_HREF}
+                variant="accent"
+                size="lg"
+                cta={{ label: PRIMARY_CTA_LABEL, section: "use-case-hero", service: "operations" }}
+              >
+                {PRIMARY_CTA_LABEL}
               </LinkButton>
             </div>
           </div>
@@ -152,9 +158,24 @@ export default async function UseCaseDetailPage({
               Ready to fix this{" "}
               <em className="italic text-primary">in your operation?</em>
             </h2>
-            <LinkButton href="/contact" variant="accent" size="lg">
-              Book a Workflow Review
-            </LinkButton>
+            <div className="flex flex-wrap items-center justify-center gap-3.5">
+              <LinkButton
+                href={BOOK_HREF}
+                variant="accent"
+                size="lg"
+                cta={{ label: PRIMARY_CTA_LABEL, section: "use-case-cta", service: "operations" }}
+              >
+                {PRIMARY_CTA_LABEL}
+              </LinkButton>
+              <LinkButton
+                href="/services/build-only"
+                variant="ghost"
+                size="lg"
+                cta={{ label: "Start with one workflow", section: "use-case-cta", service: "operations" }}
+              >
+                Start with one workflow
+              </LinkButton>
+            </div>
           </div>
         </section>
       </main>
