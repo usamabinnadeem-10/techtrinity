@@ -13,6 +13,7 @@ import {
 import { GoogleAnalytics } from "@/components/analytics/google-analytics";
 import { ConsentModeInit } from "@/components/analytics/consent-mode-init";
 import { CookieConsentBanner } from "@/components/analytics/cookie-consent-banner";
+import { CtaClickTracker } from "@/components/analytics/cta-click-tracker";
 
 const fraunces = Fraunces({
   variable: "--font-fraunces",
@@ -90,6 +91,7 @@ export default function RootLayout({
         {children}
         <CookieConsentBanner />
         <GoogleAnalytics />
+        <CtaClickTracker />
       </body>
     </html>
   );
