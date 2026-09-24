@@ -1,5 +1,6 @@
 import { CookieSettingsLink } from "@/components/analytics/cookie-settings-link";
 import { CookieTable } from "@/components/privacy/cookie-table";
+import { OutreachNotice } from "@/components/privacy/outreach-notice";
 import { PolicyHeader } from "@/components/privacy/policy-header";
 import { PolicySection } from "@/components/privacy/policy-section";
 import { POLICY_META, PROCESSORS } from "@/lib/legal/policy-meta";
@@ -36,7 +37,8 @@ export function PrivacyContent() {
           >
             {POLICY_META.contactEmail}
           </a>
-          . Postal address available on request. A real person reads privacy email.
+          . Our postal address is {POLICY_META.postalAddress}. A real person reads
+          privacy email.
         </p>
       </PolicySection>
 
@@ -228,6 +230,8 @@ export function PrivacyContent() {
           </li>
         </ul>
       </PolicySection>
+
+      <OutreachNotice />
 
       <PolicySection title="Changes to this policy">
         <p>
