@@ -1,15 +1,18 @@
+import Link from "next/link";
 import { LinkButton } from "@/components/home/button";
 import { EditorialLabel } from "@/components/home/label";
 import type { CaseStudy } from "@/lib/case-studies";
+import { ctaAttrs } from "@/lib/cta";
+import { BOOK_HREF, PRIMARY_CTA_HELPER, PRIMARY_CTA_LABEL } from "@/lib/offer";
 
 type Props = {
-  caseStudy?: CaseStudy;
+  caseStudy: CaseStudy;
 };
 
 export function CaseCTA({ caseStudy }: Props) {
-  const cta = caseStudy?.cta;
+  const { cta, relatedCta, slug } = caseStudy;
   const label = cta?.label ?? "Let's Build";
-  const showSecondButton = cta?.showSecondButton ?? true;
+  const section = `case-study-${slug}`;
 
   return (
     <section className="border-y border-border bg-card py-24 md:py-28">
@@ -27,15 +30,33 @@ export function CaseCTA({ caseStudy }: Props) {
             )}
           </h2>
           <div className="mt-10 flex flex-wrap items-center justify-center gap-3.5">
-            <LinkButton href="/#cta-sec" variant="accent" size="lg">
-              Book a Workflow Review
+            <LinkButton
+              href={BOOK_HREF}
+              variant="accent"
+              size="lg"
+              cta={{ label: PRIMARY_CTA_LABEL, section }}
+            >
+              {PRIMARY_CTA_LABEL}
             </LinkButton>
-            {showSecondButton && (
-              <LinkButton href="/work" variant="ghost" size="lg">
-                See Other Case Studies
-              </LinkButton>
-            )}
+            <LinkButton
+              href={relatedCta.href}
+              variant="ghost"
+              size="lg"
+              cta={{ label: relatedCta.label, section, service: relatedCta.service }}
+            >
+              {relatedCta.label}
+            </LinkButton>
           </div>
+          <p className="mx-auto mt-6 max-w-[440px] text-[14px] font-light leading-[1.7] text-muted">
+            {PRIMARY_CTA_HELPER}
+          </p>
+          <Link
+            href="/#work"
+            className="mt-6 inline-block font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground underline decoration-border-strong underline-offset-4 transition-colors hover:text-foreground"
+            {...ctaAttrs("See other work", section)}
+          >
+            See other work
+          </Link>
         </div>
       </div>
     </section>

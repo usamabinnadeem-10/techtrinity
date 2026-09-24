@@ -18,6 +18,9 @@ import { CasePlatform } from "@/components/case-study/case-platform";
 import { CaseReview } from "@/components/case-study/case-review";
 import { CaseScorecard } from "@/components/case-study/case-scorecard";
 import { CaseSpotlight } from "@/components/case-study/case-spotlight";
+import { CaseSummary } from "@/components/case-study/case-summary";
+import { CaseWalkthrough } from "@/components/case-study/case-walkthrough";
+import { TrackView } from "@/components/analytics/track-view";
 import { CaseWhyItMatters } from "@/components/case-study/case-why-it-matters";
 import {
   getAllCaseStudySlugs,
@@ -30,6 +33,7 @@ import {
   easyAccountsSchema,
   JsonLd,
   ORG_ID,
+  PERSON_ID,
 } from "@/lib/site";
 
 type RouteParams = { slug: string };
@@ -87,7 +91,11 @@ function caseStudySchema(caseStudy: CaseStudy): Record<string, unknown> {
     mainEntityOfPage: { "@type": "WebPage", "@id": url },
     image: [heroImage],
     publisher: { "@id": ORG_ID },
-    author: { "@id": ORG_ID },
+    // Employment work is the founder's own engineering, not a TechTrinity
+    // commission, so the founder (not the company) is credited as author.
+    author: {
+      "@id": caseStudy.engagement === "employment" ? PERSON_ID : ORG_ID,
+    },
   };
 }
 
@@ -118,9 +126,12 @@ export default async function CaseStudyPage({
       <AmbientBackground />
       <SiteNav />
       <main>
+        <TrackView event="case_study_view" slug={caseStudy.slug} />
         <BackNav />
         <CaseHero caseStudy={caseStudy} />
+        {caseStudy.summary && <CaseSummary caseStudy={caseStudy} />}
         {caseStudy.overview && <CaseOverview caseStudy={caseStudy} />}
+        {caseStudy.walkthrough && <CaseWalkthrough caseStudy={caseStudy} />}
         {caseStudy.challenge && <CaseChallenge caseStudy={caseStudy} />}
         {caseStudy.whyItMatters && <CaseWhyItMatters caseStudy={caseStudy} />}
         {caseStudy.architecture && <CaseArchitecture caseStudy={caseStudy} />}

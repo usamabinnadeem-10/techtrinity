@@ -6,8 +6,18 @@ type Props = {
   caseStudy: CaseStudy;
 };
 
+/** Grid columns per card count, so 1–3 cards don't leave empty cells. */
+function gridColumns(count: number): string {
+  if (count <= 1) return "";
+  if (count === 2) return "sm:grid-cols-2";
+  if (count === 3) return "sm:grid-cols-3";
+  return "sm:grid-cols-2 lg:grid-cols-4";
+}
+
 export function CaseOutcomes({ caseStudy }: Props) {
   const { outcomes } = caseStudy;
+  if (outcomes.cards.length === 0) return null;
+  const longValues = outcomes.cards.some((c) => c.primary.length > 8);
   return (
     <section className="border-y border-border bg-card py-24 md:py-28">
       <div className="mx-auto max-w-[1240px] px-6 md:px-12">
@@ -19,7 +29,11 @@ export function CaseOutcomes({ caseStudy }: Props) {
         <div
           data-reveal
           data-reveal-delay="1"
-          className="grid grid-cols-1 gap-px overflow-hidden rounded-lg border border-border-strong bg-border-strong sm:grid-cols-2 md:grid-cols-4"
+          className={[
+            "grid grid-cols-1 gap-px overflow-hidden rounded-lg border border-border-strong bg-border-strong",
+            gridColumns(outcomes.cards.length),
+            outcomes.cards.length === 1 ? "mx-auto max-w-[420px]" : "",
+          ].join(" ")}
         >
           {outcomes.cards.map((card, i) => (
             <article
@@ -29,7 +43,16 @@ export function CaseOutcomes({ caseStudy }: Props) {
               <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
                 {String(i + 1).padStart(2, "0")}
               </span>
-              <p className="mt-6 font-display text-[clamp(28px,3vw,42px)] font-black leading-[1] tracking-[-0.025em] text-primary">
+              <p
+                className={[
+                  "mt-6 break-words font-display font-black leading-[1] tracking-[-0.025em] text-primary",
+                  // Word-valued cards ("Multi-branch") need a smaller size
+                  // than short figures to fit narrow columns.
+                  longValues
+                    ? "text-[clamp(24px,2.2vw,32px)]"
+                    : "text-[clamp(28px,3vw,42px)]",
+                ].join(" ")}
+              >
                 {card.primary}
               </p>
               <div className="mt-4 space-y-1 text-[14px] font-light leading-[1.7] text-muted">
