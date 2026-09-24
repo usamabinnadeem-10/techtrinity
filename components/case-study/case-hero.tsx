@@ -5,8 +5,19 @@ type Props = {
   caseStudy: CaseStudy;
 };
 
+/** Column classes per stat count (0–4 supported; extra stats are dropped). */
+const STAT_COLUMNS: Record<number, string> = {
+  1: "",
+  2: "md:grid-cols-2",
+  3: "md:grid-cols-3",
+  4: "md:grid-cols-4",
+};
+
 export function CaseHero({ caseStudy }: Props) {
   const { name, meta, headline, heroStats, hero } = caseStudy;
+  const stats = heroStats.slice(0, 4);
+  // Word-valued stats ("Multi-branch") need a smaller size to fit columns.
+  const longValues = stats.some((s) => s.value.length > 8);
 
   return (
     <section className="mx-auto max-w-[1240px] px-6 pt-12 pb-24 md:px-12 md:pt-16 md:pb-28">
@@ -35,39 +46,44 @@ export function CaseHero({ caseStudy }: Props) {
         ))}
       </h2>
 
-      <dl
-        className={[
-          "hero-rise-sm mt-14 grid grid-cols-1 overflow-hidden border-y border-border [animation-delay:0.55s]",
-          heroStats.length === 3 ? "md:grid-cols-3" : "md:grid-cols-2",
-        ].join(" ")}
-      >
-        {heroStats.map((stat, i) => (
-          <div
-            key={stat.label}
-            className={[
-              "flex flex-col gap-3 py-9",
-              i > 0
-                ? "border-t border-border md:border-t-0 md:border-l md:pl-14"
-                : "",
-              "md:px-14 first:md:pl-0",
-            ].join(" ")}
-          >
-            <dt className="order-2 font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
-              {stat.label}
-            </dt>
-            <dd
+      {stats.length > 0 && (
+        <dl
+          className={[
+            "hero-rise-sm mt-14 grid grid-cols-1 overflow-hidden border-y border-border [animation-delay:0.55s]",
+            STAT_COLUMNS[stats.length],
+          ].join(" ")}
+        >
+          {stats.map((stat, i) => (
+            <div
+              key={stat.label}
               className={[
-                "order-1 font-display font-black leading-none tracking-[-0.03em]",
-                heroStats.length === 3
-                  ? "text-[clamp(28px,2.8vw,44px)]"
-                  : "text-[clamp(36px,3.4vw,52px)]",
+                "flex min-w-0 flex-col gap-3 py-9",
+                i > 0
+                  ? "border-t border-border md:border-t-0 md:border-l"
+                  : "",
+                stats.length >= 3 ? "md:px-8 lg:px-12" : "md:px-14",
+                "first:md:pl-0",
               ].join(" ")}
             >
-              {stat.value}
-            </dd>
-          </div>
-        ))}
-      </dl>
+              <dt className="order-2 font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
+                {stat.label}
+              </dt>
+              <dd
+                className={[
+                  "order-1 break-words font-display font-black leading-none tracking-[-0.03em]",
+                  longValues
+                    ? "text-[clamp(26px,2.4vw,40px)]"
+                    : stats.length >= 3
+                      ? "text-[clamp(28px,2.8vw,44px)]"
+                      : "text-[clamp(36px,3.4vw,52px)]",
+                ].join(" ")}
+              >
+                {stat.value}
+              </dd>
+            </div>
+          ))}
+        </dl>
+      )}
 
       <div
         data-reveal
