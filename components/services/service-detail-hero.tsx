@@ -6,6 +6,10 @@ type Props = {
 };
 
 export function ServiceDetailHero({ service }: Props) {
+  // Sentence-length headlines (the newer service pages) use a smaller scale so
+  // they stay readable and never overflow at 375px.
+  const long =
+    service.headlineLead.length + service.headlineTail.length > 36;
   return (
     <section className="relative mx-auto max-w-[1240px] px-6 pt-12 pb-20 md:px-12 md:pt-16 md:pb-24">
       <span
@@ -20,7 +24,14 @@ export function ServiceDetailHero({ service }: Props) {
           <EditorialLabel>Service {service.num}</EditorialLabel>
         </div>
 
-        <h1 className="hero-rise mt-5 max-w-[1080px] font-display text-[clamp(48px,7vw,108px)] font-black leading-[0.94] tracking-[-0.04em] [animation-delay:0.2s]">
+        <h1
+          className={[
+            "hero-rise mt-5 max-w-[1080px] font-display font-black leading-[0.94] tracking-[-0.04em] [animation-delay:0.2s]",
+            long
+              ? "text-[clamp(38px,5.6vw,84px)] break-words"
+              : "text-[clamp(48px,7vw,108px)]",
+          ].join(" ")}
+        >
           <span className="block">{service.headlineLead}</span>
           <em className="block italic font-bold text-primary">
             {service.headlineTail}

@@ -23,6 +23,13 @@ const FOOTER_LINKS: FooterLink[] = [
   },
 ];
 
+/** Secondary offers (TT-12/TT-15) — kept to a quiet second row. */
+const SECONDARY_SERVICE_LINKS: FooterLink[] = [
+  { href: "/services/ai-workflow-automation", label: "AI automation" },
+  { href: "/services/mvp-development", label: "MVP development" },
+  { href: "/services/business-websites", label: "Business websites" },
+];
+
 export function SiteFooter() {
   return (
     <footer className="border-t border-border py-10">
@@ -33,8 +40,8 @@ export function SiteFooter() {
               TechTrinity
             </span>
             <span className="max-w-[320px] text-[12px] font-light leading-[1.6] text-muted-foreground">
-              Custom operations software for inventory-heavy businesses that
-              have outgrown spreadsheets.
+              Custom software for wholesale &amp; distribution — tools for stock,
+              orders, and reporting, built for daily use.
             </span>
             <address className="max-w-[320px] text-[12px] font-light not-italic leading-[1.6] text-muted-foreground">
               {ORG_ADDRESS_LINE}
@@ -61,6 +68,23 @@ export function SiteFooter() {
             © 2026 TechTrinity
           </span>
         </div>
+        <nav
+          aria-label="Secondary services"
+          className="mt-6 flex flex-wrap items-baseline gap-x-5 gap-y-2 border-t border-border pt-5"
+        >
+          <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">
+            Also
+          </span>
+          {SECONDARY_SERVICE_LINKS.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className="text-[12px] text-muted-foreground transition-colors hover:text-foreground"
+            >
+              {link.label}
+            </Link>
+          ))}
+        </nav>
       </div>
     </footer>
   );

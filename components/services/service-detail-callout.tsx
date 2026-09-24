@@ -1,3 +1,4 @@
+import Link from "next/link";
 import type { CalloutBlock } from "@/lib/services";
 
 type Props = {
@@ -33,6 +34,15 @@ export function ServiceDetailCallout({ callout }: Props) {
               <p className="mt-5 text-[16px] font-light leading-[1.75] text-muted md:text-[17px]">
                 {callout.body}
               </p>
+              {callout.link && (
+                <Link
+                  href={callout.link.href}
+                  className="mt-6 inline-flex items-center gap-2 border-b border-border pb-0.5 text-[15px] text-foreground transition-colors hover:border-primary hover:text-primary"
+                >
+                  {callout.link.label}
+                  <span aria-hidden>→</span>
+                </Link>
+              )}
             </div>
           </div>
         </div>
