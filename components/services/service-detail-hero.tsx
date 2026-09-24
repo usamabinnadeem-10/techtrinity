@@ -5,6 +5,12 @@ type Props = {
   service: ServiceDetail;
 };
 
+const META_COLUMNS: Record<number, string> = {
+  1: "md:grid-cols-1",
+  2: "md:grid-cols-2",
+  3: "md:grid-cols-3",
+};
+
 export function ServiceDetailHero({ service }: Props) {
   // Sentence-length headlines (the newer service pages) use a smaller scale so
   // they stay readable and never overflow at 375px.
@@ -38,7 +44,9 @@ export function ServiceDetailHero({ service }: Props) {
           </em>
         </h1>
 
-        <dl className="hero-rise-sm mt-14 grid grid-cols-1 overflow-hidden border-y border-border md:mt-16 md:grid-cols-3 [animation-delay:0.45s]">
+        <dl
+          className={`hero-rise-sm mt-14 grid grid-cols-1 overflow-hidden border-y border-border md:mt-16 ${META_COLUMNS[service.meta.length] ?? "md:grid-cols-3"} [animation-delay:0.45s]`}
+        >
           {service.meta.map((entry, i) => (
             <div
               key={entry.label}
@@ -48,9 +56,6 @@ export function ServiceDetailHero({ service }: Props) {
                   ? "border-t border-border md:border-t-0 md:border-l md:pl-10"
                   : "",
                 "md:px-10 first:md:pl-0",
-                service.meta.length === 2 && i === 1
-                  ? "md:col-span-2 md:border-l md:pl-10"
-                  : "",
               ].join(" ")}
             >
               <dt className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">

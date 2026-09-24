@@ -15,7 +15,7 @@ export const FOUNDER_CANONICAL_BADGE = "Engineering experience at Canonical";
 export const FOUNDER_BIO =
   "I’m Usama Nadeem, Founder & CEO of TechTrinity. I built EasyAccounts for my family’s wholesale business and continue to work on the details that matter in daily use: stock movements, orders, reporting, permissions, and the exceptions real teams encounter. That experience shapes how we approach client software: understand the work, design for the people doing it, and build a system that can keep evolving.";
 
-/** Card label for work done as an employee, until engagement type is verified. */
+/** Card label for work the founder did as an employee (Canonical, Xenia, Hirecinch). */
 export const EMPLOYMENT_WORK_LABEL = "Founder’s engineering work";
 export const OWN_PRODUCT_LABEL = "Founder’s own product";
 
@@ -35,8 +35,6 @@ export const DESIGN_PROMISE =
 export const LAUNCH_SUPPORT_TERM = "two weeks";
 export const LAUNCH_SUPPORT_COPY =
   "Two weeks of launch support are included. Ongoing maintenance and improvements are available separately under an agreement — no 24/7 cover, guaranteed uptime, or unlimited fixes.";
-
-export const UNPRICED_SERVICE_COPY = "Quoted after a scope review.";
 
 // ── Buying process (TT-03, homepage section 7) ──────────────────────────────
 

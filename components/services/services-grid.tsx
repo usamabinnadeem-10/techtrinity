@@ -38,12 +38,6 @@ function ServiceCard({
         {service.card.description}
       </p>
 
-      <div className="mt-8">
-        <span className="inline-block rounded-full border border-ring bg-primary-soft px-4 py-1.5 font-mono text-[12px] tracking-[0.04em] text-primary">
-          {service.card.price}
-        </span>
-      </div>
-
       <div className="mt-10 flex items-center justify-between border-t border-border pt-6">
         <span className="font-mono text-[12px] uppercase tracking-[0.16em] text-muted-foreground transition-colors duration-300 group-hover:text-foreground">
           View Details

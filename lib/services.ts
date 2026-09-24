@@ -3,8 +3,6 @@ import {
   EMPLOYMENT_WORK_LABEL,
   ENGAGEMENT_STEPS,
   LAUNCH_SUPPORT_COPY,
-  SCOPE_PROMISE,
-  UNPRICED_SERVICE_COPY,
   type FaqItem,
   type ServiceIntent,
 } from "@/lib/offer";
@@ -70,7 +68,6 @@ export type ServiceTier = "primary" | "audit" | "secondary";
 
 export type ServiceCard = {
   description: string;
-  price: string;
   timeline: string;
 };
 
@@ -102,7 +99,6 @@ export type ServiceDetail = {
   callout?: CalloutBlock;
   relatedWork?: RelatedWorkBlock;
   idealFor: string;
-  priceDetail: string[];
   /** Subset of BUYER_FAQ ids to answer on this page. */
   faqIds?: string[];
   ctaPrompt: string;
@@ -140,11 +136,9 @@ export const SERVICE_DETAILS: ServiceDetail[] = [
     card: {
       description:
         "A workflow is costing time or creating mistakes, but the right fix isn’t clear yet. We map it, measure it with the data you have, and recommend whether to build, configure, or buy.",
-      price: UNPRICED_SERVICE_COPY,
       timeline: "Paid · scoped separately",
     },
     meta: [
-      { label: "Pricing", value: UNPRICED_SERVICE_COPY },
       { label: "Engagement", value: "Paid, separately scoped" },
       { label: "Best for", value: "Workflows with open questions" },
     ],
@@ -175,11 +169,6 @@ export const SERVICE_DETAILS: ServiceDetail[] = [
     },
     idealFor:
       "Owners and operations leads who know a workflow — order handoffs, stock lookup, quote preparation, reporting — is costing them, but aren’t yet sure what the right fix is, or whether new software is the answer.",
-    priceDetail: [
-      UNPRICED_SERVICE_COPY,
-      "Scope and price are agreed in writing before the assessment begins, based on the workflow and the people and systems involved.",
-      "It is paid separately from any build that follows.",
-    ],
     faqIds: ["replace-everything", "existing-software"],
     ctaPrompt: "Not sure what to fix first?",
     ctaLabel: "Discuss a Workflow Assessment",
@@ -199,11 +188,9 @@ export const SERVICE_DETAILS: ServiceDetail[] = [
     card: {
       description:
         "You can already describe the workflow you need. We review your specification, agree the scope, and build that one system — clean, fast, and ready for daily use.",
-      price: "Starting at $12,000",
       timeline: "6–12 weeks",
     },
     meta: [
-      { label: "Starting at", value: "$12,000" },
       { label: "Timeline", value: "6–12 weeks" },
       { label: "Best for", value: "One defined system" },
     ],
@@ -240,11 +227,6 @@ export const SERVICE_DETAILS: ServiceDetail[] = [
     },
     idealFor:
       "Owners or operations teams who can clearly describe one workflow that needs to be built or replaced — and have enough of a specification to move from a scope review straight to a proposal.",
-    priceDetail: [
-      "Projects start at $12,000. The final price depends on how much the system has to do.",
-      "The full price is agreed in writing before any work begins.",
-      "50% to start, 50% on delivery.",
-    ],
     faqIds: ["existing-software", "ownership"],
     ctaPrompt: "Know the exact workflow you need?",
     ctaLabel: "Describe Your Workflow",
@@ -262,11 +244,9 @@ export const SERVICE_DETAILS: ServiceDetail[] = [
     card: {
       description:
         "When the problem spans several connected workflows. We map the operation and deliver one focused system in agreed phases — not by replacing everything at once.",
-      price: "Starting at $20,000",
       timeline: "8–16 weeks",
     },
     meta: [
-      { label: "Starting at", value: "$20,000" },
       { label: "Timeline", value: "8–16 weeks" },
       { label: "Best for", value: "Several connected workflows" },
     ],
@@ -299,12 +279,6 @@ export const SERVICE_DETAILS: ServiceDetail[] = [
     },
     idealFor:
       "Owners of wholesale, distribution, light manufacturing, or multi-location businesses whose operation has outgrown spreadsheets, aging tools, or disconnected SaaS — and who want one system built properly, in phases, around how the team actually works.",
-    priceDetail: [
-      "Projects start at $20,000. The final price depends on how much you need the system to do.",
-      "The full price is agreed in writing before any work begins.",
-      SCOPE_PROMISE,
-      "50% to start, 50% on delivery.",
-    ],
     faqIds: ["replace-everything", "ownership", "after-launch"],
     ctaPrompt: "Ready to replace the spreadsheet patchwork?",
     ctaLabel: "Discuss a Larger Build",
@@ -322,11 +296,9 @@ export const SERVICE_DETAILS: ServiceDetail[] = [
     card: {
       description:
         "For live systems your team relies on. As you add locations, products, and people, we keep the system fitting — improvements and fixes every month, from the same team.",
-      price: "Starting at $4,500/month",
       timeline: "3-month minimum",
     },
     meta: [
-      { label: "Starting at", value: "$4,500/month" },
       { label: "Minimum", value: "3 months" },
       { label: "Best for", value: "Software that keeps growing" },
     ],
@@ -356,11 +328,6 @@ export const SERVICE_DETAILS: ServiceDetail[] = [
     },
     idealFor:
       "Owners with a live operations system who want it to keep improving as the business grows — without hiring a full-time developer or starting over with someone new each time.",
-    priceDetail: [
-      "Retainers start at $4,500/month.",
-      "The price scales with how much time you need each month.",
-      "Invoiced monthly, in advance.",
-    ],
     faqIds: ["after-launch"],
     ctaPrompt: "Already live and ready to keep improving?",
     ctaLabel: "Discuss Ongoing Support",
@@ -378,11 +345,9 @@ export const SERVICE_DETAILS: ServiceDetail[] = [
     card: {
       description:
         "A technical review of software you already run — code, data, security, and reliability. Different from a Workflow Assessment, which looks at a business process rather than a codebase.",
-      price: "Starting at $1,500",
       timeline: "1 week",
     },
     meta: [
-      { label: "Starting at", value: "$1,500" },
       { label: "Turnaround", value: "1 week" },
     ],
     overview: [
@@ -413,11 +378,6 @@ export const SERVICE_DETAILS: ServiceDetail[] = [
     },
     idealFor:
       "Owners who inherited, bought, or commissioned software that no longer fits the operation — and want an honest second opinion before spending more money on it.",
-    priceDetail: [
-      "Starts at $1,500 for most small to mid-size systems.",
-      "Larger or more complex software is quoted individually.",
-      "Paid in full upfront, given the short turnaround.",
-    ],
     ctaPrompt: "Not sure what you're running?",
     ctaLabel: "Request a System Audit",
     ctaPrimary: "book",
@@ -436,11 +396,9 @@ export const SERVICE_DETAILS: ServiceDetail[] = [
     card: {
       description:
         "Bounded automation for enquiries, documents, and routine information requests — with human approval where it matters.",
-      price: UNPRICED_SERVICE_COPY,
       timeline: "Scoped per workflow",
     },
     meta: [
-      { label: "Pricing", value: UNPRICED_SERVICE_COPY },
       { label: "Running costs", value: "Discussed separately" },
       { label: "Best for", value: "Enquiries, documents, routine requests" },
     ],
@@ -557,11 +515,6 @@ export const SERVICE_DETAILS: ServiceDetail[] = [
     ],
     idealFor:
       "Businesses with a recurring, well-understood information task — enquiries, documents, status requests — that has a clear owner and enough real examples to test against.",
-    priceDetail: [
-      UNPRICED_SERVICE_COPY,
-      "Build scope and price are agreed in writing before work begins.",
-      "Operating costs — model usage, APIs, hosting — depend on volume and are discussed separately.",
-    ],
     faqIds: ["need-ai", "existing-software"],
     ctaPrompt: "Have a repetitive task worth testing?",
     ctaLabel: "Discuss an Automation Workflow",
@@ -581,11 +534,9 @@ export const SERVICE_DETAILS: ServiceDetail[] = [
     card: {
       description:
         "For B2B founders with a validated problem — key journeys, interface design, and a focused first release.",
-      price: UNPRICED_SERVICE_COPY,
       timeline: "Bounded first release",
     },
     meta: [
-      { label: "Pricing", value: UNPRICED_SERVICE_COPY },
       { label: "Best for", value: "B2B product founders" },
       { label: "Approach", value: "A bounded first release" },
     ],
@@ -663,11 +614,6 @@ export const SERVICE_DETAILS: ServiceDetail[] = [
     },
     idealFor:
       "B2B founders with a validated problem, access to customers, and a budget set aside for a focused first release — who want a small senior team to design and build it.",
-    priceDetail: [
-      UNPRICED_SERVICE_COPY,
-      "The first release is scoped and priced in writing before work begins; later phases are quoted separately.",
-      SCOPE_PROMISE,
-    ],
     faqIds: ["ownership", "after-launch"],
     ctaPrompt: "Have a validated problem to build for?",
     ctaLabel: "Discuss Your Product",
@@ -689,11 +635,9 @@ export const SERVICE_DETAILS: ServiceDetail[] = [
     card: {
       description:
         "For established businesses — a clear, mobile-friendly site with enquiries connected to your sales process.",
-      price: UNPRICED_SERVICE_COPY,
       timeline: "Launch scope agreed up front",
     },
     meta: [
-      { label: "Pricing", value: UNPRICED_SERVICE_COPY },
       { label: "Best for", value: "Established businesses" },
       { label: "Focus", value: "Enquiries into sales" },
     ],
@@ -746,11 +690,6 @@ export const SERVICE_DETAILS: ServiceDetail[] = [
     ],
     idealFor:
       "Established businesses whose website doesn’t explain what they do, or doesn’t connect enquiries to their sales process — and who can supply the content and approvals the project needs.",
-    priceDetail: [
-      UNPRICED_SERVICE_COPY,
-      "Scope and price are agreed in writing before work begins.",
-      "Ongoing content, advertising, and SEO work is quoted separately.",
-    ],
     faqIds: ["ownership", "after-launch"],
     ctaPrompt: "Ready for a site that leads somewhere?",
     ctaLabel: "Discuss Your Website",
@@ -777,25 +716,6 @@ export function serviceMetaTitle(service: ServiceDetail): string {
   const { metaTitle } = service;
   if (!metaTitle) return service.title;
   return typeof metaTitle === "string" ? metaTitle : metaTitle.absolute;
-}
-
-/**
- * The published starting price in USD, or null for services quoted after a
- * scope review. Only a meta entry labelled "Starting at" counts, so unpriced
- * services never emit a JSON-LD offer.
- */
-export function getStartingPriceUSD(service: ServiceDetail): number | null {
-  const entry = service.meta.find((m) => m.label === "Starting at");
-  if (!entry) return null;
-  const match = entry.value.match(/^\$([\d,]+)/);
-  if (!match) return null;
-  const numeric = Number(match[1].replace(/,/g, ""));
-  return Number.isFinite(numeric) && numeric > 0 ? numeric : null;
-}
-
-export function isMonthlyPrice(service: ServiceDetail): boolean {
-  const entry = service.meta.find((m) => m.label === "Starting at");
-  return !!entry && /\/month/i.test(entry.value);
 }
 
 /** The BUYER_FAQ entries answered on a given service page, in listed order. */

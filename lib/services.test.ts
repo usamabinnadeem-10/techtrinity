@@ -1,12 +1,9 @@
 import { describe, expect, test } from "vitest";
-import { BUYER_FAQ, SERVICE_INTENTS, UNPRICED_SERVICE_COPY } from "@/lib/offer";
+import { BUYER_FAQ, SERVICE_INTENTS } from "@/lib/offer";
 import {
   getAllServiceSlugs,
-  getServiceDetail,
   getServiceFaqs,
   getServicesByTier,
-  getStartingPriceUSD,
-  isMonthlyPrice,
   SERVICE_DETAILS,
   serviceMetaTitle,
 } from "@/lib/services";
@@ -77,33 +74,11 @@ describe("service catalogue", () => {
 });
 
 describe("pricing", () => {
-  test("preserves the published starting prices", () => {
-    expect(getStartingPriceUSD(getServiceDetail("product-sprint")!)).toBe(20000);
-    expect(getStartingPriceUSD(getServiceDetail("build-only")!)).toBe(12000);
-    expect(getStartingPriceUSD(getServiceDetail("growth-retainer")!)).toBe(4500);
-    expect(isMonthlyPrice(getServiceDetail("growth-retainer")!)).toBe(true);
-    expect(getStartingPriceUSD(getServiceDetail("technical-audit")!)).toBe(1500);
-  });
-
-  test("preserves payment terms", () => {
-    const lines = (slug: string) => getServiceDetail(slug)!.priceDetail.join(" ");
-    expect(lines("product-sprint")).toContain("50% to start, 50% on delivery.");
-    expect(lines("build-only")).toContain("50% to start, 50% on delivery.");
-    expect(lines("growth-retainer")).toContain("Invoiced monthly, in advance.");
-    expect(lines("technical-audit")).toContain("Paid in full upfront");
-  });
-
-  test("unpriced services emit no offer price", () => {
-    for (const slug of [
-      "workflow-assessment",
-      "ai-workflow-automation",
-      "mvp-development",
-      "business-websites",
-    ]) {
-      const service = getServiceDetail(slug)!;
-      expect(getStartingPriceUSD(service)).toBeNull();
-      expect(service.card.price).toBe(UNPRICED_SERVICE_COPY);
-      expect(service.priceDetail).toContain(UNPRICED_SERVICE_COPY);
+  test("publishes no prices on any service (prices removed in #19)", () => {
+    for (const service of SERVICE_DETAILS) {
+      const copy = JSON.stringify(service);
+      expect(copy).not.toMatch(/\$\d/);
+      expect(service.meta.map((m) => m.label)).not.toContain("Starting at");
     }
   });
 

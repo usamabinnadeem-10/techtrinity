@@ -34,9 +34,6 @@ export function ServicesSecondary() {
               <p className="mt-3 flex-1 text-[14px] font-light leading-[1.7] text-muted">
                 {service.card.description}
               </p>
-              <p className="mt-5 font-mono text-[11px] tracking-[0.06em] text-muted-foreground">
-                {service.card.price}
-              </p>
               <span className="mt-5 inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.16em] text-muted-foreground transition-colors group-hover:text-foreground">
                 View Details
                 <span

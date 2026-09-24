@@ -10,7 +10,7 @@ import { ServiceDetailCallout } from "@/components/services/service-detail-callo
 import { ServiceDetailCapabilities } from "@/components/services/service-detail-capabilities";
 import { ServiceDetailCTA } from "@/components/services/service-detail-cta";
 import { ServiceDetailFaq } from "@/components/services/service-detail-faq";
-import { ServiceDetailFitPrice } from "@/components/services/service-detail-fit-price";
+import { ServiceDetailFit } from "@/components/services/service-detail-fit";
 import { ServiceDetailHero } from "@/components/services/service-detail-hero";
 import { ServiceDetailList } from "@/components/services/service-detail-list";
 import { ServiceDetailOverview } from "@/components/services/service-detail-overview";
@@ -21,8 +21,6 @@ import {
   getAllServiceSlugs,
   getServiceDetail,
   getServiceFaqs,
-  getStartingPriceUSD,
-  isMonthlyPrice,
   serviceMetaTitle,
   type ServiceDetail,
 } from "@/lib/services";
@@ -82,34 +80,6 @@ export async function generateMetadata({
 
 function serviceSchema(service: ServiceDetail): Record<string, unknown> {
   const url = absoluteUrl(`/services/${service.slug}`);
-  // Unpriced services ("Quoted after a scope review.") emit no Offer.
-  const price = getStartingPriceUSD(service);
-  const monthly = isMonthlyPrice(service);
-
-  const offers =
-    price !== null
-      ? {
-          "@type": "Offer",
-          priceCurrency: "USD",
-          price,
-          url,
-          availability: "https://schema.org/InStock",
-          ...(monthly
-            ? {
-                priceSpecification: {
-                  "@type": "UnitPriceSpecification",
-                  price,
-                  priceCurrency: "USD",
-                  referenceQuantity: {
-                    "@type": "QuantitativeValue",
-                    value: 1,
-                    unitCode: "MON",
-                  },
-                },
-              }
-            : {}),
-        }
-      : undefined;
 
   return {
     "@context": "https://schema.org",
@@ -128,7 +98,6 @@ function serviceSchema(service: ServiceDetail): Record<string, unknown> {
       "@type": "Audience",
       audienceType: service.idealFor,
     },
-    ...(offers ? { offers } : {}),
   };
 }
 
@@ -155,10 +124,6 @@ function faqSchema(service: ServiceDetail): Record<string, unknown> {
         service.notIncluded.join("; "),
       ),
       question(`Who is ${service.title} for?`, service.idealFor),
-      question(
-        `How much does ${service.title} cost?`,
-        service.priceDetail.join(" "),
-      ),
       ...getServiceFaqs(service).map((faq) =>
         question(faq.question, faq.answer),
       ),
@@ -211,10 +176,7 @@ export default async function ServiceDetailPage({
         {service.relatedWork && (
           <ServiceDetailRelatedWork block={service.relatedWork} />
         )}
-        <ServiceDetailFitPrice
-          idealFor={service.idealFor}
-          priceDetail={service.priceDetail}
-        />
+        <ServiceDetailFit idealFor={service.idealFor} />
         <ServiceDetailFaq faqs={getServiceFaqs(service)} currentPath={path} />
         <ServiceDetailCTA
           prompt={service.ctaPrompt}
