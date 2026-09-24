@@ -68,7 +68,7 @@ export function Hero() {
             See EasyAccounts
           </LinkButton>
         </div>
-        <p className="hero-fade mt-5 max-w-[440px] text-[13px] leading-[1.6] text-muted-foreground [animation-delay:1s]">
+        <p className="hero-fade mt-5 max-w-[440px] text-[13px] leading-[1.6] text-muted [animation-delay:1s]">
           {PRIMARY_CTA_HELPER}
         </p>
       </div>
