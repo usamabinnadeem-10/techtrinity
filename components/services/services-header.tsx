@@ -19,6 +19,10 @@ export function ServicesHeader() {
             businesses whose stock, order, warehouse, purchasing, and reporting
             workflows have outgrown spreadsheets and disconnected tools.
           </p>
+          <p className="mt-4 max-w-[560px] text-[16px] font-light leading-[1.75] text-foreground">
+            Start with one workflow that costs time or creates mistakes, then
+            expand when your business needs it.
+          </p>
           <p className="mt-6 font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
             React · Next.js · Node.js · Django · PostgreSQL · Cloud
           </p>

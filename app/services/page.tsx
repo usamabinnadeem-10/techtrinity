@@ -8,17 +8,19 @@ import { ServicesFit } from "@/components/services/services-fit";
 import { ServicesGrid } from "@/components/services/services-grid";
 import { ServicesHeader } from "@/components/services/services-header";
 import { ServicesProcess } from "@/components/services/services-process";
+import { ServicesSecondary } from "@/components/services/services-secondary";
 import { breadcrumbSchema, JsonLd } from "@/lib/site";
+
+const DESCRIPTION =
+  "Workflow assessments, defined builds, phased larger builds, and ongoing support for wholesale and distribution — plus AI automation, MVPs, and websites.";
 
 export const metadata: Metadata = {
   title: "Services",
-  description:
-    "Four focused services for wholesale, distribution, and operations businesses — custom software built around how you actually work. Clear scope, fixed process, no surprises.",
+  description: DESCRIPTION,
   alternates: { canonical: "/services" },
   openGraph: {
     title: "Services — TechTrinity",
-    description:
-      "Four focused services for wholesale, distribution, and operations businesses — custom software built around how you actually work.",
+    description: DESCRIPTION,
     url: "/services",
     type: "website",
   },
@@ -38,6 +40,7 @@ export default function ServicesPage() {
       <main>
         <ServicesHeader />
         <ServicesGrid />
+        <ServicesSecondary />
         <ServicesProcess />
         <ServicesFit />
         <ServicesCTA />

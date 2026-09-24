@@ -1,20 +1,29 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { TrackView } from "@/components/analytics/track-view";
 import { AmbientBackground } from "@/components/home/background";
 import { SiteNav } from "@/components/home/nav";
 import { RevealController } from "@/components/home/reveal-controller";
 import { SiteFooter } from "@/components/home/site-footer";
 import { ServiceDetailBack } from "@/components/services/service-detail-back";
 import { ServiceDetailCallout } from "@/components/services/service-detail-callout";
+import { ServiceDetailCapabilities } from "@/components/services/service-detail-capabilities";
 import { ServiceDetailCTA } from "@/components/services/service-detail-cta";
+import { ServiceDetailFaq } from "@/components/services/service-detail-faq";
 import { ServiceDetailFitPrice } from "@/components/services/service-detail-fit-price";
 import { ServiceDetailHero } from "@/components/services/service-detail-hero";
+import { ServiceDetailList } from "@/components/services/service-detail-list";
 import { ServiceDetailOverview } from "@/components/services/service-detail-overview";
 import { ServiceDetailProcess } from "@/components/services/service-detail-process";
+import { ServiceDetailRelatedWork } from "@/components/services/service-detail-related-work";
 import { ServiceDetailScope } from "@/components/services/service-detail-scope";
 import {
   getAllServiceSlugs,
   getServiceDetail,
+  getServiceFaqs,
+  getStartingPriceUSD,
+  isMonthlyPrice,
+  serviceMetaTitle,
   type ServiceDetail,
 } from "@/lib/services";
 import {
@@ -36,19 +45,6 @@ function trimDescription(text: string): string {
   return `${cut.slice(0, lastSpace > 80 ? lastSpace : cut.length).trim()}…`;
 }
 
-function parsePriceUSD(meta: ServiceDetail["meta"]): number | null {
-  const priceEntry = meta.find((m) => /\$/.test(m.value));
-  if (!priceEntry) return null;
-  const match = priceEntry.value.match(/\$([\d,]+)/);
-  if (!match) return null;
-  const numeric = Number(match[1].replace(/,/g, ""));
-  return Number.isFinite(numeric) ? numeric : null;
-}
-
-function isMonthlyPrice(meta: ServiceDetail["meta"]): boolean {
-  return meta.some((m) => /\/month/i.test(m.value));
-}
-
 export function generateStaticParams(): RouteParams[] {
   return getAllServiceSlugs().map((slug) => ({ slug }));
 }
@@ -65,13 +61,18 @@ export async function generateMetadata({
   }
   const description = trimDescription(service.overview[0]);
   const path = `/services/${slug}`;
-  const metaTitle = service.metaTitle ?? service.title;
+  const title = service.metaTitle ?? service.title;
+  // Absolute titles already carry "| TechTrinity"; don't append it again.
+  const ogTitle =
+    typeof title === "string"
+      ? `${title} — ${SITE_NAME}`
+      : serviceMetaTitle(service);
   return {
-    title: metaTitle,
+    title,
     description,
     alternates: { canonical: path },
     openGraph: {
-      title: `${metaTitle} — ${SITE_NAME}`,
+      title: ogTitle,
       description,
       url: path,
       type: "website",
@@ -81,32 +82,34 @@ export async function generateMetadata({
 
 function serviceSchema(service: ServiceDetail): Record<string, unknown> {
   const url = absoluteUrl(`/services/${service.slug}`);
-  const price = parsePriceUSD(service.meta);
-  const monthly = isMonthlyPrice(service.meta);
+  // Unpriced services ("Quoted after a scope review.") emit no Offer.
+  const price = getStartingPriceUSD(service);
+  const monthly = isMonthlyPrice(service);
 
-  const offers = price
-    ? {
-        "@type": "Offer",
-        priceCurrency: "USD",
-        price,
-        url,
-        availability: "https://schema.org/InStock",
-        ...(monthly
-          ? {
-              priceSpecification: {
-                "@type": "UnitPriceSpecification",
-                price,
-                priceCurrency: "USD",
-                referenceQuantity: {
-                  "@type": "QuantitativeValue",
-                  value: 1,
-                  unitCode: "MON",
+  const offers =
+    price !== null
+      ? {
+          "@type": "Offer",
+          priceCurrency: "USD",
+          price,
+          url,
+          availability: "https://schema.org/InStock",
+          ...(monthly
+            ? {
+                priceSpecification: {
+                  "@type": "UnitPriceSpecification",
+                  price,
+                  priceCurrency: "USD",
+                  referenceQuantity: {
+                    "@type": "QuantitativeValue",
+                    value: 1,
+                    unitCode: "MON",
+                  },
                 },
-              },
-            }
-          : {}),
-      }
-    : undefined;
+              }
+            : {}),
+        }
+      : undefined;
 
   return {
     "@context": "https://schema.org",
@@ -129,47 +132,36 @@ function serviceSchema(service: ServiceDetail): Record<string, unknown> {
   };
 }
 
-function faqSchema(service: ServiceDetail): Record<string, unknown> {
-  const priceAnswer = service.priceDetail.join(" ");
-  const includedAnswer = service.included.join("; ");
-  const notIncludedAnswer = service.notIncluded.join("; ");
+function question(name: string, text: string): Record<string, unknown> {
+  return {
+    "@type": "Question",
+    name,
+    acceptedAnswer: { "@type": "Answer", text },
+  };
+}
 
+/** FAQ JSON-LD built only from copy that is visible on the page. */
+function faqSchema(service: ServiceDetail): Record<string, unknown> {
   return {
     "@context": "https://schema.org",
     "@type": "FAQPage",
     mainEntity: [
-      {
-        "@type": "Question",
-        name: `What's included in ${service.title}?`,
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: includedAnswer,
-        },
-      },
-      {
-        "@type": "Question",
-        name: `What isn't included in ${service.title}?`,
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: notIncludedAnswer,
-        },
-      },
-      {
-        "@type": "Question",
-        name: `Who is ${service.title} for?`,
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: service.idealFor,
-        },
-      },
-      {
-        "@type": "Question",
-        name: `How much does ${service.title} cost?`,
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: priceAnswer,
-        },
-      },
+      question(
+        `What's included in ${service.title}?`,
+        service.included.join("; "),
+      ),
+      question(
+        `What isn't included in ${service.title}?`,
+        service.notIncluded.join("; "),
+      ),
+      question(`Who is ${service.title} for?`, service.idealFor),
+      question(
+        `How much does ${service.title} cost?`,
+        service.priceDetail.join(" "),
+      ),
+      ...getServiceFaqs(service).map((faq) =>
+        question(faq.question, faq.answer),
+      ),
     ],
   };
 }
@@ -183,10 +175,11 @@ export default async function ServiceDetailPage({
   const service = getServiceDetail(slug);
   if (!service) notFound();
 
+  const path = `/services/${service.slug}`;
   const breadcrumbs = breadcrumbSchema([
     { name: "Home", path: "/" },
     { name: "Services", path: "/services" },
-    { name: service.title, path: `/services/${service.slug}` },
+    { name: service.title, path },
   ]);
 
   return (
@@ -194,23 +187,42 @@ export default async function ServiceDetailPage({
       <JsonLd
         data={[serviceSchema(service), faqSchema(service), breadcrumbs]}
       />
+      <TrackView event="service_view" slug={service.slug} />
       <AmbientBackground />
       <SiteNav />
       <main>
         <ServiceDetailBack />
         <ServiceDetailHero service={service} />
         <ServiceDetailOverview paragraphs={service.overview} />
+        {service.capabilities && (
+          <ServiceDetailCapabilities block={service.capabilities} />
+        )}
         <ServiceDetailScope
           included={service.included}
           notIncluded={service.notIncluded}
+          includedLabel={service.includedLabel}
+          note={service.scopeNote}
         />
-        {service.process && <ServiceDetailProcess steps={service.process} />}
+        {service.process && <ServiceDetailProcess process={service.process} />}
+        {service.detailBlocks?.map((block) => (
+          <ServiceDetailList key={block.label} block={block} />
+        ))}
         {service.callout && <ServiceDetailCallout callout={service.callout} />}
+        {service.relatedWork && (
+          <ServiceDetailRelatedWork block={service.relatedWork} />
+        )}
         <ServiceDetailFitPrice
           idealFor={service.idealFor}
           priceDetail={service.priceDetail}
         />
-        <ServiceDetailCTA prompt={service.ctaPrompt} label={service.ctaLabel} />
+        <ServiceDetailFaq faqs={getServiceFaqs(service)} currentPath={path} />
+        <ServiceDetailCTA
+          prompt={service.ctaPrompt}
+          label={service.ctaLabel}
+          intent={service.intent}
+          primary={service.ctaPrimary}
+          body={service.ctaBody}
+        />
       </main>
       <SiteFooter />
       <RevealController />

@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { EditorialLabel } from "@/components/home/label";
 
 const GOOD_FIT = [
@@ -14,7 +15,6 @@ const BAD_FIT = [
   `There's no real operational friction yet`,
   `You only want the cheapest developer`,
   `You need a rushed two-week build for a complex workflow`,
-  `You want to resell the software as a SaaS product`,
   `You cannot give access to the people who actually run the process`,
 ];
 
@@ -24,11 +24,29 @@ export function ServicesFit() {
       <div className="mx-auto max-w-[1240px] px-6 md:px-12">
         <div className="grid items-start gap-14 md:grid-cols-[5fr_7fr] md:gap-20">
           <div data-reveal>
-            <EditorialLabel>Right Fit</EditorialLabel>
+            <EditorialLabel>Right Fit · Operations</EditorialLabel>
             <h2 className="mt-4 font-display text-[clamp(32px,3.6vw,54px)] font-bold leading-[1.05] tracking-[-0.025em]">
               We&apos;re selective about{" "}
               <em className="italic text-primary">who we work with.</em>
             </h2>
+            <p className="mt-6 max-w-[440px] text-[15px] font-light leading-[1.75] text-muted">
+              These criteria apply to our operations engagements. Building a
+              B2B product instead? See{" "}
+              <Link
+                href="/services/mvp-development"
+                className="border-b border-border pb-0.5 text-foreground transition-colors hover:border-primary hover:text-primary"
+              >
+                MVP development
+              </Link>
+              . Need a business website? See{" "}
+              <Link
+                href="/services/business-websites"
+                className="border-b border-border pb-0.5 text-foreground transition-colors hover:border-primary hover:text-primary"
+              >
+                business websites
+              </Link>
+              .
+            </p>
           </div>
 
           <div
@@ -37,9 +55,9 @@ export function ServicesFit() {
             className="grid gap-px overflow-hidden rounded-lg border border-border bg-border sm:grid-cols-2"
           >
             <div className="bg-card p-8 md:p-10">
-              <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-primary">
+              <h3 className="font-mono text-[11px] font-normal uppercase tracking-[0.18em] text-primary">
                 We&apos;re a good fit if
-              </p>
+              </h3>
               <ul className="mt-7 space-y-5">
                 {GOOD_FIT.map((item) => (
                   <li
@@ -57,9 +75,9 @@ export function ServicesFit() {
             </div>
 
             <div className="bg-card p-8 md:p-10">
-              <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
+              <h3 className="font-mono text-[11px] font-normal uppercase tracking-[0.18em] text-muted-foreground">
                 We&apos;re not a good fit if
-              </p>
+              </h3>
               <ul className="mt-7 space-y-5">
                 {BAD_FIT.map((item) => (
                   <li
