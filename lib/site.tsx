@@ -20,6 +20,11 @@ export const ORG_LOGO_URL = `${SITE_URL}/tt-logo.png`;
 
 export const ORG_CONTACT_EMAIL = "info@techtrinity.ai";
 
+// Data-protection contact, deliberately separate from the general enquiry inbox:
+// the privacy policy is the only place we publish it, so rights requests and
+// marketing objections land somewhere they can't be lost in sales mail.
+export const ORG_PRIVACY_EMAIL = "privacy@techtrinity.ai";
+
 export const ORG_CONTACT_PHONE = "+12513732320";
 
 // Mailing address = the company's US virtual mailbox (VirtualPostMail, Keller TX),
