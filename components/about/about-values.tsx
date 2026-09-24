@@ -14,18 +14,18 @@ const VALUES: Value[] = [
   },
   {
     num: "02",
-    title: "No handoffs to juniors",
-    body: "The senior engineer who scopes your project is the one writing the code. No bait-and-switch to a junior the moment the contract is signed.",
+    title: "Direct access",
+    body: "The people who scope your project stay responsible for building it. You talk to them directly — no relay through an account manager once the contract is signed.",
   },
   {
     num: "03",
     title: "Written agreements",
-    body: "Scope, timeline, and price go in writing before anything starts. \"We'll figure it out as we go\" is how projects blow past budget — so we don't work that way.",
+    body: "Scope, milestones, and price go in writing before work starts, and changes are approved before additional work begins. \"We'll figure it out as we go\" is how projects blow past budget.",
   },
   {
     num: "04",
     title: "Accountability after launch",
-    body: "We don't vanish at delivery. Every build includes post-launch support, and a founder you can actually reach when something needs attention.",
+    body: "We don't vanish at delivery. Launch support is included as scoped, ongoing maintenance is available under a separate agreement, and the founder stays reachable.",
   },
 ];
 

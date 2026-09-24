@@ -3,6 +3,8 @@ import { Fraunces, Plus_Jakarta_Sans, DM_Mono } from "next/font/google";
 import "./globals.css";
 import {
   founderPersonSchema,
+  HOME_SOCIAL_TITLE,
+  HOME_TITLE,
   JsonLd,
   organizationSchema,
   SITE_DESCRIPTION,
@@ -13,6 +15,7 @@ import {
 import { GoogleAnalytics } from "@/components/analytics/google-analytics";
 import { ConsentModeInit } from "@/components/analytics/consent-mode-init";
 import { CookieConsentBanner } from "@/components/analytics/cookie-consent-banner";
+import { CtaClickTracker } from "@/components/analytics/cta-click-tracker";
 
 const fraunces = Fraunces({
   variable: "--font-fraunces",
@@ -37,8 +40,7 @@ const dmMono = DM_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default:
-      "Custom Operations Software for Wholesale & Distribution Businesses | TechTrinity",
+    default: HOME_TITLE,
     template: `%s | ${SITE_NAME}`,
   },
   description: SITE_DESCRIPTION,
@@ -47,17 +49,15 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     siteName: SITE_NAME,
-    title: "Custom Operations Software for Inventory-Heavy Businesses",
-    description:
-      "Inventory, warehouse, order, and reporting systems built around how your operation actually runs.",
+    title: HOME_SOCIAL_TITLE,
+    description: SITE_DESCRIPTION,
     url: SITE_URL,
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Custom Operations Software for Inventory-Heavy Businesses",
-    description:
-      "Inventory, warehouse, order, and reporting systems built around how your operation actually runs.",
+    title: HOME_SOCIAL_TITLE,
+    description: SITE_DESCRIPTION,
   },
   robots: {
     index: true,
@@ -90,6 +90,7 @@ export default function RootLayout({
         {children}
         <CookieConsentBanner />
         <GoogleAnalytics />
+        <CtaClickTracker />
       </body>
     </html>
   );

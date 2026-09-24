@@ -1,5 +1,10 @@
 import Image from "next/image";
 import { cn } from "@/lib/cn";
+import {
+  FOUNDER_CANONICAL_BADGE,
+  FOUNDER_DISPLAY_NAME,
+  FOUNDER_TITLE,
+} from "@/lib/offer";
 
 export type TeamMember = {
   name: string;
@@ -15,9 +20,9 @@ export type TeamMember = {
 
 export const TEAM: TeamMember[] = [
   {
-    name: "Usama Nadeem",
-    role: "Founder · Engineering Lead",
-    bio: "Ex-Canonical. Architects production systems that survive launch day and the next six years.",
+    name: FOUNDER_DISPLAY_NAME,
+    role: FOUNDER_TITLE,
+    bio: `${FOUNDER_CANONICAL_BADGE}. Built EasyAccounts, his own product, and leads how each client system is scoped, designed, and built.`,
     initials: "UN",
     index: "01",
     signature: "u·nadeem",
@@ -28,7 +33,7 @@ export const TEAM: TeamMember[] = [
   {
     name: "Faiq Khan",
     role: "Design Direction",
-    bio: "A decade across editorial, product, and identity. Believes screens should feel as considered as print.",
+    bio: "Works across editorial, product, and identity design. Believes screens should feel as considered as print.",
     initials: "FK",
     index: "02",
     signature: "f·khan",

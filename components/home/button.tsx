@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { cn } from "@/lib/cn";
+import { ctaAttrs, type CtaTracking } from "@/lib/cta";
 
 type Variant = "accent" | "ghost";
 type Size = "md" | "lg";
@@ -30,6 +31,8 @@ type LinkButtonProps = CommonProps & {
   href: string;
   external?: boolean;
   onClick?: () => void;
+  /** Opts the link into `cta_click` analytics. */
+  cta?: CtaTracking;
 };
 
 export function LinkButton({
@@ -40,8 +43,10 @@ export function LinkButton({
   className,
   children,
   onClick,
+  cta,
 }: LinkButtonProps) {
   const classes = cn(base, variants[variant], sizes[size], className);
+  const tracking = cta ? ctaAttrs(cta.label, cta.section, cta.service) : {};
   if (external) {
     return (
       <a
@@ -50,13 +55,14 @@ export function LinkButton({
         rel="noreferrer"
         className={classes}
         onClick={onClick}
+        {...tracking}
       >
         {children}
       </a>
     );
   }
   return (
-    <Link href={href} className={classes} onClick={onClick}>
+    <Link href={href} className={classes} onClick={onClick} {...tracking}>
       {children}
     </Link>
   );

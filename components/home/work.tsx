@@ -1,9 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
+import { ctaAttrs } from "@/lib/cta";
+import { EMPLOYMENT_WORK_LABEL } from "@/lib/offer";
 import { EditorialLabel } from "./label";
 
 type Project = {
   name: string;
+  /** Attribution shown on the card — employment work is never a TechTrinity commission. */
+  attribution: string;
   description: string;
   href: string;
   image?: {
@@ -17,6 +21,7 @@ type Project = {
 const PROJECTS: Project[] = [
   {
     name: "Canonical Academy",
+    attribution: `${EMPLOYMENT_WORK_LABEL} · in-house at Canonical`,
     description:
       "The certification and learning platform for Canonical — the team behind Ubuntu, one of the world's most-used operating systems.",
     href: "/work/canonical-academy",
@@ -29,6 +34,7 @@ const PROJECTS: Project[] = [
   },
   {
     name: "Xenia",
+    attribution: `${EMPLOYMENT_WORK_LABEL} · employed at Xenia`,
     description:
       "An operations platform for multi-location teams — tasks, checklists, and audits in one place, so nothing slips between sites.",
     href: "/work/xenia",
@@ -41,6 +47,7 @@ const PROJECTS: Project[] = [
   },
   {
     name: "Hirecinch ATS",
+    attribution: `${EMPLOYMENT_WORK_LABEL} · employed at Hirecinch`,
     description:
       "A hiring platform that puts candidates, feedback, and decisions in one place — so teams hire together instead of over email.",
     href: "/work/hirecinch",
@@ -60,65 +67,26 @@ export function Work() {
         <div className="mb-14" data-reveal>
           <EditorialLabel>Selected Work</EditorialLabel>
           <h2 className="mt-3.5 font-display text-[clamp(32px,3.4vw,52px)] font-bold leading-[1.05] tracking-[-0.025em]">
-            Software we shipped —
-            <br />
-            and teams{" "}
-            <em className="font-bold italic text-primary">actually use.</em>
+            Selected engineering{" "}
+            <em className="font-bold italic text-primary">work.</em>
           </h2>
-          <p className="mt-3.5 max-w-[600px] text-[17px] font-light leading-[1.7] text-muted">
-            Production systems in daily use across the US, UK, and Australia. Not
-            prototypes, not slideware — software that&apos;s still running years
-            after launch.
+          <p className="mt-3.5 max-w-[640px] text-[17px] font-light leading-[1.7] text-muted">
+            Alongside EasyAccounts, Usama has engineered production platforms
+            for other companies. Each project is labelled with how he was
+            involved, and its case study describes his exact contribution.
           </p>
         </div>
 
-        <article
-          data-reveal
-          data-reveal-delay="1"
-          className="grid items-center gap-12 rounded-lg border border-border bg-card p-10 transition-colors duration-300 hover:border-border-strong md:grid-cols-2 md:p-16"
-        >
-          <div>
-            <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-primary">
-              Featured · Wholesale Inventory &amp; Operations
-            </p>
-            <h3 className="mt-5 font-display text-[clamp(28px,3vw,48px)] font-bold leading-[1.05] tracking-[-0.025em]">
-              EasyAccounts ERP
-            </h3>
-            <p className="mt-3.5 text-[16px] font-light leading-[1.75] text-muted">
-              The inventory, stock, and reporting system behind a live wholesale
-              textile operation — built to replace spreadsheets and fragile
-              backups with real-time numbers the whole team trusts. Three years in
-              production and still running.
-            </p>
-            <Link
-              href="/work/easyaccounts"
-              className="mt-9 inline-flex items-center gap-2.5 border-b border-border pb-1 text-sm font-medium text-foreground transition-colors hover:border-primary hover:text-primary"
-            >
-              View Case Study <span aria-hidden>→</span>
-            </Link>
-          </div>
-          <div className="relative overflow-hidden rounded-md border border-border bg-background">
-            <Image
-              src="/easyaccounts/reports-product-cost-trace.png"
-              alt="EasyAccounts ERP product cost trace interface"
-              width={1465}
-              height={812}
-              sizes="(min-width: 768px) 540px, 100vw"
-              className="h-auto w-full"
-            />
-          </div>
-        </article>
-
         <div
           data-reveal
-          data-reveal-delay="2"
-          className="mt-4 grid overflow-hidden rounded-lg border border-border bg-border md:grid-cols-3"
+          data-reveal-delay="1"
+          className="grid overflow-hidden rounded-lg border border-border bg-border md:grid-cols-3"
           style={{ gap: 1 }}
         >
           {PROJECTS.map((project) => (
             <article
               key={project.name}
-              className="flex flex-col bg-card p-10 transition-colors duration-300 hover:bg-card-elevated"
+              className="flex flex-col bg-card p-8 transition-colors duration-300 hover:bg-card-elevated"
             >
               <div className="relative mb-9 aspect-video w-full overflow-hidden rounded-sm border border-border bg-transparent">
                 {project.image ? (
@@ -142,7 +110,10 @@ export function Work() {
                   </div>
                 )}
               </div>
-              <h3 className="font-display text-[24px] font-bold tracking-[-0.02em]">
+              <p className="font-mono text-[10.5px] uppercase tracking-[0.14em] text-primary">
+                {project.attribution}
+              </p>
+              <h3 className="mt-3 font-display text-[24px] font-bold tracking-[-0.02em]">
                 {project.name}
               </h3>
               <p className="mt-2.5 text-[14px] font-light leading-[1.7] text-muted">
@@ -150,6 +121,7 @@ export function Work() {
               </p>
               <Link
                 href={project.href}
+                {...ctaAttrs(`View ${project.name} case study`, "work")}
                 className="mt-auto inline-flex items-center gap-1.5 self-start pt-6 font-mono text-[12px] tracking-[0.04em] text-muted-foreground transition-colors hover:text-primary"
               >
                 View Case Study →

@@ -1,4 +1,9 @@
 import { EditorialLabel } from "@/components/home/label";
+import { ctaAttrs } from "@/lib/cta";
+import { RESPONSE_PROMISE } from "@/lib/offer";
+
+const jumpLink =
+  "inline-flex items-center gap-2 rounded-pill border border-border bg-card px-4 py-2 font-mono text-[12px] uppercase tracking-[0.14em] text-muted transition-[color,border-color] duration-200 hover:border-border-strong hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring";
 
 export function ContactHeader() {
   return (
@@ -8,11 +13,25 @@ export function ContactHeader() {
         <h1 className="mt-4 font-display text-[clamp(44px,6vw,84px)] font-black leading-[0.96] tracking-[-0.04em]">
           Start a <em className="italic text-primary">conversation.</em>
         </h1>
-        <p className="mx-auto mt-7 max-w-[480px] text-[16px] font-light leading-[1.7] text-muted">
-          Tell us what is slowing your operation down. We&apos;ll review it and
-          get back to you within one business day. Or skip the form and book a
-          workflow review directly.
+        <p className="mx-auto mt-7 max-w-[500px] text-[16px] font-light leading-[1.7] text-muted">
+          Tell us what you&apos;d like to improve or build. {RESPONSE_PROMISE}{" "}
+          Or skip the form and book a free 30-minute workflow review.
         </p>
+        <nav
+          aria-label="Contact options"
+          className="mt-8 flex flex-wrap items-center justify-center gap-3"
+        >
+          <a href="#message" className={jumpLink}>
+            Send a message
+          </a>
+          <a
+            href="#book"
+            className={jumpLink}
+            {...ctaAttrs("Book a call", "contact-header")}
+          >
+            Book a call
+          </a>
+        </nav>
       </div>
     </section>
   );

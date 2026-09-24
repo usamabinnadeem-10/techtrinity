@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useId, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { cn } from "@/lib/cn";
+import { BOOK_HREF, PRIMARY_CTA_LABEL } from "@/lib/offer";
 import { LinkButton } from "./button";
 import { NAV_LINKS, type NavLink } from "./nav-links";
 
@@ -269,13 +270,14 @@ export function MobileMenu() {
 
           <div className="px-6 pt-5">
             <LinkButton
-              href="/contact"
+              href={BOOK_HREF}
               variant="accent"
               size="lg"
               className="w-full justify-between"
               onClick={close}
+              cta={{ label: PRIMARY_CTA_LABEL, section: "mobile-nav" }}
             >
-              Book a Call
+              {PRIMARY_CTA_LABEL}
               <ChevronRight />
             </LinkButton>
           </div>

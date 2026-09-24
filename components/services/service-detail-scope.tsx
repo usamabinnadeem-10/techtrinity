@@ -1,9 +1,16 @@
 type Props = {
   included: string[];
   notIncluded: string[];
+  includedLabel?: string;
+  note?: string;
 };
 
-export function ServiceDetailScope({ included, notIncluded }: Props) {
+export function ServiceDetailScope({
+  included,
+  notIncluded,
+  includedLabel = "What’s included",
+  note,
+}: Props) {
   return (
     <section className="border-y border-border bg-card py-24 md:py-28">
       <div className="mx-auto max-w-[1240px] px-6 md:px-12">
@@ -12,9 +19,9 @@ export function ServiceDetailScope({ included, notIncluded }: Props) {
           className="grid gap-px overflow-hidden rounded-lg border border-border bg-border md:grid-cols-2"
         >
           <div className="bg-card p-8 md:p-12">
-            <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-primary">
-              What&apos;s included
-            </p>
+            <h2 className="font-mono text-[11px] font-normal uppercase tracking-[0.18em] text-primary">
+              {includedLabel}
+            </h2>
             <ul className="mt-8 space-y-5">
               {included.map((item) => (
                 <li
@@ -35,9 +42,9 @@ export function ServiceDetailScope({ included, notIncluded }: Props) {
           </div>
 
           <div className="bg-card p-8 md:p-12">
-            <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
+            <h2 className="font-mono text-[11px] font-normal uppercase tracking-[0.18em] text-muted-foreground">
               What&apos;s not included
-            </p>
+            </h2>
             <ul className="mt-8 space-y-5">
               {notIncluded.map((item) => (
                 <li
@@ -54,6 +61,14 @@ export function ServiceDetailScope({ included, notIncluded }: Props) {
             </ul>
           </div>
         </div>
+        {note && (
+          <p
+            data-reveal
+            className="mt-8 max-w-[820px] text-[14px] font-light leading-[1.7] text-muted"
+          >
+            {note}
+          </p>
+        )}
       </div>
     </section>
   );

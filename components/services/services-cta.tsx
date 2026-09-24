@@ -1,5 +1,15 @@
 import { LinkButton } from "@/components/home/button";
 import { EditorialLabel } from "@/components/home/label";
+import { ctaAttrs } from "@/lib/cta";
+import {
+  BOOK_HREF,
+  PRIMARY_CTA_HELPER,
+  PRIMARY_CTA_LABEL,
+  RESPONSE_PROMISE,
+  messageHref,
+} from "@/lib/offer";
+
+const SECTION = "services_cta";
 
 export function ServicesCTA() {
   return (
@@ -17,18 +27,32 @@ export function ServicesCTA() {
             tell you honestly if we&apos;re not the right team.
           </p>
           <div className="flex flex-wrap items-center justify-center gap-3.5">
-            <LinkButton href="/contact" variant="accent" size="lg">
-              Book a Workflow Review
+            <LinkButton
+              href={BOOK_HREF}
+              variant="accent"
+              size="lg"
+              cta={{ label: PRIMARY_CTA_LABEL, section: SECTION }}
+            >
+              {PRIMARY_CTA_LABEL}
             </LinkButton>
-            <LinkButton href="/contact" variant="ghost" size="lg">
+            <LinkButton
+              href={messageHref("not-sure")}
+              variant="ghost"
+              size="lg"
+              cta={{ label: "Send a Message", section: SECTION, service: "not-sure" }}
+            >
               Send a Message
             </LinkButton>
           </div>
-          <p className="mt-6 text-sm text-muted-foreground">
+          <p className="mx-auto mt-6 max-w-[520px] text-[13px] font-light leading-[1.6] text-muted-foreground">
+            {PRIMARY_CTA_HELPER} {RESPONSE_PROMISE}
+          </p>
+          <p className="mt-5 text-sm text-muted-foreground">
             Or email us at{" "}
             <a
               href="mailto:info@techtrinity.ai"
               className="border-b border-border pb-0.5 text-muted transition-colors hover:border-muted hover:text-foreground"
+              {...ctaAttrs("Email", SECTION)}
             >
               info@techtrinity.ai
             </a>

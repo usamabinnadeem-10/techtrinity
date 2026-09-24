@@ -1,20 +1,27 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { TrackView } from "@/components/analytics/track-view";
 import { AmbientBackground } from "@/components/home/background";
 import { SiteNav } from "@/components/home/nav";
 import { RevealController } from "@/components/home/reveal-controller";
 import { SiteFooter } from "@/components/home/site-footer";
 import { ServiceDetailBack } from "@/components/services/service-detail-back";
 import { ServiceDetailCallout } from "@/components/services/service-detail-callout";
+import { ServiceDetailCapabilities } from "@/components/services/service-detail-capabilities";
 import { ServiceDetailCTA } from "@/components/services/service-detail-cta";
+import { ServiceDetailFaq } from "@/components/services/service-detail-faq";
 import { ServiceDetailFit } from "@/components/services/service-detail-fit";
 import { ServiceDetailHero } from "@/components/services/service-detail-hero";
+import { ServiceDetailList } from "@/components/services/service-detail-list";
 import { ServiceDetailOverview } from "@/components/services/service-detail-overview";
 import { ServiceDetailProcess } from "@/components/services/service-detail-process";
+import { ServiceDetailRelatedWork } from "@/components/services/service-detail-related-work";
 import { ServiceDetailScope } from "@/components/services/service-detail-scope";
 import {
   getAllServiceSlugs,
   getServiceDetail,
+  getServiceFaqs,
+  serviceMetaTitle,
   type ServiceDetail,
 } from "@/lib/services";
 import {
@@ -52,13 +59,18 @@ export async function generateMetadata({
   }
   const description = trimDescription(service.overview[0]);
   const path = `/services/${slug}`;
-  const metaTitle = service.metaTitle ?? service.title;
+  const title = service.metaTitle ?? service.title;
+  // Absolute titles already carry "| TechTrinity"; don't append it again.
+  const ogTitle =
+    typeof title === "string"
+      ? `${title} — ${SITE_NAME}`
+      : serviceMetaTitle(service);
   return {
-    title: metaTitle,
+    title,
     description,
     alternates: { canonical: path },
     openGraph: {
-      title: `${metaTitle} — ${SITE_NAME}`,
+      title: ogTitle,
       description,
       url: path,
       type: "website",
@@ -89,38 +101,32 @@ function serviceSchema(service: ServiceDetail): Record<string, unknown> {
   };
 }
 
-function faqSchema(service: ServiceDetail): Record<string, unknown> {
-  const includedAnswer = service.included.join("; ");
-  const notIncludedAnswer = service.notIncluded.join("; ");
+function question(name: string, text: string): Record<string, unknown> {
+  return {
+    "@type": "Question",
+    name,
+    acceptedAnswer: { "@type": "Answer", text },
+  };
+}
 
+/** FAQ JSON-LD built only from copy that is visible on the page. */
+function faqSchema(service: ServiceDetail): Record<string, unknown> {
   return {
     "@context": "https://schema.org",
     "@type": "FAQPage",
     mainEntity: [
-      {
-        "@type": "Question",
-        name: `What's included in ${service.title}?`,
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: includedAnswer,
-        },
-      },
-      {
-        "@type": "Question",
-        name: `What isn't included in ${service.title}?`,
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: notIncludedAnswer,
-        },
-      },
-      {
-        "@type": "Question",
-        name: `Who is ${service.title} for?`,
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: service.idealFor,
-        },
-      },
+      question(
+        `What's included in ${service.title}?`,
+        service.included.join("; "),
+      ),
+      question(
+        `What isn't included in ${service.title}?`,
+        service.notIncluded.join("; "),
+      ),
+      question(`Who is ${service.title} for?`, service.idealFor),
+      ...getServiceFaqs(service).map((faq) =>
+        question(faq.question, faq.answer),
+      ),
     ],
   };
 }
@@ -134,10 +140,11 @@ export default async function ServiceDetailPage({
   const service = getServiceDetail(slug);
   if (!service) notFound();
 
+  const path = `/services/${service.slug}`;
   const breadcrumbs = breadcrumbSchema([
     { name: "Home", path: "/" },
     { name: "Services", path: "/services" },
-    { name: service.title, path: `/services/${service.slug}` },
+    { name: service.title, path },
   ]);
 
   return (
@@ -145,20 +152,39 @@ export default async function ServiceDetailPage({
       <JsonLd
         data={[serviceSchema(service), faqSchema(service), breadcrumbs]}
       />
+      <TrackView event="service_view" slug={service.slug} />
       <AmbientBackground />
       <SiteNav />
       <main>
         <ServiceDetailBack />
         <ServiceDetailHero service={service} />
         <ServiceDetailOverview paragraphs={service.overview} />
+        {service.capabilities && (
+          <ServiceDetailCapabilities block={service.capabilities} />
+        )}
         <ServiceDetailScope
           included={service.included}
           notIncluded={service.notIncluded}
+          includedLabel={service.includedLabel}
+          note={service.scopeNote}
         />
-        {service.process && <ServiceDetailProcess steps={service.process} />}
+        {service.process && <ServiceDetailProcess process={service.process} />}
+        {service.detailBlocks?.map((block) => (
+          <ServiceDetailList key={block.label} block={block} />
+        ))}
         {service.callout && <ServiceDetailCallout callout={service.callout} />}
+        {service.relatedWork && (
+          <ServiceDetailRelatedWork block={service.relatedWork} />
+        )}
         <ServiceDetailFit idealFor={service.idealFor} />
-        <ServiceDetailCTA prompt={service.ctaPrompt} label={service.ctaLabel} />
+        <ServiceDetailFaq faqs={getServiceFaqs(service)} currentPath={path} />
+        <ServiceDetailCTA
+          prompt={service.ctaPrompt}
+          label={service.ctaLabel}
+          intent={service.intent}
+          primary={service.ctaPrimary}
+          body={service.ctaBody}
+        />
       </main>
       <SiteFooter />
       <RevealController />

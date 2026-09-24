@@ -1,14 +1,7 @@
+import { BOOK_HREF, PRIMARY_CTA_HELPER, PRIMARY_CTA_LABEL } from "@/lib/offer";
 import { LinkButton } from "./button";
 import { EditorialLabel } from "./label";
 import { ScreenReel } from "./screen-reel";
-
-const STATS = [
-  "5+ Years in Production",
-  "Inventory & Operations Software",
-  "Ex-Canonical Founder",
-  "US / UK / AU Clients",
-  "Senior-Only Team",
-];
 
 export function Hero() {
   return (
@@ -38,51 +31,46 @@ export function Hero() {
 
       <div className="relative z-10 flex w-full max-w-[920px] flex-col items-center">
         <div className="hero-rise-sm mb-8 [animation-delay:0.15s]">
-          <EditorialLabel>Custom Operations Software</EditorialLabel>
+          <EditorialLabel>Custom software for wholesale &amp; distribution</EditorialLabel>
         </div>
 
-        <h1 className="hero-rise font-display text-[clamp(56px,8vw,124px)] font-black leading-[0.92] tracking-[-0.04em] [text-wrap:balance] [animation-delay:0.35s]">
-          Built Around How You{" "}
-          <em className="font-bold italic text-primary">Actually Work.</em>
+        <h1 className="hero-rise font-display text-[clamp(44px,8vw,116px)] font-black leading-[0.94] tracking-[-0.04em] [text-wrap:balance] [animation-delay:0.35s]">
+          Software that keeps your{" "}
+          <em className="font-bold italic text-primary">operation moving.</em>
         </h1>
 
-        <p className="hero-rise-sm mt-8 max-w-[560px] text-[18px] font-light leading-[1.7] text-muted [text-wrap:pretty] [animation-delay:0.6s]">
-          Wholesale, distribution, and multi-location teams lose hours to
-          spreadsheets, stock errors, and systems nobody trusts. We learn how you
-          actually run — then build the inventory, warehouse, and reporting tools
-          that fit it. Not another SaaS template you bend your business around.
+        <p className="hero-rise-sm mt-8 max-w-[600px] text-[18px] font-light leading-[1.7] text-muted [text-wrap:pretty] [animation-delay:0.6s]">
+          We design and build tools for stock, orders, and reporting—and connect
+          the systems your team already uses. Start with one workflow that costs
+          time or creates mistakes, then expand as your business needs.
+        </p>
+        <p className="hero-rise-sm mt-4 font-display text-[16px] italic tracking-[-0.01em] text-foreground/80 [animation-delay:0.7s]">
+          Designed for daily use. Built to maintain and improve.
         </p>
 
-        <div className="hero-rise-sm mt-11 flex flex-wrap items-center justify-center gap-3.5 [animation-delay:0.8s]">
-          <LinkButton href="/contact" variant="accent" size="lg">
-            Book a Workflow Review
+        <div className="hero-rise-sm mt-10 flex w-full flex-col items-stretch justify-center gap-3.5 sm:w-auto sm:flex-row sm:flex-wrap sm:items-center [animation-delay:0.8s]">
+          <LinkButton
+            href={BOOK_HREF}
+            variant="accent"
+            size="lg"
+            className="justify-center"
+            cta={{ label: PRIMARY_CTA_LABEL, section: "hero" }}
+          >
+            {PRIMARY_CTA_LABEL}
           </LinkButton>
-          <LinkButton href="#work" variant="ghost" size="lg">
-            See Our Work
+          <LinkButton
+            href="/work/easyaccounts"
+            variant="ghost"
+            size="lg"
+            className="justify-center"
+            cta={{ label: "See EasyAccounts", section: "hero" }}
+          >
+            See EasyAccounts
           </LinkButton>
         </div>
-      </div>
-
-      <div className="hero-fade relative z-10 mt-16 flex w-full max-w-[1080px] flex-col items-center gap-3 border-t border-border pt-7 lg:mt-20 lg:flex-row lg:flex-wrap lg:justify-center lg:gap-x-5 lg:gap-y-2.5 lg:pt-8 [animation-delay:1.2s]">
-        {STATS.map((stat, i) => (
-          <div key={stat} className="flex items-center gap-x-5">
-            {i > 0 && (
-              <span
-                aria-hidden
-                className="hidden select-none text-[15px] font-light text-muted-foreground lg:inline"
-              >
-                |
-              </span>
-            )}
-            <span className="flex items-center gap-3 font-display text-[14px] font-semibold tracking-[-0.01em] text-foreground/75 transition-colors hover:text-foreground">
-              <span
-                aria-hidden
-                className="block h-px w-3.5 bg-primary lg:hidden"
-              />
-              {stat}
-            </span>
-          </div>
-        ))}
+        <p className="hero-fade mt-5 max-w-[440px] text-[13px] leading-[1.6] text-muted [animation-delay:1s]">
+          {PRIMARY_CTA_HELPER}
+        </p>
       </div>
     </section>
   );

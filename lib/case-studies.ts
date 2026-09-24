@@ -1,3 +1,18 @@
+import {
+  CLAIMS,
+  claimStat,
+  claimText,
+  isPublished,
+  publishedStats,
+  type ClaimKey,
+} from "@/lib/claims";
+import {
+  EMPLOYMENT_WORK_LABEL,
+  FOUNDER_TITLE,
+  OWN_PRODUCT_LABEL,
+  messageHref,
+} from "@/lib/offer";
+
 export type CaseStudyImage = {
   src: string;
   alt: string;
@@ -10,13 +25,54 @@ export type MetaEntry = {
   value: string;
 };
 
+export type Stat = { value: string; label: string };
+
+export type OutcomeCard = { primary: string; description: string[] };
+
+/**
+ * How the work relates to TechTrinity (brief TT-02). "own-product" is the
+ * founder's own product; "employment" is the founder's engineering work for
+ * another company — never presented as a TechTrinity client commission.
+ */
+export type Engagement = "own-product" | "employment";
+
+/** One answer in the buyer-question business summary (brief TT-09). */
+export type SummaryItem = {
+  /** Short heading for the buyer question, e.g. "Setting". */
+  question: string;
+  answer: string;
+};
+
 export type CaseStudy = {
   slug: string;
   name: string;
+  engagement: Engagement;
   meta: MetaEntry[];
   headline: string[];
-  heroStats: { value: string; label: string }[];
+  /** 0–4 stat badges. Numbers must come from lib/claims.ts. */
+  heroStats: Stat[];
   hero: { image: CaseStudyImage; url: string };
+
+  /** Concise business summary shown right after the hero (TT-09). */
+  summary?: {
+    label: string;
+    headline: string[];
+    items: SummaryItem[];
+  };
+
+  /** A real task from input to outcome, as a captioned screenshot sequence. */
+  walkthrough?: {
+    label: string;
+    headline: string[];
+    intro: string;
+    steps: {
+      title: string;
+      caption: string;
+      image: CaseStudyImage;
+      url: string;
+    }[];
+    note?: string;
+  };
 
   overview?: {
     label: string;
@@ -127,16 +183,91 @@ export type CaseStudy = {
   outcomes: {
     label: string;
     headline: string[];
-    cards: { primary: string; description: string[] }[];
+    /** Any number of cards; verified figures or factual capability copy. */
+    cards: OutcomeCard[];
   };
 
   cta?: {
     label?: string;
     headline: string[];
     emphasis?: string;
-    showSecondButton?: boolean;
+  };
+
+  /** Related-workflow CTA shown next to the booking CTA (TT-09). */
+  relatedCta: {
+    label: string;
+    href: string;
+    /** Intended service slug, for cta_click analytics. */
+    service?: string;
   };
 };
+
+// ── Claim helpers ───────────────────────────────────────────────────────────
+
+/**
+ * A verified outcome card from the claims registry, or `null` when the claim
+ * is unverified (the card is then omitted, never shown with a placeholder).
+ */
+function claimCard(key: ClaimKey, description: string[]): OutcomeCard | null {
+  const stat = claimStat(key);
+  return stat ? { primary: stat.value, description } : null;
+}
+
+/** Uses the verified card when available, otherwise the factual fallback. */
+function claimCardOr(
+  key: ClaimKey,
+  description: string[],
+  fallback: OutcomeCard,
+): OutcomeCard {
+  return claimCard(key, description) ?? fallback;
+}
+
+function compact<T>(items: (T | null | undefined | false)[]): T[] {
+  return items.filter((item): item is T => Boolean(item));
+}
+
+/** Hero stats are capped at four so the hero grid stays legible. */
+function heroStats(stats: (Stat | null | undefined | false)[]): Stat[] {
+  return compact(stats).slice(0, 4);
+}
+
+function sentence(text: string | null): string {
+  if (!text) return "";
+  return /[.!?]$/.test(text) ? text : `${text}.`;
+}
+
+// Running-copy phrasings for EasyAccounts claims (verified value, or fallback).
+const eaPermissions = claimStat("easyAccountsPermissions");
+const eaBranches = claimStat("easyAccountsBranches");
+
+/** e.g. "role-based access control with 189+ permissions". */
+const accessControlPhrase = eaPermissions
+  ? `role-based access control with ${eaPermissions.value} permissions`
+  : "granular role-based access control";
+
+/** e.g. "Used in a live, multi-branch wholesale operation." */
+const branchesSentence = sentence(
+  claimText("easyAccountsBranches", (c) => `Live across ${c.value} branches`),
+);
+
+/** e.g. "across 50+ branches" or "across a multi-branch operation". */
+const branchesPhrase = eaBranches
+  ? `across ${eaBranches.value} branches`
+  : "across a multi-branch operation";
+
+/** e.g. "Built and maintained for daily wholesale operations." */
+const durationSentence = sentence(
+  claimText("easyAccountsDuration", (c) => `In production for ${c.value}`),
+);
+
+/** Hirecinch outcome percentages that may be published (verified only). */
+const hirecinchStats = publishedStats([
+  "hirecinchRecruiterTime",
+  "hirecinchTimeToHire",
+]);
+
+/** Xenia engineering results that may be published (verified only). */
+const xeniaStats = publishedStats(["xeniaLoadTime", "xeniaChecklistCapacity"]);
 
 const CANONICAL_HERO_IMAGE: CaseStudyImage = {
   src: "/canonical/purchase.png",
@@ -149,19 +280,59 @@ export const CASE_STUDIES: Record<string, CaseStudy> = {
   "canonical-academy": {
     slug: "canonical-academy",
     name: "Canonical Academy",
+    engagement: "employment",
     meta: [
       { label: "Role", value: "Full-Stack Engineer (In-house)" },
+      { label: "Type", value: EMPLOYMENT_WORK_LABEL },
       { label: "Stack", value: "Go · Node.js · React" },
       { label: "Year", value: "2023–2024" },
     ],
     headline: ["The platform powering Ubuntu", "certifications at scale."],
-    heroStats: [
-      { value: "10,000+", label: "Exams Conducted" },
+    heroStats: heroStats([
+      claimStat("canonicalExams"),
+      { value: "In-house", label: "Canonical engineering team" },
       { value: "Go · Node · React", label: "Core Stack" },
-    ],
+    ]),
     hero: {
       image: CANONICAL_HERO_IMAGE,
       url: "academy.canonical.com",
+    },
+    summary: {
+      label: "In Brief",
+      headline: ["The work, in", "plain terms."],
+      items: [
+        {
+          question: "Who used it",
+          answer:
+            "Engineers worldwide use Canonical Academy to buy, schedule, and sit proctored Ubuntu and Linux certification exams, and to receive Credly badges when they pass.",
+        },
+        {
+          question: "What was difficult",
+          answer:
+            "A Flask monolith with Jinja templates meant full-page reloads during exam flows, UI changes that needed backend knowledge, and vendor integrations tangled into core code.",
+        },
+        {
+          question: "Usama’s contribution",
+          answer:
+            "As a full-stack engineer on Canonical’s in-house team — not a TechTrinity client engagement — Usama worked on the rebuild across the Go backend, the Node.js BFF that isolates Proctor360 and Credly, and the React frontend.",
+        },
+        {
+          question: "What changed",
+          answer:
+            "Buying, scheduling, proctored check-in, and badge issuance run as one flow without full-page reloads, and vendor API changes are contained in the BFF rather than the core business logic.",
+        },
+        {
+          question: "Outcomes",
+          answer: isPublished("canonicalExams")
+            ? `The platform has conducted ${CLAIMS.canonicalExams.value} exams. That is a platform-wide figure reflecting Canonical’s whole team, not one engineer’s contribution.`
+            : "Operational description only. Platform-wide usage figures are Canonical’s and are pending verification, so none are published here.",
+        },
+        {
+          question: "What it taught",
+          answer:
+            "Clear boundaries between layers make a system easier to change safely — especially where third-party integrations change on their own schedule.",
+        },
+      ],
     },
     overview: {
       label: "The Project",
@@ -328,17 +499,14 @@ export const CASE_STUDIES: Record<string, CaseStudy> = {
     },
     outcomes: {
       label: "Outcomes",
-      headline: ["Shipped. Scaled.", "Still running."],
-      cards: [
+      headline: ["Shipped.", "Still running."],
+      cards: compact([
+        claimCard("canonicalExams", ["Exams conducted", "on the platform"]),
         {
-          primary: "10,000+",
-          description: ["Exams conducted", "on the platform"],
-        },
-        {
-          primary: "Faster",
+          primary: "Simpler",
           description: [
             "onboarding",
-            "New engineers contribute to both layers independently",
+            "New engineers can work on one layer without learning the whole monolith",
           ],
         },
         {
@@ -349,29 +517,41 @@ export const CASE_STUDIES: Record<string, CaseStudy> = {
           ],
         },
         {
-          primary: "Resilient",
+          primary: "Isolated",
           description: [
             "integrations",
-            "Proctor360 and Credly isolated in the BFF",
+            "Proctor360 and Credly contained in the BFF",
           ],
         },
-      ],
+      ]),
+    },
+    relatedCta: {
+      label: "Discuss an Existing System",
+      href: messageHref("system-review"),
+      service: "system-review",
     },
   },
 
   hirecinch: {
     slug: "hirecinch",
     name: "Hirecinch",
+    engagement: "employment",
     meta: [
       { label: "Role", value: "Lead Developer" },
+      { label: "Type", value: EMPLOYMENT_WORK_LABEL },
+      { label: "Product", value: "SaaS hiring platform" },
       { label: "Stack", value: "React · Django" },
-      { label: "Type", value: "SaaS Product" },
     ],
     headline: ["From Google Sheets", "to a full hiring platform."],
-    heroStats: [
-      { value: "30%", label: "Recruiter time saved" },
-      { value: "22%", label: "Faster time to hire" },
-    ],
+    // Outcome percentages only when verified; otherwise factual capabilities.
+    heroStats: heroStats(
+      hirecinchStats.length > 0
+        ? hirecinchStats
+        : [
+            { value: "Shared", label: "Candidate pipeline per role" },
+            { value: "Weighted", label: "Candidate scorecards" },
+          ],
+    ),
     hero: {
       image: {
         src: "/hirecinch/applicants.png",
@@ -380,6 +560,44 @@ export const CASE_STUDIES: Record<string, CaseStudy> = {
         height: 895,
       },
       url: "app.hirecinch.com",
+    },
+    summary: {
+      label: "In Brief",
+      headline: ["The work, in", "plain terms."],
+      items: [
+        {
+          question: "Who used it",
+          answer:
+            "Recruiting teams hiring for several open roles at once, from public job posting through to offer.",
+        },
+        {
+          question: "What was difficult",
+          answer:
+            "Hiring ran on Google Sheets and email: resumes were hard to match to applications, stages were invisible to hiring managers, and interviewers scored candidates inconsistently.",
+        },
+        {
+          question: "Usama’s contribution",
+          answer:
+            "As lead developer, Usama led development of the React and Django application, including the public job board, configurable application forms and questions, per-role pipelines, and the weighted scorecard with auto-rejection thresholds. This was employment at Hirecinch, not a TechTrinity client commission.",
+        },
+        {
+          question: "What changed",
+          answer:
+            "Applications, stages, scores, resumes, and candidate emails live in one place, and every team member can see where each candidate stands.",
+        },
+        {
+          question: "Outcomes",
+          answer:
+            hirecinchStats.length > 0
+              ? "Measured changes in recruiter time and time to hire are shown below."
+              : "Operational description; figures pending verification. The capabilities below are implemented — time-saving percentages are not published until they can be substantiated.",
+        },
+        {
+          question: "What it taught",
+          answer:
+            "Structured, weighted criteria make candidate comparisons more consistent than free-form notes in a spreadsheet.",
+        },
+      ],
     },
     overview: {
       label: "The Project",
@@ -415,7 +633,7 @@ export const CASE_STUDIES: Record<string, CaseStudy> = {
       ],
     },
     platform: {
-      label: "What We Built",
+      label: "The Platform",
       headline: ["Every stage of hiring,", "in one place."],
       rows: [
         {
@@ -470,7 +688,7 @@ export const CASE_STUDIES: Record<string, CaseStudy> = {
       body: [
         "The scorecard system is what separates Hirecinch from a basic ATS. When creating a job, recruiters assign weights to specific evaluation criteria — communication skills, technical ability, cultural fit, and more.",
         "Every candidate receives a calculated score based on those weights. Scores are broken down by category and displayed as percentages, so recruiters can compare candidates objectively rather than relying on gut feel.",
-        "Combined with auto-rejection triggers, candidates who don't meet minimum thresholds are removed automatically — eliminating the time spent manually reviewing unqualified applicants.",
+        "Combined with auto-rejection triggers, candidates who don't meet minimum thresholds are removed automatically, so recruiters don't have to review them by hand.",
       ],
       image: {
         src: "/hirecinch/scorecard.png",
@@ -524,25 +742,37 @@ export const CASE_STUDIES: Record<string, CaseStudy> = {
     },
     outcomes: {
       label: "Outcomes",
-      headline: ["The numbers", "it moved."],
-      cards: [
+      headline:
+        hirecinchStats.length > 0
+          ? ["The numbers", "it moved."]
+          : ["What the platform", "does today."],
+      // Percentages appear only once verified; the rest are implemented
+      // capabilities, not measured results.
+      cards: compact([
+        claimCard("hirecinchRecruiterTime", ["Recruiter time", "saved per hire"]),
+        claimCard("hirecinchTimeToHire", ["Faster mean", "time to hire"]),
         {
-          primary: "30%",
-          description: ["Recruiter time", "saved per hire"],
+          primary: "Shared",
+          description: ["Candidate pipeline", "Every stage of every role, visible to the team"],
         },
         {
-          primary: "22%",
-          description: ["Faster mean", "time to hire"],
+          primary: "Weighted",
+          description: ["Scorecards", "Candidates compared on the same criteria"],
         },
         {
-          primary: "0",
-          description: ["Spreadsheets", "in the workflow"],
+          primary: "Automatic",
+          description: ["Threshold rejection", "Configured per role by recruiters"],
         },
         {
           primary: "1",
           description: ["Platform", "for all roles"],
         },
-      ],
+      ]).slice(0, 4),
+    },
+    relatedCta: {
+      label: "See MVP Development",
+      href: "/services/mvp-development",
+      service: "mvp",
     },
   },
 };
@@ -550,21 +780,29 @@ export const CASE_STUDIES: Record<string, CaseStudy> = {
 CASE_STUDIES.xenia = {
   slug: "xenia",
   name: "Xenia",
+  engagement: "employment",
   meta: [
     { label: "Role", value: "Full-Stack Engineer" },
+    { label: "Type", value: EMPLOYMENT_WORK_LABEL },
     { label: "Stack", value: "React · Node.js · RabbitMQ" },
     { label: "Duration", value: "2+ Years" },
   ],
   headline: [
-    "Helping build a frontline",
-    "ops platform from seed",
-    "to Series A.",
+    "Engineering work on a",
+    "frontline operations",
+    "platform.",
   ],
-  heroStats: [
-    { value: "$1M → $12M", label: "Seed to Series A during tenure" },
-    { value: "30s → 7s", label: "Load time improvement" },
-    { value: "100+", label: "Checklist items without crashing" },
-  ],
+  // Engineering results only when verified; otherwise the contribution areas.
+  // Company funding is context, never a stat attributed to this work.
+  heroStats: heroStats(
+    xeniaStats.length > 0
+      ? xeniaStats
+      : [
+          { value: "Performance", label: "API compression & render fixes" },
+          { value: "Billing", label: "Stripe subscriptions & plan gating" },
+          { value: "Public links", label: "External checklist sharing" },
+        ],
+  ),
   hero: {
     image: {
       src: "/xenia/checklist-builder.png",
@@ -574,29 +812,71 @@ CASE_STUDIES.xenia = {
     },
     url: "app.xenia.team",
   },
+  summary: {
+    label: "In Brief",
+    headline: ["The work, in", "plain terms."],
+    items: [
+      {
+        question: "Who used it",
+        answer:
+          "Restaurants, retail chains, and hospitality businesses use Xenia to run tasks, checklists, audits, and work orders across multiple locations.",
+      },
+      {
+        question: "What was difficult",
+        answer:
+          "Slow initial loads, a checklist builder that crashed on larger templates, no way to share checklists with people outside the platform, and no billing or plan gating.",
+      },
+      {
+        question: "Usama’s contribution",
+        answer:
+          "Over two-plus years as a full-stack engineer on Xenia’s product team, Usama shipped API response compression, re-render fixes in the checklist builder, public checklist links, and the Stripe billing and plan-gating infrastructure, and contributed to reporting and AI-assisted documents. This was employment at Xenia, not a TechTrinity client commission.",
+      },
+      {
+        question: "What changed",
+        answer:
+          "Managers could build larger checklists without the builder crashing, share checklists with guests and other external parties by link, and gate add-on features behind paid plans.",
+      },
+      {
+        question: "Outcomes",
+        answer:
+          xeniaStats.length > 0
+            ? "Measured performance changes from this work are shown below. The company’s funding is context only, not an outcome of any one engineer’s work."
+            : "Operational description; figures pending verification. The company’s funding stage is context only and is not presented as an outcome of this work.",
+      },
+      {
+        question: "What it taught",
+        answer:
+          "In a fast-growing product, performance fixes and billing infrastructure are as important to customers as new features — and both have to ship without disrupting daily use.",
+      },
+    ],
+  },
   overview: {
     label: "The Project",
     headline: [
       "A frontline operations platform",
       "for multi-location businesses.",
     ],
-    body: [
+    body: compact([
       "Xenia is an AI-powered operations execution platform used by restaurants, retail chains, and hospitality businesses to manage tasks, checklists, audits, work orders, and team communication across multiple locations.",
-      "We joined as Full-Stack Engineers when the company had raised approximately $1M in seed funding. Over two years, we contributed to core features across the platform — from performance infrastructure to billing architecture to user-facing product features that helped unlock new customer segments.",
-      "The platform has since raised a $12M Series A.",
-    ],
+      "Usama joined Xenia’s team as a full-stack engineer. Over two-plus years he contributed to core features across the platform — performance work, the checklist builder, external sharing, billing infrastructure, and reporting.",
+      claimText(
+        "xeniaFunding",
+        (c) =>
+          `For context, the company went from ${c.value} during that time. That growth reflects the whole company’s work and is not presented as a result of these contributions.`,
+      ),
+    ]),
   },
   challenge: {
     label: "The Constraints",
     headline: ["A platform running at", "the edge of its limits."],
     cards: [
       {
-        title: "30-second load times",
+        title: "Slow initial load",
         body: "The application was noticeably slow on initial load, creating friction for frontline workers who needed fast access during operational hours.",
       },
       {
         title: "Crashing checklist builder",
-        body: "The template builder crashed the browser at 20+ checklist items due to unnecessary re-renders — severely limiting the complexity of templates customers could build.",
+        body: "The template builder could crash the browser on larger templates due to unnecessary re-renders — limiting the complexity of templates customers could build.",
       },
       {
         title: "No external sharing",
@@ -609,13 +889,19 @@ CASE_STUDIES.xenia = {
     ],
   },
   platform: {
-    label: "What We Built",
+    label: "Usama’s Contributions",
     headline: ["Core infrastructure,", "shipped across two years."],
     startWithCopy: true,
     rows: [
       {
         label: "Load Time & Rendering Performance",
-        body: "Added response compression across the API layer, reducing initial load times from 30 seconds to 7 seconds — a 77% improvement. Resolved systematic unnecessary re-renders in the checklist builder, increasing its item limit from a browser-crashing 20 items to a stable 100+ without performance degradation.",
+        body: [
+          "Added response compression across the API layer to cut initial load time",
+          claimText("xeniaLoadTime", (c) => ` (${c.value})`) ?? "",
+          ". Resolved systematic unnecessary re-renders in the checklist builder so it could handle much larger templates without crashing the browser",
+          claimText("xeniaChecklistCapacity", (c) => ` (${c.value} items)`) ?? "",
+          ".",
+        ].join(""),
         image: {
           src: "/xenia/reporting-task-summary.png",
           alt: "Xenia task summary dashboard",
@@ -637,7 +923,7 @@ CASE_STUDIES.xenia = {
       },
       {
         label: "External Sharing",
-        body: "Built the public checklist feature — allowing templates to be shared with people outside the Xenia platform via a public link. This unblocked a significant use case: hospitality businesses collecting guest experience feedback directly through Xenia without requiring guests to create an account. This feature helped convert previously reluctant customers who needed to collect data from external parties.",
+        body: "Built the public checklist feature — allowing templates to be shared with people outside the Xenia platform via a public link. This opened up a use case such as hospitality businesses collecting guest experience feedback directly through Xenia, without requiring guests to create an account.",
         image: {
           src: "/xenia/checklist-filling.png",
           alt: "Xenia public checklist being filled by an external user",
@@ -648,7 +934,7 @@ CASE_STUDIES.xenia = {
       },
       {
         label: "Stripe Billing & Monetisation",
-        body: "Built the complete billing infrastructure — Stripe integration, recurring subscription plans, and feature gating. Before this, premium and free features were undifferentiated. After implementation, every add-on feature was properly gated behind the appropriate plan, creating a sustainable freemium-to-paid conversion path for the business.",
+        body: "Built the complete billing infrastructure — Stripe integration, recurring subscription plans, and feature gating. Before this, premium and free features were undifferentiated. After implementation, add-on features were gated behind the appropriate plan, giving the business a way to charge for advanced capabilities.",
         image: {
           src: "/xenia/integration-add-ons.png",
           alt: "Xenia plan gating and integration add-ons billing screen",
@@ -708,51 +994,69 @@ CASE_STUDIES.xenia = {
   },
   outcomes: {
     label: "Outcomes",
-    headline: ["Two years.", "Measurable results."],
+    headline: ["Two years.", "Shipped contributions."],
+    // Performance figures only once verified. Funding is deliberately absent:
+    // it is company context, not an outcome of this work.
     cards: [
+      claimCardOr("xeniaLoadTime", ["Initial load time", "After API response compression"], {
+        primary: "Faster",
+        description: ["Initial load", "API response compression across the platform"],
+      }),
+      claimCardOr(
+        "xeniaChecklistCapacity",
+        ["Checklist items", "Without crashing the builder"],
+        {
+          primary: "Larger",
+          description: ["Checklists", "Re-render fixes in the template builder"],
+        },
+      ),
       {
-        primary: "77%",
-        description: ["Load time reduction", "30s → 7s"],
+        primary: "Public",
+        description: ["Checklist links", "External parties respond without an account"],
       },
       {
-        primary: "5×",
-        description: ["Checklist capacity", "20 → 100+ items"],
-      },
-      {
-        primary: "$1M → $12M",
-        description: ["Seed to Series A", "during tenure"],
-      },
-      {
-        primary: "Unlocked",
-        description: ["External use cases", "via public links"],
+        primary: "Gated",
+        description: ["Paid features", "Stripe subscriptions and plan gating"],
       },
     ],
   },
   cta: {
     headline: ["Want infrastructure that", "scales with your operation?"],
     emphasis: "infrastructure",
-    showSecondButton: false,
+  },
+  relatedCta: {
+    label: "See MVP Development",
+    href: "/services/mvp-development",
+    service: "mvp",
   },
 };
 
 CASE_STUDIES.easyaccounts = {
   slug: "easyaccounts",
   name: "EasyAccounts",
+  engagement: "own-product",
   meta: [
-    { label: "Role", value: "Founder & Lead Engineer" },
+    { label: "Role", value: FOUNDER_TITLE },
+    { label: "Type", value: OWN_PRODUCT_LABEL },
+    { label: "Built for", value: "Family textile wholesale business" },
     { label: "Stack", value: "React · Django" },
-    { label: "Type", value: "In-house Product" },
   ],
   headline: [
     "A production ERP built",
     "from the ground up —",
     "and actually used.",
   ],
-  heroStats: [
-    { value: "90,000+", label: "Transactions processed" },
-    { value: "100,000+", label: "Payments recorded" },
-    { value: "12+", label: "Live branches in production" },
-  ],
+  // Branch count only when verified (neutral fallback otherwise); volume
+  // badges are hidden until their definitions and dates are verified.
+  heroStats: heroStats([
+    claimStat("easyAccountsBranches") ?? {
+      value: "Multi-branch",
+      label: "Live wholesale operation",
+    },
+    claimStat("easyAccountsTransactions"),
+    claimStat("easyAccountsPayments"),
+    claimStat("easyAccountsPermissions"),
+  ]),
   hero: {
     image: {
       src: "/easyaccounts/reports-product-cost-trace.png",
@@ -762,6 +1066,92 @@ CASE_STUDIES.easyaccounts = {
     },
     url: "app.easyaccounts.com",
   },
+  summary: {
+    label: "In Brief",
+    headline: ["The business case,", "before the screens."],
+    items: [
+      {
+        question: "Who uses it",
+        answer: `The staff and owners of a multi-branch textile wholesale business — Usama’s family’s business — for purchasing, sales, stock, cheques, and financial reporting. ${durationSentence}`,
+      },
+      {
+        question: "What was difficult",
+        answer:
+          "Manual ledgers and disconnected spreadsheets gave no reliable view of stock or financial health. Fabric moves through dyeing and processing, so cost had to be tracked at every stage, not just at purchase and sale.",
+      },
+      {
+        question: "Usama’s contribution",
+        answer: `Usama Nadeem, ${FOUNDER_TITLE} of TechTrinity, built EasyAccounts for his family’s wholesale business and continues to work on it: the data model, purchasing and sales workflows, reporting, cost tracing, and permissions.`,
+      },
+      {
+        question: "What changed",
+        answer:
+          "Transactions, stock movements, cheques, and reports live in one system. The owner can trace a product’s cost from purchase through processing to sale, and every action is recorded in an audit log.",
+      },
+      {
+        question: "Outcomes",
+        answer: [
+          branchesSentence,
+          publishedStats(["easyAccountsTransactions", "easyAccountsPayments"]).length > 0
+            ? "Transaction and payment volumes are shown above."
+            : "Operational description; transaction and payment figures are pending verification and are not published.",
+        ]
+          .filter(Boolean)
+          .join(" "),
+      },
+      {
+        question: "What operation taught",
+        answer:
+          "Daily use surfaces the details generic software misses — units, branch permissions, stock corrections, and the exceptions real staff run into. Those details shape how we scope client software.",
+      },
+    ],
+  },
+  walkthrough: {
+    label: "One Task, End to End",
+    headline: ["Tracing what a", "product really cost."],
+    intro:
+      "A real task from the business: the owner wants to know what a fabric actually cost by the time it was sold, after purchase, dyeing, and processing. These are the screens used to answer it.",
+    steps: [
+      {
+        title: "Record the purchase",
+        caption:
+          "Staff record the purchase invoice with party, quantity, amount, book reference, and date. It joins the searchable transaction history.",
+        image: {
+          src: "/easyaccounts/transactions-list.png",
+          alt: "EasyAccounts transactions list with party, amount, and book references",
+          width: 3454,
+          height: 1912,
+        },
+        url: "app.easyaccounts.com",
+      },
+      {
+        title: "Trace the cost",
+        caption:
+          "The product cost trace shows opening and closing average cost per yard, the cost change, and average sale price — with every transaction that moved the cost in a chronological log.",
+        image: {
+          src: "/easyaccounts/reports-product-cost-trace.png",
+          alt: "EasyAccounts product cost trace with chronological event log",
+          width: 1465,
+          height: 812,
+        },
+        url: "app.easyaccounts.com",
+      },
+      {
+        title: "See the effect on profit",
+        caption:
+          "The income statement breaks gross profit down by product category — finished goods, raw materials, dyeing/washing, and processing — and every figure traces back to its transactions.",
+        image: {
+          src: "/easyaccounts/reprots-income-statement.png",
+          alt: "EasyAccounts income statement broken down by product category",
+          width: 1467,
+          height: 812,
+        },
+        url: "app.easyaccounts.com",
+      },
+    ],
+    note:
+      "EasyAccounts was designed around one textile wholesale operation — yardage, rolls, dyeing, and processing stages. It is not an off-the-shelf fit for every distributor; another business’s workflow would need its own review.",
+  },
   overview: {
     label: "The System",
     headline: [
@@ -769,11 +1159,11 @@ CASE_STUDIES.easyaccounts = {
       "A real system for a",
       "real business.",
     ],
-    body: [
-      "EasyAccounts started as a solution to a problem we knew firsthand — managing a multi-branch textile wholesale business without the right tools meant manual ledgers, disconnected spreadsheets, and no reliable view of financial health.",
-      "We built EasyAccounts from scratch as a full-scale ERP purpose-built for the operational complexity of wholesale trading. It's live across 12+ branches, processing real transaction volume every day.",
-      "The system handles the complete business lifecycle — purchasing, sales, inventory, financial reporting, cheque management, and a 187-permission access control system — all in one platform.",
-    ],
+    body: compact([
+      "EasyAccounts started as a solution to a problem Usama knew firsthand — managing his family’s multi-branch textile wholesale business without the right tools meant manual ledgers, disconnected spreadsheets, and no reliable view of financial health.",
+      `He built EasyAccounts from scratch as a full-scale ERP purpose-built for the operational complexity of wholesale trading. ${branchesSentence} ${durationSentence}`.trim(),
+      `The system handles the complete business lifecycle — purchasing, sales, inventory, financial reporting, cheque management, and ${accessControlPhrase} — all in one platform.`,
+    ]),
   },
   whyItMatters: {
     label: "Why It Matters",
@@ -802,11 +1192,11 @@ CASE_STUDIES.easyaccounts = {
       },
       {
         title: "Financial accuracy at scale",
-        body: "With hundreds of transactions per month across dozens of branches, the system needed double-entry accounting, immutable audit trails, and financial statements that could be trusted.",
+        body: "With transactions flowing through multiple branches and warehouses every day, the system needed double-entry accounting, immutable audit trails, and financial statements that could be trusted.",
       },
       {
         title: "Access control across branches",
-        body: "Different employees across different branches need different levels of access. A 187-permission system was required to ensure every role saw exactly what it needed — nothing more.",
+        body: `Different employees across different branches need different levels of access. ${accessControlPhrase.replace(/^./, (c) => c.toUpperCase())} was required to ensure every role saw exactly what it needed — nothing more.`,
       },
     ],
   },
@@ -817,7 +1207,7 @@ CASE_STUDIES.easyaccounts = {
     rows: [
       {
         label: "Purchase & Sale Management",
-        body: "Full purchase and sale invoice management with support for wholesale-specific units. Every transaction is recorded with party, amount, quantity, book reference, and date — filterable and searchable across the full transaction history. 500+ request types logged in the audit trail.",
+        body: "Full purchase and sale invoice management with support for wholesale-specific units. Every transaction is recorded with party, amount, quantity, book reference, and date — filterable and searchable across the full transaction history. Every request is recorded in the audit trail.",
         image: {
           src: "/easyaccounts/transactions-list.png",
           alt: "EasyAccounts transactions list with party, amount, and book references",
@@ -883,7 +1273,7 @@ CASE_STUDIES.easyaccounts = {
       },
       {
         label: "Immutable Request Logs",
-        body: "Every action in the system is logged — user, timestamp, path, view name, IP address, device type, browser, OS, and HTTP status. Logs are immutable and append-only. 500 entries load per page with full search and filter capability. Built for accountability across 12+ branches.",
+        body: `Every action in the system is logged — user, timestamp, path, view name, IP address, device type, browser, OS, and HTTP status. Logs are immutable and append-only. 500 entries load per page with full search and filter capability. Built for accountability ${branchesPhrase}.`,
         image: {
           src: "/easyaccounts/reports-request-logs.png",
           alt: "EasyAccounts immutable request log audit trail",
@@ -899,8 +1289,8 @@ CASE_STUDIES.easyaccounts = {
     headline: ["Built for multi-branch", "operations from day one."],
     cards: [
       {
-        title: "187+ Permissions",
-        body: "Granular role-based access control with 187 individual permissions. Every feature, every report, every action can be enabled or disabled per employee role.",
+        title: eaPermissions ? `${eaPermissions.value} Permissions` : "Granular Permissions",
+        body: `Granular role-based access control${eaPermissions ? ` with ${eaPermissions.value} individual permissions` : ""}. Every feature, every report, every action can be enabled or disabled per employee role.`,
       },
       {
         title: "Multi-warehouse stock",
@@ -914,30 +1304,37 @@ CASE_STUDIES.easyaccounts = {
   },
   outcomes: {
     label: "Outcomes",
-    headline: ["In production.", "Processing real volume."],
-    cards: [
+    headline: ["In production.", "In daily use."],
+    // Verified figures from lib/claims.ts; neutral operational copy otherwise.
+    cards: compact([
+      claimCardOr("easyAccountsBranches", ["Live branches", "in production"], {
+        primary: "Multi-branch",
+        description: [
+          "Live operation",
+          "Used in a live, multi-branch wholesale operation",
+        ],
+      }),
+      claimCard("easyAccountsTransactions", ["Transactions", "processed"]),
+      claimCard("easyAccountsPayments", ["Payments", "recorded"]),
+      claimCard("easyAccountsPermissions", ["Access", "permissions"]),
       {
-        primary: "90,000+",
-        description: ["Transactions", "processed"],
+        primary: "Traceable",
+        description: ["Stock & cost", "Every cost change linked to its transactions"],
       },
       {
-        primary: "100,000+",
-        description: ["Payments", "recorded"],
+        primary: "Audited",
+        description: ["Every action", "Immutable, append-only request logs"],
       },
-      {
-        primary: "12+",
-        description: ["Live branches", "in production"],
-      },
-      {
-        primary: "187+",
-        description: ["Access", "permissions"],
-      },
-    ],
+    ]).slice(0, 4),
   },
   cta: {
     headline: ["Need a system built for", "complexity, not demos?"],
     emphasis: "complexity",
-    showSecondButton: false,
+  },
+  relatedCta: {
+    label: "Discuss an Operations Workflow",
+    href: messageHref("operations"),
+    service: "operations",
   },
 };
 

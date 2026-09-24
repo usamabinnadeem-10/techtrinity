@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/cn";
+import { BOOK_HREF, PRIMARY_CTA_LABEL } from "@/lib/offer";
 import { LinkButton } from "./button";
 import { MobileMenu } from "./mobile-menu";
 import { NAV_LINKS } from "./nav-links";
@@ -38,7 +39,7 @@ export function SiteNav() {
           className="h-8 w-8 sm:h-10 sm:w-10"
         />
       </Link>
-      <ul className="hidden items-center gap-9 md:flex">
+      <ul className="hidden items-center gap-6 md:flex lg:gap-9">
         {NAV_LINKS.map((link) => (
           <li key={link.label}>
             <Link
@@ -50,8 +51,12 @@ export function SiteNav() {
           </li>
         ))}
         <li>
-          <LinkButton href="/contact" variant="accent">
-            Book a Call
+          <LinkButton
+            href={BOOK_HREF}
+            variant="accent"
+            cta={{ label: PRIMARY_CTA_LABEL, section: "nav" }}
+          >
+            {PRIMARY_CTA_LABEL}
           </LinkButton>
         </li>
       </ul>
