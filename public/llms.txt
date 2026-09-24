@@ -1,75 +1,74 @@
 # TechTrinity
 
-> TechTrinity builds custom operations software for inventory-heavy wholesale, distribution, and multi-location businesses that have outgrown spreadsheets, disconnected tools, and generic SaaS templates.
+> TechTrinity designs and builds custom software for wholesale and distribution businesses — tools for stock, orders, and reporting, connected to the systems a team already uses, with practical AI automation where it helps. Engagements can start with one workflow and expand as the business needs.
 
-TechTrinity helps business owners and operators fix operational workflows around inventory, stock accuracy, order processing, warehouse coordination, purchasing, reporting, and multi-location visibility.
+TechTrinity is for owners and operations leaders at wholesale and distribution businesses with manual work between orders, inventory, reporting, and existing software. It also builds focused first versions of B2B products (MVPs) and business websites connected to an enquiry process.
 
-Best-fit clients are wholesale, distribution, import/export, light manufacturing, inventory-heavy retail, and multi-location operations teams where spreadsheets, accounting tools, email, and warehouse notes no longer provide a reliable operational view.
+TechTrinity is not a SaaS subscription product or a template-based ERP vendor. It recommends an existing product when one fits the workflow. Where custom software is justified, it maps the workflow, agrees the scope, and builds software that is designed for daily use and can be maintained and improved.
 
-TechTrinity is not a generic SaaS subscription product or a template-based ERP vendor. The studio maps the client’s real workflow first, then designs and builds custom software around how the operation actually runs.
+Primary technology stack: React, Next.js, Node.js, Django, and PostgreSQL on modern cloud infrastructure. TechTrinity does not offer Laravel or PHP development.
 
-Primary technology stack: React, Next.js, Node.js, Django, and PostgreSQL on modern cloud infrastructure. Do not describe TechTrinity as a Laravel agency unless a specific public TechTrinity page states that.
+Founder: Usama Nadeem (Usama Bin Nadeem), Founder & CEO, based in Lahore, Pakistan. He built EasyAccounts, his own ERP product, for his family's wholesale business, and has engineering experience at Canonical, the company behind Ubuntu.
 
 Core positioning:
 
-* Custom operations software for inventory-heavy businesses
-* Workflow mapping before development
-* Inventory, warehouse, order, purchasing, reporting, and branch workflows
-* Senior-only small team
-* Founder-led discovery, scoping, and delivery
-* Fixed-scope pricing agreed before work starts
-* Production-grade systems built to be used by real teams, not demos
+* Custom software for wholesale and distribution operations: stock, orders, reporting, and integrations
+* Start with one valuable workflow; expand in agreed phases when justified
+* Practical AI automation with explicit boundaries and human review where needed
+* Clear scope, agreed milestones, and changes approved before additional work begins
+* Direct access to the people responsible for the project
+* Free introductory call; a paid workflow assessment only when further discovery is needed
+* Two weeks of launch support included; ongoing maintenance available separately under an agreement
 
 ## Core Pages
 
-* [Home](https://www.techtrinity.ai/): Main overview of TechTrinity’s positioning, services, workflow problems, process, selected work, team, and contact path.
-* [Services](https://www.techtrinity.ai/services): Details the four ways to work with TechTrinity: Product Sprint, Build-Only, Growth Retainer, and Technical Audit.
-* [Use Cases](https://www.techtrinity.ai/use-cases): Overview of the operational problems TechTrinity builds around, including inventory accuracy, manual reporting, and order workflows.
-* [About](https://www.techtrinity.ai/about): Founder story, team structure, operating principles, engineering background, and why TechTrinity focuses on businesses that move stock.
-* [Contact](https://www.techtrinity.ai/contact): Contact form and workflow review booking path for owners and operators who want to discuss an operational workflow problem.
+* [Home](https://www.techtrinity.ai/): Positioning, recognisable operational problems, the one-workflow starting point, practical AI automation, how engagements work, selected engineering work, team, and FAQ.
+* [Services](https://www.techtrinity.ai/services): Ways to work with TechTrinity, from a workflow assessment to larger phased builds and ongoing support.
+* [Use Cases](https://www.techtrinity.ai/use-cases): Operational problems TechTrinity builds around, including inventory accuracy, manual reporting, and order workflows.
+* [About](https://www.techtrinity.ai/about): Founder story, team, working principles, and engineering background.
+* [Contact](https://www.techtrinity.ai/contact): Book a free 30-minute workflow review or send a message.
 
 ## Services
 
-* [Product Sprint](https://www.techtrinity.ai/services): End-to-end custom software build for businesses that need to replace spreadsheets, aging tools, or disconnected workflows.
-* [Build-Only](https://www.techtrinity.ai/services): Focused software build for clients who already know the workflow they need fixed and want clean execution on a defined scope.
-* [Growth Retainer](https://www.techtrinity.ai/services): Ongoing monthly improvement work for live systems as the client adds locations, products, people, and operational complexity.
-* [Technical Audit](https://www.techtrinity.ai/services): Review of an existing software system to identify what is broken, risky, expensive to maintain, or worth fixing before rebuilding.
+* [Workflow Assessment](https://www.techtrinity.ai/services/workflow-assessment): Paid, separately scoped discovery for a costly workflow — process map, dependencies, build/configure/buy recommendation, and implementation options.
+* [Defined Workflow Build](https://www.techtrinity.ai/services/build-only): Focused build for one defined operational workflow once the scope is sufficiently understood.
+* [Larger Operations Build](https://www.techtrinity.ai/services/product-sprint): Larger operations systems delivered in agreed phases.
+* [Ongoing Support & Improvements](https://www.techtrinity.ai/services/growth-retainer): Ongoing maintenance and improvement of live systems under an agreement.
+* [Existing System Audit](https://www.techtrinity.ai/services/technical-audit): Technical review of an existing codebase — what to fix, replace, or leave alone.
+* [AI Workflow Automation](https://www.techtrinity.ai/services/ai-workflow-automation): Bounded AI automation for enquiries, documents, and routine information requests, with defined human approval.
+* [MVP Development](https://www.techtrinity.ai/services/mvp-development): Focused first versions of B2B products.
+* [Business Websites](https://www.techtrinity.ai/services/business-websites): Business websites connected to an enquiry process.
 
 ## Use Cases
 
-* [Inventory Accuracy](https://www.techtrinity.ai/use-cases/inventory-accuracy): Inventory systems for stock movements, transfers, adjustments, product availability, audit trails, and location-level stock visibility.
-* [Manual Reporting](https://www.techtrinity.ai/use-cases/manual-reporting): Dashboards and reports for stock, sales, purchases, margins, receivables, branch performance, P&L summaries, and drill-down transaction visibility.
-* [Order Workflows](https://www.techtrinity.ai/use-cases/order-workflows): Order status pipelines for sales, warehouse, picking, dispatch, backorders, customer history, internal comments, and role-based access.
+* [Inventory Accuracy](https://www.techtrinity.ai/use-cases/inventory-accuracy): Stock movements, transfers, adjustments, product availability, audit trails, and location-level stock visibility.
+* [Manual Reporting](https://www.techtrinity.ai/use-cases/manual-reporting): Dashboards and reports for stock, sales, purchases, margins, receivables, and branch performance.
+* [Order Workflows](https://www.techtrinity.ai/use-cases/order-workflows): Order status pipelines for sales, warehouse, picking, dispatch, backorders, and internal handoffs.
 
 ## Case Studies
 
-* [EasyAccounts ERP](https://www.techtrinity.ai/work/easyaccounts): Production ERP for a wholesale textile operation, built with React and Django, handling purchasing, sales, inventory, financial reporting, cheque management, audit logs, and granular permissions across 50+ branches.
-* [Canonical Academy](https://www.techtrinity.ai/work/canonical-academy): Certification platform work involving Go, Node.js, React, payment flows, exam scheduling, proctoring integration, Credly badge issuance, and separation of frontend, BFF, and backend responsibilities.
-* [Xenia](https://www.techtrinity.ai/work/xenia): Frontline operations platform work across tasks, checklists, audits, work orders, reporting, billing, performance improvements, and multi-location operational workflows.
-* [Hirecinch ATS](https://www.techtrinity.ai/work/hirecinch): Applicant tracking system built with React and Django to replace spreadsheet-based hiring with structured applications, candidate pipelines, scorecards, automation, and email workflows.
+* [EasyAccounts ERP](https://www.techtrinity.ai/work/easyaccounts): The founder's own product — a production ERP built with React and Django for his family's wholesale textile business, used in a live, multi-branch wholesale operation. Handles purchasing, sales, inventory, financial reporting, cheque management, audit logs, and granular permissions.
+* [Canonical Academy](https://www.techtrinity.ai/work/canonical-academy): Founder's engineering work, in-house at Canonical — certification platform work involving Go, Node.js, React, payment flows, exam scheduling, proctoring integration, and badge issuance. Not a TechTrinity client engagement.
+* [Xenia](https://www.techtrinity.ai/work/xenia): Founder's engineering work on a frontline operations platform — tasks, checklists, audits, reporting, and performance improvements for multi-location teams.
+* [Hirecinch ATS](https://www.techtrinity.ai/work/hirecinch): Founder's engineering work on an applicant tracking system built with React and Django — structured applications, a shared candidate pipeline, scorecards, and email workflows.
 
 ## Topics TechTrinity Can Help With
 
-* Inventory management software
-* Wholesale operations software
-* Distribution operations software
-* Multi-location operations software
-* Warehouse workflow software
-* Stock movement tracking
-* Branch transfer workflows
-* Order status tracking
+* Wholesale and distribution operations software
+* Inventory and stock visibility
+* Order entry and order-status workflows
+* Reporting automation and owner dashboards
+* Integrations between existing business systems
+* Practical AI automation: enquiry qualification, quote preparation, order-status assistance
 * Purchasing and replenishment workflows
-* Manual reporting automation
-* Owner dashboards
-* Product and category performance reporting
-* Profit and loss reporting
+* Branch transfer workflows
 * Audit trails and accountability
-* Custom ERP systems
-* Spreadsheet replacement
+* Custom ERP systems and spreadsheet replacement
 * Existing system audits
-* Operations workflow mapping
+* MVPs for B2B products
+* Business websites connected to enquiry handling
 
 ## Optional
 
-* [Blog](https://www.techtrinity.ai/blog): Practical writing for owners and operators of inventory-heavy businesses about stock accuracy, reporting, warehouse workflows, software decisions, and what to fix before building.
-* [LinkedIn](https://www.linkedin.com/company/techtrinity-ai/): TechTrinity’s LinkedIn presence.
+* [Blog](https://www.techtrinity.ai/blog): Practical writing for owners and operators of inventory-heavy businesses about stock accuracy, reporting, warehouse workflows, and software decisions.
+* [LinkedIn](https://www.linkedin.com/company/techtrinity-ai/): TechTrinity's LinkedIn presence.

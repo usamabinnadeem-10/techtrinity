@@ -1,34 +1,44 @@
 import { EditorialLabel } from "@/components/home/label";
+import { claimStat } from "@/lib/claims";
+import { FOUNDER_CANONICAL_BADGE } from "@/lib/offer";
 
 export function AboutCanonical() {
+  // Platform-wide figure; shown only once verified in the claims registry.
+  const exams = claimStat("canonicalExams");
   return (
     <section className="border-t border-border py-28 md:py-32">
       <div className="mx-auto max-w-[1240px] px-6 md:px-12">
         <div className="grid items-center gap-14 md:grid-cols-[7fr_5fr] md:gap-20">
           <div data-reveal>
-            <EditorialLabel>Credibility</EditorialLabel>
+            <EditorialLabel>{FOUNDER_CANONICAL_BADGE}</EditorialLabel>
             <h2 className="mt-4 mb-7 font-display text-[clamp(32px,3.8vw,56px)] font-bold leading-[1.04] tracking-[-0.03em]">
-              Not an agency that{" "}
-              <em className="italic text-primary">just launched last week.</em>
+              Production engineering,{" "}
+              <em className="italic text-primary">in-house at Canonical.</em>
             </h2>
             <div className="space-y-5 text-[16px] font-light leading-[1.85] text-muted">
               <p>
-                TechTrinity isn&apos;t a freelancer who picked up a few projects
-                last quarter. It&apos;s built on production engineering — the
-                kind where downtime and bad data have real consequences.
-              </p>
-              <p>
-                Two of those years were inside{" "}
+                Before founding TechTrinity, Usama spent two years as an
+                engineer at{" "}
                 <strong className="font-medium text-foreground">
                   Canonical
                 </strong>
-                , the company behind Ubuntu, on systems used by engineers
-                worldwide.
+                , the company behind Ubuntu, as part of its in-house team on{" "}
+                <strong className="font-medium text-foreground">
+                  Canonical Academy
+                </strong>{" "}
+                — the platform engineers use to take Canonical&apos;s
+                certification exams.
               </p>
               <p>
-                That&apos;s the standard we hold every project to — whether
-                it&apos;s a global platform or a stock system for three
-                warehouses. Same discipline. Same care about the details.
+                The work covered payment flows, exam scheduling, proctoring
+                integration, and badge issuance, with clear separation between
+                the frontend, backend-for-frontend, and backend services — on a
+                platform used by engineers worldwide.
+              </p>
+              <p>
+                We apply the same habits to client systems of any size: clear
+                boundaries between parts of the system, careful handling of
+                data, and decisions documented for the next engineer.
               </p>
             </div>
           </div>
@@ -59,7 +69,7 @@ export function AboutCanonical() {
 
             <div className="relative flex flex-col items-center text-center">
               <span className="font-mono text-[10px] uppercase tracking-[0.28em] text-muted-foreground">
-                Engineering Heritage
+                Engineering experience
               </span>
 
               <div className="mt-8 flex items-baseline gap-2">
@@ -98,18 +108,26 @@ export function AboutCanonical() {
                     Production Engineering
                   </dd>
                 </div>
-                <div className="flex items-baseline justify-between gap-4">
+                <div
+                  className={`flex items-baseline justify-between gap-4${exams ? " border-b border-border pb-4" : ""}`}
+                >
                   <dt className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
                     Platform
                   </dt>
                   <dd className="text-right font-display text-[15px] font-medium tracking-[-0.01em] text-foreground">
-                    10,000+ exams
-                    <br />
-                    <span className="text-[13px] font-normal text-muted">
-                      conducted
-                    </span>
+                    Canonical Academy
                   </dd>
                 </div>
+                {exams && (
+                  <div className="flex items-baseline justify-between gap-4">
+                    <dt className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
+                      {exams.label}
+                    </dt>
+                    <dd className="text-right font-display text-[15px] font-medium tracking-[-0.01em] text-foreground">
+                      {exams.value}
+                    </dd>
+                  </div>
+                )}
               </dl>
             </div>
           </aside>

@@ -1,5 +1,11 @@
 import { LinkButton } from "@/components/home/button";
 import { EditorialLabel } from "@/components/home/label";
+import {
+  BOOK_HREF,
+  messageHref,
+  PRIMARY_CTA_HELPER,
+  PRIMARY_CTA_LABEL,
+} from "@/lib/offer";
 
 export function AboutCTA() {
   return (
@@ -12,13 +18,25 @@ export function AboutCTA() {
             <em className="italic text-primary">before writing code?</em>
           </h2>
           <p className="mb-12 text-[17px] font-light leading-[1.75] text-muted">
-            Book a free workflow review. We&apos;ll go deep on how your
-            operation runs and tell you honestly whether we&apos;re the right
-            fit — even if the answer is no.
+            {PRIMARY_CTA_HELPER} We&apos;ll tell you honestly whether
+            we&apos;re the right fit — even if the answer is no.
           </p>
           <div className="flex flex-wrap items-center justify-center gap-3.5">
-            <LinkButton href="/contact" variant="accent" size="lg">
-              Book a Workflow Review
+            <LinkButton
+              href={BOOK_HREF}
+              variant="accent"
+              size="lg"
+              cta={{ label: PRIMARY_CTA_LABEL, section: "about-cta" }}
+            >
+              {PRIMARY_CTA_LABEL}
+            </LinkButton>
+            <LinkButton
+              href={messageHref()}
+              variant="ghost"
+              size="lg"
+              cta={{ label: "Send a Message", section: "about-cta" }}
+            >
+              Send a Message
             </LinkButton>
           </div>
           <p className="mt-6 text-sm text-muted-foreground">

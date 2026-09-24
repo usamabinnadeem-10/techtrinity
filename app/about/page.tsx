@@ -14,12 +14,12 @@ import { breadcrumbSchema, JsonLd } from "@/lib/site";
 export const metadata: Metadata = {
   title: "About",
   description:
-    "Custom inventory and operations software for growing distribution and multi-location businesses — built by an operator who's run a live ERP across 50+ branches, not an agency that just launched last week.",
+    "Meet Usama Nadeem, Founder & CEO of TechTrinity, and the team building custom software for wholesale and distribution — shaped by building EasyAccounts for a live wholesale operation.",
   alternates: { canonical: "/about" },
   openGraph: {
     title: "About — TechTrinity",
     description:
-      "Custom inventory and operations software for distribution and multi-location businesses — built by an operator who's run a live ERP across 50+ branches.",
+      "The founder and team behind TechTrinity's custom software for wholesale and distribution businesses.",
     url: "/about",
     type: "website",
   },

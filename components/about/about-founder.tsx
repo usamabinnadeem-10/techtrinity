@@ -1,6 +1,14 @@
 import Image from "next/image";
+import {
+  FOUNDER_BIO,
+  FOUNDER_CANONICAL_BADGE,
+  FOUNDER_DISPLAY_NAME,
+  FOUNDER_LOCATION,
+  FOUNDER_TITLE,
+  OWN_PRODUCT_LABEL,
+} from "@/lib/offer";
 
-const CHIPS = ["Built EasyAccounts — Live in 50+ Branches", "Ex-Canonical Engineer"];
+const CHIPS = [`EasyAccounts — ${OWN_PRODUCT_LABEL}`, FOUNDER_CANONICAL_BADGE];
 
 export function AboutFounder() {
   return (
@@ -15,7 +23,7 @@ export function AboutFounder() {
               >
                 <Image
                   src="/team/usama_hf.png"
-                  alt="Portrait of Usama Bin Nadeem, founder of TechTrinity"
+                  alt={`Portrait of ${FOUNDER_DISPLAY_NAME}, ${FOUNDER_TITLE} of TechTrinity`}
                   fill
                   sizes="(min-width: 1024px) 480px, (min-width: 768px) 50vw, 100vw"
                   className="object-cover object-center [filter:grayscale(0.3)_contrast(1.02)_brightness(0.94)]"
@@ -71,7 +79,7 @@ export function AboutFounder() {
 
                 <div className="absolute left-5 top-5 flex flex-col gap-1.5 font-mono text-[9.5px] uppercase tracking-[0.22em] text-foreground/65">
                   <span>Founder / 01</span>
-                  <span>Karachi · Remote</span>
+                  <span>{FOUNDER_LOCATION}</span>
                 </div>
                 <span className="absolute bottom-5 left-5 font-mono text-[9px] uppercase tracking-[0.22em] text-foreground/55">
                   Portrait — TT/01
@@ -85,8 +93,8 @@ export function AboutFounder() {
               </div>
 
               <figcaption className="mt-6 flex flex-col gap-1 font-mono text-[11px] uppercase tracking-[0.2em] text-muted">
-                <span className="text-foreground">Usama Bin Nadeem</span>
-                <span>Founder &amp; Lead Engineer</span>
+                <span className="text-foreground">{FOUNDER_DISPLAY_NAME}</span>
+                <span>{FOUNDER_TITLE}</span>
               </figcaption>
             </figure>
           </div>
@@ -98,34 +106,25 @@ export function AboutFounder() {
             </h2>
 
             <div className="mt-7 space-y-5 text-[16px] font-light leading-[1.85] text-muted">
+              <p className="text-foreground/90">{FOUNDER_BIO}</p>
               <p>
-                For three years I built and ran{" "}
-                <strong className="font-medium text-foreground">
-                  EasyAccounts
-                </strong>{" "}
-                — a custom ERP for a wholesale business that was tracking
-                inventory on spreadsheets and backing up to USB sticks. Today it
-                runs live across{" "}
-                <strong className="font-medium text-foreground">
-                  50+ branches
-                </strong>
-                . You learn operational software the only way that sticks: by
-                living with the consequences of every decision.
+                EasyAccounts started as a replacement for spreadsheets and
+                fragile backups. Working on it day to day teaches the lessons
+                that matter in operational software: every shortcut in stock,
+                permissions, or reporting eventually shows up as a mistake
+                someone has to fix.
               </p>
               <p>
-                Before that, two years at{" "}
+                My engineering experience also includes two years at{" "}
                 <strong className="font-medium text-foreground">
                   Canonical
                 </strong>{" "}
-                — the company behind Ubuntu — on a platform that&apos;s run
-                over{" "}
-                <strong className="font-medium text-foreground">
-                  10,000 professional certifications
-                </strong>
-                . I also built core infrastructure for{" "}
-                <strong className="font-medium text-foreground">Xenia</strong>{" "}
-                as it grew from $1M to a $12M Series A. The engineering is
-                enterprise-grade. The difference is who it&apos;s for.
+                — the company behind Ubuntu — working in-house on its
+                certification platform, and engineering work on{" "}
+                <strong className="font-medium text-foreground">Xenia</strong>
+                &apos;s operations platform for multi-location teams. Those
+                teams ran production systems where downtime and bad data had
+                real consequences.
               </p>
               <p>
                 I started TechTrinity because the same story kept repeating — a

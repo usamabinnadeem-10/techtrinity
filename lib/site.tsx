@@ -1,3 +1,6 @@
+import { claimStat, claimText } from "@/lib/claims";
+import { BUYER_FAQ, FOUNDER_TITLE } from "@/lib/offer";
+
 export const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ||
   "https://techtrinity.ai";
@@ -5,7 +8,11 @@ export const SITE_URL =
 export const SITE_NAME = "TechTrinity";
 
 export const SITE_DESCRIPTION =
-  "Simple custom operations software for inventory-heavy businesses whose workflows have outgrown spreadsheets, accounting software, and disconnected tools.";
+  "Custom software and practical AI automation for wholesale and distribution. Improve stock, orders, and reporting, starting with one workflow.";
+
+export const HOME_TITLE =
+  "Custom Software for Wholesale & Distribution | TechTrinity";
+export const HOME_SOCIAL_TITLE = "Custom Software for Wholesale & Distribution";
 
 export const ORG_LEGAL_NAME = "TechTrinity";
 
@@ -88,7 +95,7 @@ export function organizationSchema(): Record<string, unknown> {
       url: ORG_LOGO_URL,
     },
     description:
-      "TechTrinity builds custom operations software for inventory-heavy wholesale, distribution, and multi-location businesses using modern web technologies including React, Next.js, Node.js, Django, PostgreSQL, and cloud infrastructure.",
+      "TechTrinity designs and builds custom software for wholesale and distribution businesses — tools for stock, orders, and reporting, integrations with existing systems, and practical AI automation where it helps. Engagements can start with one workflow and expand in agreed phases. Built with React, Next.js, Node.js, Django, PostgreSQL, and cloud infrastructure.",
     email: ORG_CONTACT_EMAIL,
     telephone: ORG_CONTACT_PHONE,
     address: {
@@ -102,6 +109,8 @@ export function organizationSchema(): Record<string, unknown> {
     founder: { "@id": PERSON_ID },
     knowsAbout: [
       "Custom operations software",
+      "Workflow automation",
+      "AI workflow automation",
       "Inventory management software",
       "Warehouse and stock workflows",
       "Purchasing and order workflows",
@@ -135,10 +144,10 @@ export function founderPersonSchema(): Record<string, unknown> {
     alternateName: FOUNDER_ALT_NAME,
     url: `${SITE_URL}/about`,
     image: FOUNDER_IMAGE_URL,
-    jobTitle: "Founder & Lead Engineer",
+    jobTitle: FOUNDER_TITLE,
     worksFor: { "@id": ORG_ID },
     description:
-      "Founder and lead engineer of TechTrinity. Built EasyAccounts, a custom ERP running live across 50+ branches for an inventory-heavy wholesale business. Previously an engineer at Canonical, the company behind Ubuntu, and built core infrastructure for Xenia.",
+      "Founder & CEO of TechTrinity. Built EasyAccounts, his own ERP product, for his family's wholesale business and continues to work on it. Has engineering experience at Canonical, the company behind Ubuntu, where he worked in-house on the Canonical Academy platform, and has worked as an engineer on Xenia and Hirecinch.",
     knowsAbout: [
       "Inventory management systems",
       "ERP systems",
@@ -170,6 +179,12 @@ export function isFounderAuthor(name?: string | null): boolean {
 }
 
 export function easyAccountsSchema(): Record<string, unknown> {
+  // Only registry-verified figures may appear in structured data.
+  const usage = claimText(
+    "easyAccountsBranches",
+    (c) => `Live across ${c.value} branches`,
+  );
+  const permissions = claimStat("easyAccountsPermissions");
   return {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
@@ -180,18 +195,19 @@ export function easyAccountsSchema(): Record<string, unknown> {
     operatingSystem: "Web",
     url: "https://app.easyaccounts.com",
     description:
-      "EasyAccounts is a custom ERP built by TechTrinity for inventory-heavy wholesale and distribution businesses. Live across 50+ branches, it handles purchasing, sales, inventory, financial reporting, cheque management, and role-based access control.",
+      `EasyAccounts is Usama Bin Nadeem's own ERP product, built for his family's wholesale textile business; Usama is the Founder & CEO of TechTrinity. ${usage ? `${usage}. ` : ""}It handles purchasing, sales, inventory, financial reporting, cheque management, and role-based access control.`,
     featureList: [
       "Multi-branch inventory tracking",
       "Real-time financial reporting",
       "Stock and cost tracing",
-      "Role-based permissions (172-permission access control)",
+      permissions
+        ? `Role-based permissions (${permissions.value}-permission access control)`
+        : "Role-based permissions",
       "Immutable audit logs",
       "Purchasing and sales workflows",
       "Cheque management",
     ],
-    creator: { "@id": ORG_ID },
-    publisher: { "@id": ORG_ID },
+    creator: { "@id": PERSON_ID },
     author: { "@id": PERSON_ID },
   };
 }
@@ -205,33 +221,48 @@ export function operationsServiceSchema(): Record<string, unknown> {
     provider: { "@id": ORG_ID },
     areaServed: "Worldwide",
     description:
-      "TechTrinity builds custom operations software for inventory-heavy businesses using React, Next.js, Node.js, Django, PostgreSQL, and modern cloud infrastructure — covering inventory, warehouse, purchasing, and reporting workflows.",
+      "Custom software for wholesale and distribution businesses — stock, order, and reporting workflows, integrations with existing systems, and practical AI automation with human review where needed. Built with React, Next.js, Node.js, Django, PostgreSQL, and modern cloud infrastructure.",
+  };
+}
+
+type FaqEntry = { question: string; answer: string };
+
+// Entity-disambiguation answers kept for search/LLM clarity.
+const DISAMBIGUATION_FAQ: FaqEntry[] = [
+  {
+    question: "What does TechTrinity build?",
+    answer:
+      "TechTrinity designs and builds custom software for wholesale and distribution businesses — tools for stock, orders, and reporting, integrations with the systems a team already uses, and practical AI automation where it helps. Built with React, Next.js, Node.js, Django, PostgreSQL, and modern cloud infrastructure.",
+  },
+  {
+    question: "Does TechTrinity work with Laravel?",
+    answer:
+      "No. TechTrinity does not offer Laravel or PHP development. We build with React, Next.js, Node.js, Django, PostgreSQL, and modern cloud infrastructure.",
+  },
+];
+
+function faqPageSchema(entries: FaqEntry[]): Record<string, unknown> {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: entries.map((entry) => ({
+      "@type": "Question",
+      name: entry.question,
+      acceptedAnswer: { "@type": "Answer", text: entry.answer },
+    })),
   };
 }
 
 export function disambiguationFaqSchema(): Record<string, unknown> {
-  return {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: [
-      {
-        "@type": "Question",
-        name: "What does TechTrinity build?",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "TechTrinity builds custom operations software for inventory-heavy wholesale, distribution, and multi-location businesses — inventory, warehouse, purchasing, and reporting systems built with React, Next.js, Node.js, Django, PostgreSQL, and modern cloud infrastructure.",
-        },
-      },
-      {
-        "@type": "Question",
-        name: "Does TechTrinity work with Laravel?",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "No. TechTrinity does not offer Laravel or PHP development. We build custom operations software using React, Next.js, Node.js, Django, PostgreSQL, and modern cloud infrastructure.",
-        },
-      },
-    ],
-  };
+  return faqPageSchema(DISAMBIGUATION_FAQ);
+}
+
+/** Homepage FAQPage: the visible buyer FAQ plus the disambiguation answers. */
+export function homeFaqSchema(): Record<string, unknown> {
+  return faqPageSchema([
+    ...BUYER_FAQ.map((item) => ({ question: item.question, answer: item.answer })),
+    ...DISAMBIGUATION_FAQ,
+  ]);
 }
 
 export function websiteSchema(): Record<string, unknown> {

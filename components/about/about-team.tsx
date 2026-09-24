@@ -13,13 +13,13 @@ export function AboutTeam() {
             <EditorialLabel>The Team</EditorialLabel>
             <h2 className="mt-3.5 font-display text-[clamp(32px,3.4vw,52px)] font-bold leading-[1.05] tracking-[-0.025em]">
               Small by design.{" "}
-              <em className="italic text-primary">Senior by default.</em>
+              <em className="italic text-primary">Direct by default.</em>
             </h2>
           </div>
           <div className="md:justify-self-end md:text-right">
             <p className="text-[15px] font-light leading-[1.8] text-muted md:max-w-[420px]">
-              We keep the team small on purpose. Every client gets the senior
-              people who actually build your system — not a project manager
+              We keep the team small on purpose. You get direct access to the
+              people responsible for your project — not a project manager
               relaying messages to a team you&apos;ll never meet.
             </p>
           </div>
@@ -40,8 +40,8 @@ export function AboutTeam() {
               &ldquo;
             </span>
             <p className="mt-2 font-display text-[clamp(26px,3.2vw,44px)] italic leading-[1.18] tracking-[-0.02em] text-muted">
-              The person you speak to in the discovery call is the person
-              mapping and building your system.
+              The people you speak to about your workflow are the people
+              responsible for mapping and building your system.
             </p>
           </blockquote>
         </figure>
