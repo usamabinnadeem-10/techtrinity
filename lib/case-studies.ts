@@ -1,6 +1,8 @@
 import {
+  CLAIMS,
   claimStat,
   claimText,
+  isPublished,
   publishedStats,
   type ClaimKey,
 } from "@/lib/claims";
@@ -238,10 +240,10 @@ function sentence(text: string | null): string {
 const eaPermissions = claimStat("easyAccountsPermissions");
 const eaBranches = claimStat("easyAccountsBranches");
 
-/** e.g. "a 172-permission" or "a granular" (+ " access control system"). */
-const permissionsPhrase = eaPermissions
-  ? `a ${eaPermissions.value}-permission`
-  : "a granular";
+/** e.g. "role-based access control with 189+ permissions". */
+const accessControlPhrase = eaPermissions
+  ? `role-based access control with ${eaPermissions.value} permissions`
+  : "granular role-based access control";
 
 /** e.g. "Used in a live, multi-branch wholesale operation." */
 const branchesSentence = sentence(
@@ -321,8 +323,9 @@ export const CASE_STUDIES: Record<string, CaseStudy> = {
         },
         {
           question: "Outcomes",
-          answer:
-            "Operational description only. Platform-wide usage figures are Canonical’s and are pending verification, so none are published here.",
+          answer: isPublished("canonicalExams")
+            ? `The platform has conducted ${CLAIMS.canonicalExams.value} exams. That is a platform-wide figure reflecting Canonical’s whole team, not one engineer’s contribution.`
+            : "Operational description only. Platform-wide usage figures are Canonical’s and are pending verification, so none are published here.",
         },
         {
           question: "What it taught",
@@ -575,7 +578,7 @@ export const CASE_STUDIES: Record<string, CaseStudy> = {
         {
           question: "Usama’s contribution",
           answer:
-            "As lead developer, Usama led development of the React and Django application, including the public job board, configurable application forms and questions, per-role pipelines, and the weighted scorecard with auto-rejection thresholds. This was engineering work for the Hirecinch product, not a TechTrinity client commission.",
+            "As lead developer, Usama led development of the React and Django application, including the public job board, configurable application forms and questions, per-role pipelines, and the weighted scorecard with auto-rejection thresholds. This was employment at Hirecinch, not a TechTrinity client commission.",
         },
         {
           question: "What changed",
@@ -826,7 +829,7 @@ CASE_STUDIES.xenia = {
       {
         question: "Usama’s contribution",
         answer:
-          "Over two-plus years as a full-stack engineer on Xenia’s product team, Usama shipped API response compression, re-render fixes in the checklist builder, public checklist links, and the Stripe billing and plan-gating infrastructure, and contributed to reporting and AI-assisted documents. This was engineering work for Xenia, not a TechTrinity client commission.",
+          "Over two-plus years as a full-stack engineer on Xenia’s product team, Usama shipped API response compression, re-render fixes in the checklist builder, public checklist links, and the Stripe billing and plan-gating infrastructure, and contributed to reporting and AI-assisted documents. This was employment at Xenia, not a TechTrinity client commission.",
       },
       {
         question: "What changed",
@@ -1090,7 +1093,7 @@ CASE_STUDIES.easyaccounts = {
         answer: [
           branchesSentence,
           publishedStats(["easyAccountsTransactions", "easyAccountsPayments"]).length > 0
-            ? "Verified volume figures are shown above."
+            ? "Transaction and payment volumes are shown above."
             : "Operational description; transaction and payment figures are pending verification and are not published.",
         ]
           .filter(Boolean)
@@ -1159,7 +1162,7 @@ CASE_STUDIES.easyaccounts = {
     body: compact([
       "EasyAccounts started as a solution to a problem Usama knew firsthand — managing his family’s multi-branch textile wholesale business without the right tools meant manual ledgers, disconnected spreadsheets, and no reliable view of financial health.",
       `He built EasyAccounts from scratch as a full-scale ERP purpose-built for the operational complexity of wholesale trading. ${branchesSentence} ${durationSentence}`.trim(),
-      `The system handles the complete business lifecycle — purchasing, sales, inventory, financial reporting, cheque management, and ${permissionsPhrase} access control system — all in one platform.`,
+      `The system handles the complete business lifecycle — purchasing, sales, inventory, financial reporting, cheque management, and ${accessControlPhrase} — all in one platform.`,
     ]),
   },
   whyItMatters: {
@@ -1193,7 +1196,7 @@ CASE_STUDIES.easyaccounts = {
       },
       {
         title: "Access control across branches",
-        body: `Different employees across different branches need different levels of access. ${permissionsPhrase.replace(/^a/, "A")} access control system was required to ensure every role saw exactly what it needed — nothing more.`,
+        body: `Different employees across different branches need different levels of access. ${accessControlPhrase.replace(/^./, (c) => c.toUpperCase())} was required to ensure every role saw exactly what it needed — nothing more.`,
       },
     ],
   },

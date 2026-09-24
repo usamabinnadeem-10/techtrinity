@@ -201,7 +201,7 @@ export function easyAccountsSchema(): Record<string, unknown> {
       "Real-time financial reporting",
       "Stock and cost tracing",
       permissions
-        ? `Role-based permissions (${permissions.value}-permission access control)`
+        ? `Role-based access control (${permissions.value} permissions)`
         : "Role-based permissions",
       "Immutable audit logs",
       "Purchasing and sales workflows",

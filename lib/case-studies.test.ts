@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { CLAIMS, type Claim } from "@/lib/claims";
+import { CLAIMS, claimText, isPublished, type Claim } from "@/lib/claims";
 import {
   EMPLOYMENT_WORK_LABEL,
   FOUNDER_TITLE,
@@ -25,7 +25,8 @@ describe("case-study claims (TT-01)", () => {
       for (const value of unverifiedValues) {
         expect(text, `found unverified "${value}"`).not.toContain(value);
       }
-      for (const legacy of ["50+", "12+", "77%", "5×", "$1M", "$12M", "30 seconds", "500+"]) {
+      // Superseded or derived figures that are not in the registry.
+      for (const legacy of ["50+", "180,000", "100,000+", "172", "77%", "5×", "$1M", "$12M", "30 seconds", "500+"]) {
         expect(text).not.toContain(legacy);
       }
     },
@@ -37,24 +38,48 @@ describe("case-study claims (TT-01)", () => {
     }
   });
 
-  it("uses factual capabilities for Hirecinch while percentages are unverified", () => {
+  it("shows verified registry figures on the matching study", () => {
+    const expectations: [string, (keyof typeof CLAIMS)[]][] = [
+      ["easyaccounts", ["easyAccountsBranches", "easyAccountsTransactions", "easyAccountsPayments", "easyAccountsPermissions"]],
+      ["hirecinch", ["hirecinchRecruiterTime", "hirecinchTimeToHire"]],
+      ["xenia", ["xeniaLoadTime", "xeniaChecklistCapacity"]],
+      ["canonical-academy", ["canonicalExams"]],
+    ];
+    for (const [slug, keys] of expectations) {
+      const text = JSON.stringify(getCaseStudy(slug));
+      for (const key of keys) {
+        if (isPublished(key)) expect(text).toContain(CLAIMS[key].value);
+      }
+    }
+  });
+
+  it("uses Hirecinch percentages only when verified, capabilities otherwise", () => {
     const hirecinch = getCaseStudy("hirecinch")!;
-    expect(hirecinch.heroStats.map((s) => s.value)).toEqual(["Shared", "Weighted"]);
-    expect(hirecinch.outcomes.cards.some((c) => c.primary.includes("%"))).toBe(false);
+    const hasPercent = hirecinch.heroStats.some((s) => s.value.includes("%"));
+    expect(hasPercent).toBe(isPublished("hirecinchRecruiterTime") || isPublished("hirecinchTimeToHire"));
   });
 
   it("never presents Xenia's funding as an outcome", () => {
     const xenia = getCaseStudy("xenia")!;
+    const outcomeText = JSON.stringify([
+      xenia.headline,
+      xenia.heroStats,
+      xenia.outcomes,
+    ]).toLowerCase();
+    expect(outcomeText).not.toContain("series a");
+    expect(outcomeText).not.toContain("seed");
     const text = JSON.stringify(xenia).toLowerCase();
-    expect(text).not.toContain("series a");
     expect(text).not.toContain("we joined");
     expect(text).not.toContain("what we built");
-    expect(xenia.headline.join(" ").toLowerCase()).not.toContain("seed");
+    if (text.includes("series a")) {
+      expect(text).toContain("not presented as a result");
+    }
   });
 
-  it("uses the neutral multi-branch fallback for EasyAccounts", () => {
-    const ea = getCaseStudy("easyaccounts")!;
-    expect(JSON.stringify(ea)).toContain("Used in a live, multi-branch wholesale operation");
+  it("describes EasyAccounts branches from the registry", () => {
+    const ea = JSON.stringify(getCaseStudy("easyaccounts"));
+    const branches = claimText("easyAccountsBranches", (c) => c.value)!;
+    expect(ea).toContain(branches);
   });
 });
 
@@ -73,6 +98,7 @@ describe("attribution (TT-02)", () => {
       const study = getCaseStudy(slug)!;
       expect(study.engagement).toBe("employment");
       expect(study.meta).toContainEqual({ label: "Type", value: EMPLOYMENT_WORK_LABEL });
+      expect(JSON.stringify(study)).toContain("not a TechTrinity client");
     },
   );
 

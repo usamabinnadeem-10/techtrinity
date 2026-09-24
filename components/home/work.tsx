@@ -34,7 +34,7 @@ const PROJECTS: Project[] = [
   },
   {
     name: "Xenia",
-    attribution: EMPLOYMENT_WORK_LABEL,
+    attribution: `${EMPLOYMENT_WORK_LABEL} · employed at Xenia`,
     description:
       "An operations platform for multi-location teams — tasks, checklists, and audits in one place, so nothing slips between sites.",
     href: "/work/xenia",
@@ -47,7 +47,7 @@ const PROJECTS: Project[] = [
   },
   {
     name: "Hirecinch ATS",
-    attribution: EMPLOYMENT_WORK_LABEL,
+    attribution: `${EMPLOYMENT_WORK_LABEL} · employed at Hirecinch`,
     description:
       "A hiring platform that puts candidates, feedback, and decisions in one place — so teams hire together instead of over email.",
     href: "/work/hirecinch",

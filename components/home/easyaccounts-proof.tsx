@@ -1,6 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
-import { claimText, publishedStats, type ClaimKey } from "@/lib/claims";
+import {
+  claimText,
+  isPublished,
+  publishedStats,
+  type ClaimKey,
+} from "@/lib/claims";
 import { ctaAttrs } from "@/lib/cta";
 import { OWN_PRODUCT_LABEL } from "@/lib/offer";
 import { EditorialLabel } from "./label";
@@ -14,12 +19,12 @@ const STAT_KEYS: ClaimKey[] = [
   "easyAccountsPermissions",
 ];
 
-// Running-copy facts: the verified phrasing when published, otherwise the
-// registry's neutral fallback.
-const FACTS = [
-  claimText("easyAccountsBranches", (c) => `${c.value} ${c.label.toLowerCase()}`),
-  claimText("easyAccountsDuration", (c) => `${c.label} ${c.value}`),
-].filter((fact): fact is string => fact !== null);
+// Neutral running-copy facts, shown only while the matching figure is
+// unverified — once verified it appears in the stat badges instead.
+const FACT_KEYS: ClaimKey[] = ["easyAccountsBranches", "easyAccountsDuration"];
+const FACTS = FACT_KEYS.filter((key) => !isPublished(key))
+  .map((key) => claimText(key, () => ""))
+  .filter((fact): fact is string => Boolean(fact));
 
 export function EasyAccountsProof() {
   const stats = publishedStats(STAT_KEYS);
@@ -45,20 +50,22 @@ export function EasyAccountsProof() {
               improved as the business changes.
             </p>
 
-            <ul className="mt-7 space-y-3">
-              {FACTS.map((fact) => (
-                <li
-                  key={fact}
-                  className="flex items-start gap-3 text-[15px] font-light leading-[1.6] text-foreground"
-                >
-                  <span
-                    aria-hidden
-                    className="mt-[9px] inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-primary"
-                  />
-                  <span>{fact}</span>
-                </li>
-              ))}
-            </ul>
+            {FACTS.length > 0 && (
+              <ul className="mt-7 space-y-3">
+                {FACTS.map((fact) => (
+                  <li
+                    key={fact}
+                    className="flex items-start gap-3 text-[15px] font-light leading-[1.6] text-foreground"
+                  >
+                    <span
+                      aria-hidden
+                      className="mt-[9px] inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-primary"
+                    />
+                    <span>{fact}</span>
+                  </li>
+                ))}
+              </ul>
+            )}
 
             {stats.length > 0 && (
               <dl className="mt-7 flex flex-wrap gap-x-8 gap-y-4 border-t border-border pt-6">

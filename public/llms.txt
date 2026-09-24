@@ -47,10 +47,10 @@ Core positioning:
 
 ## Case Studies
 
-* [EasyAccounts ERP](https://www.techtrinity.ai/work/easyaccounts): The founder's own product — a production ERP built with React and Django for his family's wholesale textile business, used in a live, multi-branch wholesale operation. Handles purchasing, sales, inventory, financial reporting, cheque management, audit logs, and granular permissions.
+* [EasyAccounts ERP](https://www.techtrinity.ai/work/easyaccounts): The founder's own product — a production ERP built with React and Django for his family's wholesale textile business, live across 12+ branches and in production for 4 years. Handles purchasing, sales, inventory, financial reporting, cheque management, audit logs, and role-based access control with 189+ permissions.
 * [Canonical Academy](https://www.techtrinity.ai/work/canonical-academy): Founder's engineering work, in-house at Canonical — certification platform work involving Go, Node.js, React, payment flows, exam scheduling, proctoring integration, and badge issuance. Not a TechTrinity client engagement.
-* [Xenia](https://www.techtrinity.ai/work/xenia): Founder's engineering work on a frontline operations platform — tasks, checklists, audits, reporting, and performance improvements for multi-location teams.
-* [Hirecinch ATS](https://www.techtrinity.ai/work/hirecinch): Founder's engineering work on an applicant tracking system built with React and Django — structured applications, a shared candidate pipeline, scorecards, and email workflows.
+* [Xenia](https://www.techtrinity.ai/work/xenia): Founder's engineering work as an employee of Xenia (not a TechTrinity client project) on a frontline operations platform — tasks, checklists, audits, reporting, and performance improvements for multi-location teams.
+* [Hirecinch ATS](https://www.techtrinity.ai/work/hirecinch): Founder's engineering work as an employee of Hirecinch (not a TechTrinity client project) on an applicant tracking system built with React and Django — structured applications, a shared candidate pipeline, scorecards, and email workflows.
 
 ## Topics TechTrinity Can Help With
 

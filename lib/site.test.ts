@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+import { CLAIMS, type Claim } from "./claims";
 import { BUYER_FAQ, FOUNDER_TITLE } from "./offer";
 import {
   easyAccountsSchema,
@@ -15,7 +16,10 @@ describe("structured data", () => {
       founderPersonSchema(),
       organizationSchema(),
     ]);
-    for (const figure of ["50+", "12+", "180,000", "10,000", "Series A"]) {
+    const unverified = (Object.values(CLAIMS) as Claim[])
+      .filter((c) => c.status !== "verified")
+      .map((c) => c.value);
+    for (const figure of [...unverified, "50+", "180,000", "Series A"]) {
       expect(json).not.toContain(figure);
     }
   });

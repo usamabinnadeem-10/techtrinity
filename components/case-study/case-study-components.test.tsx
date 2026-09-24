@@ -49,7 +49,9 @@ describe("CaseOutcomes", () => {
 
   it("renders the provided cards", () => {
     render(<CaseOutcomes caseStudy={base} />);
-    expect(screen.getByText("Multi-branch")).toBeInTheDocument();
+    for (const card of base.outcomes.cards) {
+      expect(screen.getAllByText(card.primary).length).toBeGreaterThan(0);
+    }
   });
 });
 
@@ -84,7 +86,8 @@ describe("CaseSummary & CaseWalkthrough", () => {
   it("renders the six buyer answers", () => {
     render(<CaseSummary caseStudy={base} />);
     expect(screen.getByText("Usama’s contribution")).toBeInTheDocument();
-    expect(screen.getByText(/figures are pending verification/i)).toBeInTheDocument();
+    const outcomes = base.summary!.items.find((i) => i.question === "Outcomes")!;
+    expect(screen.getByText(outcomes.answer)).toBeInTheDocument();
   });
 
   it("renders the walkthrough as an ordered list with captions and no video", () => {
