@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import { CLAIMS, type Claim } from "./claims";
 import { BUYER_FAQ, FOUNDER_TITLE } from "./offer";
 import {
-  easyAccountsSchema,
+  tappyIOSchema,
   founderPersonSchema,
   homeFaqSchema,
   organizationSchema,
@@ -12,7 +12,7 @@ import {
 describe("structured data", () => {
   it("keeps unverified figures out of JSON-LD", () => {
     const json = JSON.stringify([
-      easyAccountsSchema(),
+      tappyIOSchema(),
       founderPersonSchema(),
       organizationSchema(),
     ]);
@@ -24,8 +24,8 @@ describe("structured data", () => {
     }
   });
 
-  it("attributes EasyAccounts to the founder, not the studio", () => {
-    const schema = easyAccountsSchema();
+  it("attributes TappyIO to the founder, not the studio", () => {
+    const schema = tappyIOSchema();
     expect(schema.creator).toEqual({ "@id": PERSON_ID });
     expect(String(schema.description)).not.toMatch(/built by TechTrinity/i);
   });

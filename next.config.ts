@@ -10,6 +10,16 @@ const nextConfig: NextConfig = {
     // path. Recommended for atomic CSS; only applies to production builds.
     inlineCss: true,
   },
+  async redirects() {
+    return [
+      // EasyAccounts was renamed to TappyIO; keep the old case study URL working.
+      {
+        source: "/work/easyaccounts",
+        destination: "/work/tappyio",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;

@@ -3,7 +3,7 @@ import { AiAutomation } from "@/components/home/ai-automation";
 import { AmbientBackground } from "@/components/home/background";
 import { BuiltToLast } from "@/components/home/built-to-last";
 import { CTA } from "@/components/home/cta";
-import { EasyAccountsProof } from "@/components/home/easyaccounts-proof";
+import { TappyIOProof } from "@/components/home/tappyio-proof";
 import { Faq } from "@/components/home/faq";
 import { Hero } from "@/components/home/hero";
 import { SiteNav } from "@/components/home/nav";
@@ -45,7 +45,7 @@ export default function HomePage() {
       <SiteNav />
       <main>
         <Hero />
-        <EasyAccountsProof />
+        <TappyIOProof />
         <Problem />
         <OneWorkflow />
         <AiAutomation />

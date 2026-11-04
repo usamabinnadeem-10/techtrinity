@@ -8,7 +8,7 @@ import { CaseOutcomes } from "./case-outcomes";
 import { CaseSummary } from "./case-summary";
 import { CaseWalkthrough } from "./case-walkthrough";
 
-const base = getCaseStudy("easyaccounts")!;
+const base = getCaseStudy("tappyio")!;
 
 function withStats(n: number): CaseStudy {
   return {
@@ -60,7 +60,7 @@ describe("CaseCTA", () => {
     render(<CaseCTA caseStudy={base} />);
     const book = screen.getByRole("link", { name: /book a workflow review/i });
     expect(book).toHaveAttribute("href", BOOK_HREF);
-    expect(book).toHaveAttribute("data-cta-section", "case-study-easyaccounts");
+    expect(book).toHaveAttribute("data-cta-section", "case-study-tappyio");
 
     const related = screen.getByRole("link", { name: /discuss an operations workflow/i });
     expect(related).toHaveAttribute("href", "/contact?service=operations#message");

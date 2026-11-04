@@ -14,7 +14,7 @@ import { breadcrumbSchema, JsonLd } from "@/lib/site";
 export const metadata: Metadata = {
   title: "About",
   description:
-    "Meet Usama Nadeem, Founder & CEO of TechTrinity, and the team building custom software for wholesale and distribution — shaped by building EasyAccounts for a live wholesale operation.",
+    "Meet Usama Nadeem, Founder & CEO of TechTrinity, and the team building custom software for wholesale and distribution — shaped by building TappyIO for a live wholesale operation.",
   alternates: { canonical: "/about" },
   openGraph: {
     title: "About — TechTrinity",

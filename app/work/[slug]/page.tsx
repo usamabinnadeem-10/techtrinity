@@ -30,7 +30,7 @@ import {
 import {
   absoluteUrl,
   breadcrumbSchema,
-  easyAccountsSchema,
+  tappyIOSchema,
   JsonLd,
   ORG_ID,
   PERSON_ID,
@@ -120,7 +120,7 @@ export default async function CaseStudyPage({
         data={[
           caseStudySchema(caseStudy),
           breadcrumbs,
-          ...(caseStudy.slug === "easyaccounts" ? [easyAccountsSchema()] : []),
+          ...(caseStudy.slug === "tappyio" ? [tappyIOSchema()] : []),
         ]}
       />
       <AmbientBackground />

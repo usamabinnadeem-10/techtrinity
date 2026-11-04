@@ -40,7 +40,7 @@ describe("case-study claims (TT-01)", () => {
 
   it("shows verified registry figures on the matching study", () => {
     const expectations: [string, (keyof typeof CLAIMS)[]][] = [
-      ["easyaccounts", ["easyAccountsBranches", "easyAccountsTransactions", "easyAccountsPayments", "easyAccountsPermissions"]],
+      ["tappyio", ["tappyIOBranches", "tappyIOTransactions", "tappyIOPayments", "tappyIOPermissions"]],
       ["hirecinch", ["hirecinchRecruiterTime", "hirecinchTimeToHire"]],
       ["xenia", ["xeniaLoadTime", "xeniaChecklistCapacity"]],
       ["canonical-academy", ["canonicalExams"]],
@@ -76,20 +76,20 @@ describe("case-study claims (TT-01)", () => {
     }
   });
 
-  it("describes EasyAccounts branches from the registry", () => {
-    const ea = JSON.stringify(getCaseStudy("easyaccounts"));
-    const branches = claimText("easyAccountsBranches", (c) => c.value)!;
-    expect(ea).toContain(branches);
+  it("describes TappyIO branches from the registry", () => {
+    const tappyIO = JSON.stringify(getCaseStudy("tappyio"));
+    const branches = claimText("tappyIOBranches", (c) => c.value)!;
+    expect(tappyIO).toContain(branches);
   });
 });
 
 describe("attribution (TT-02)", () => {
-  it("labels EasyAccounts as the founder's own product with the CEO title", () => {
-    const ea = getCaseStudy("easyaccounts")!;
-    expect(ea.engagement).toBe("own-product");
-    expect(ea.meta).toContainEqual({ label: "Role", value: FOUNDER_TITLE });
-    expect(ea.meta).toContainEqual({ label: "Type", value: OWN_PRODUCT_LABEL });
-    expect(JSON.stringify(ea)).toContain("family’s");
+  it("labels TappyIO as the founder's own product with the CEO title", () => {
+    const tappyIO = getCaseStudy("tappyio")!;
+    expect(tappyIO.engagement).toBe("own-product");
+    expect(tappyIO.meta).toContainEqual({ label: "Role", value: FOUNDER_TITLE });
+    expect(tappyIO.meta).toContainEqual({ label: "Type", value: OWN_PRODUCT_LABEL });
+    expect(JSON.stringify(tappyIO)).toContain("family’s");
   });
 
   it.each(["xenia", "hirecinch", "canonical-academy"])(
@@ -116,13 +116,13 @@ describe("buyer summary & CTA (TT-09)", () => {
     }
   });
 
-  it("gives EasyAccounts a screenshot walkthrough with the textile-fit caveat", () => {
-    const ea = getCaseStudy("easyaccounts")!;
-    expect(ea.walkthrough?.steps.length).toBeGreaterThanOrEqual(3);
-    for (const step of ea.walkthrough!.steps) {
-      expect(step.image.src).toMatch(/^\/easyaccounts\//);
+  it("gives TappyIO a screenshot walkthrough with the textile-fit caveat", () => {
+    const tappyIO = getCaseStudy("tappyio")!;
+    expect(tappyIO.walkthrough?.steps.length).toBeGreaterThanOrEqual(3);
+    for (const step of tappyIO.walkthrough!.steps) {
+      expect(step.image.src).toMatch(/^\/tappyio\//);
     }
-    expect(ea.walkthrough?.note).toMatch(/not an off-the-shelf fit/);
+    expect(tappyIO.walkthrough?.note).toMatch(/not an off-the-shelf fit/);
   });
 
   it("links related CTAs to real destinations", () => {
@@ -135,7 +135,7 @@ describe("buyer summary & CTA (TT-09)", () => {
         expect(service).toBe(slug);
       }
     }
-    expect(getCaseStudy("easyaccounts")!.relatedCta.href).toBe(
+    expect(getCaseStudy("tappyio")!.relatedCta.href).toBe(
       "/contact?service=operations#message",
     );
     expect(getCaseStudy("hirecinch")!.relatedCta.href).toBe("/services/mvp-development");
@@ -144,7 +144,7 @@ describe("buyer summary & CTA (TT-09)", () => {
 
   it("exposes all slugs", () => {
     expect(getAllCaseStudySlugs().sort()).toEqual(
-      ["canonical-academy", "easyaccounts", "hirecinch", "xenia"],
+      ["canonical-academy", "hirecinch", "tappyio", "xenia"],
     );
   });
 });
