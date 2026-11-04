@@ -71,7 +71,7 @@ export function Work() {
             <em className="font-bold italic text-primary">work.</em>
           </h2>
           <p className="mt-3.5 max-w-[640px] text-[17px] font-light leading-[1.7] text-muted">
-            Alongside EasyAccounts, Usama has engineered production platforms
+            Alongside TappyIO, Usama has engineered production platforms
             for other companies. Each project is labelled with how he was
             involved, and its case study describes his exact contribution.
           </p>

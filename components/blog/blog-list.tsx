@@ -74,14 +74,14 @@ export function BlogList({ posts }: Props) {
           <p className="text-[17px] font-light leading-[1.8] text-muted">
             We&apos;re preparing practical guides for owner-led wholesale,
             distribution, and inventory-heavy businesses. Start with the
-            EasyAccounts case study to see the kind of operational problems we
+            TappyIO case study to see the kind of operational problems we
             build around.
           </p>
           <Link
-            href="/work/easyaccounts"
+            href="/work/tappyio"
             className="inline-flex items-center gap-2 border-b border-border pb-1 text-sm font-medium text-foreground transition-colors hover:border-primary hover:text-primary"
           >
-            Read the EasyAccounts Case Study <span aria-hidden>→</span>
+            Read the TappyIO Case Study <span aria-hidden>→</span>
           </Link>
         </div>
       ) : (

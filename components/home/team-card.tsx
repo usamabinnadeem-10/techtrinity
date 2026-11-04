@@ -22,7 +22,7 @@ export const TEAM: TeamMember[] = [
   {
     name: FOUNDER_DISPLAY_NAME,
     role: FOUNDER_TITLE,
-    bio: `${FOUNDER_CANONICAL_BADGE}. Built EasyAccounts, his own product, and leads how each client system is scoped, designed, and built.`,
+    bio: `${FOUNDER_CANONICAL_BADGE}. Built TappyIO, his own product, and leads how each client system is scoped, designed, and built.`,
     initials: "UN",
     index: "01",
     signature: "u·nadeem",

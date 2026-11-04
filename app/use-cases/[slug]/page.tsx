@@ -142,10 +142,10 @@ export default async function UseCaseDetailPage({
               {useCase.outcome}
             </p>
             <Link
-              href="/work/easyaccounts"
+              href="/work/tappyio"
               className="mt-9 inline-flex items-center gap-2 border-b border-border pb-1 text-sm font-medium text-foreground transition-colors hover:border-primary hover:text-primary"
             >
-              See the EasyAccounts Case Study <span aria-hidden>→</span>
+              See the TappyIO Case Study <span aria-hidden>→</span>
             </Link>
           </div>
         </section>

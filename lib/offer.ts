@@ -13,7 +13,7 @@ export const FOUNDER_LOCATION = "Lahore, Pakistan";
 export const FOUNDER_CANONICAL_BADGE = "Engineering experience at Canonical";
 
 export const FOUNDER_BIO =
-  "I’m Usama Nadeem, Founder & CEO of TechTrinity. I built EasyAccounts for my family’s wholesale business and continue to work on the details that matter in daily use: stock movements, orders, reporting, permissions, and the exceptions real teams encounter. That experience shapes how we approach client software: understand the work, design for the people doing it, and build a system that can keep evolving.";
+  "I’m Usama Nadeem, Founder & CEO of TechTrinity. I built TappyIO for my family’s wholesale business and continue to work on the details that matter in daily use: stock movements, orders, reporting, permissions, and the exceptions real teams encounter. That experience shapes how we approach client software: understand the work, design for the people doing it, and build a system that can keep evolving.";
 
 /** Card label for work the founder did as an employee (Canonical, Xenia, Hirecinch). */
 export const EMPLOYMENT_WORK_LABEL = "Founder’s engineering work";

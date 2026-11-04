@@ -12,21 +12,21 @@ import { EditorialLabel } from "./label";
 
 // Numeric badges render only once the owner verifies them in lib/claims.ts.
 const STAT_KEYS: ClaimKey[] = [
-  "easyAccountsBranches",
-  "easyAccountsDuration",
-  "easyAccountsTransactions",
-  "easyAccountsPayments",
-  "easyAccountsPermissions",
+  "tappyIOBranches",
+  "tappyIODuration",
+  "tappyIOTransactions",
+  "tappyIOPayments",
+  "tappyIOPermissions",
 ];
 
 // Neutral running-copy facts, shown only while the matching figure is
 // unverified — once verified it appears in the stat badges instead.
-const FACT_KEYS: ClaimKey[] = ["easyAccountsBranches", "easyAccountsDuration"];
+const FACT_KEYS: ClaimKey[] = ["tappyIOBranches", "tappyIODuration"];
 const FACTS = FACT_KEYS.filter((key) => !isPublished(key))
   .map((key) => claimText(key, () => ""))
   .filter((fact): fact is string => Boolean(fact));
 
-export function EasyAccountsProof() {
+export function TappyIOProof() {
   const stats = publishedStats(STAT_KEYS);
 
   return (
@@ -37,13 +37,13 @@ export function EasyAccountsProof() {
           className="grid items-center gap-10 rounded-lg border border-border bg-card p-7 transition-colors duration-300 hover:border-border-strong md:grid-cols-2 md:gap-12 md:p-14"
         >
           <div className="min-w-0">
-            <EditorialLabel>{OWN_PRODUCT_LABEL} · EasyAccounts</EditorialLabel>
+            <EditorialLabel>{OWN_PRODUCT_LABEL} · TappyIO</EditorialLabel>
             <h2 className="mt-5 font-display text-[clamp(28px,3vw,46px)] font-bold leading-[1.06] tracking-[-0.025em]">
               Built for a real wholesale operation—{" "}
               <em className="italic text-primary">maintained for daily use.</em>
             </h2>
             <p className="mt-4 text-[16px] font-light leading-[1.75] text-muted">
-              Usama built EasyAccounts for his family&apos;s wholesale textile
+              Usama built TappyIO for his family&apos;s wholesale textile
               business to replace spreadsheets and fragile backups with stock,
               order, and reporting numbers the whole team can check. It is the
               clearest example of how we work: close to the people using it, and
@@ -83,17 +83,17 @@ export function EasyAccountsProof() {
             )}
 
             <Link
-              href="/work/easyaccounts"
+              href="/work/tappyio"
               className="mt-8 inline-flex items-center gap-2.5 border-b border-border pb-1 text-sm font-medium text-foreground transition-colors hover:border-primary hover:text-primary"
-              {...ctaAttrs("Read the EasyAccounts case study", "proof")}
+              {...ctaAttrs("Read the TappyIO case study", "proof")}
             >
-              Read the EasyAccounts case study <span aria-hidden>→</span>
+              Read the TappyIO case study <span aria-hidden>→</span>
             </Link>
           </div>
           <div className="relative min-w-0 overflow-hidden rounded-md border border-border bg-background">
             <Image
-              src="/easyaccounts/reports-product-cost-trace.png"
-              alt="EasyAccounts product cost trace report, following a product's cost through its stock movements"
+              src="/tappyio/reports-product-cost-trace.png"
+              alt="TappyIO product cost trace report, following a product's cost through its stock movements"
               width={1465}
               height={812}
               sizes="(min-width: 768px) 540px, 100vw"

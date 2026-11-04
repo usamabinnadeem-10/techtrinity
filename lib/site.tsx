@@ -147,7 +147,7 @@ export function founderPersonSchema(): Record<string, unknown> {
     jobTitle: FOUNDER_TITLE,
     worksFor: { "@id": ORG_ID },
     description:
-      "Founder & CEO of TechTrinity. Built EasyAccounts, his own ERP product, for his family's wholesale business and continues to work on it. Has engineering experience at Canonical, the company behind Ubuntu, where he worked in-house on the Canonical Academy platform, and has worked as an engineer on Xenia and Hirecinch.",
+      "Founder & CEO of TechTrinity. Built TappyIO, his own ERP product, for his family's wholesale business and continues to work on it. Has engineering experience at Canonical, the company behind Ubuntu, where he worked in-house on the Canonical Academy platform, and has worked as an engineer on Xenia and Hirecinch.",
     knowsAbout: [
       "Inventory management systems",
       "ERP systems",
@@ -178,24 +178,24 @@ export function isFounderAuthor(name?: string | null): boolean {
   );
 }
 
-export function easyAccountsSchema(): Record<string, unknown> {
+export function tappyIOSchema(): Record<string, unknown> {
   // Only registry-verified figures may appear in structured data.
   const usage = claimText(
-    "easyAccountsBranches",
+    "tappyIOBranches",
     (c) => `Live across ${c.value} branches`,
   );
-  const permissions = claimStat("easyAccountsPermissions");
+  const permissions = claimStat("tappyIOPermissions");
   return {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
-    "@id": `${SITE_URL}/work/easyaccounts#software`,
-    name: "EasyAccounts",
+    "@id": `${SITE_URL}/work/tappyio#software`,
+    name: "TappyIO",
     applicationCategory: "BusinessApplication",
     applicationSubCategory: "ERP",
     operatingSystem: "Web",
-    url: "https://app.easyaccounts.com",
+    url: "https://www.tappyio.com",
     description:
-      `EasyAccounts is Usama Bin Nadeem's own ERP product, built for his family's wholesale textile business; Usama is the Founder & CEO of TechTrinity. ${usage ? `${usage}. ` : ""}It handles purchasing, sales, inventory, financial reporting, cheque management, and role-based access control.`,
+      `TappyIO is Usama Bin Nadeem's own ERP product, built for his family's wholesale textile business; Usama is the Founder & CEO of TechTrinity. ${usage ? `${usage}. ` : ""}It handles purchasing, sales, inventory, financial reporting, cheque management, and role-based access control.`,
     featureList: [
       "Multi-branch inventory tracking",
       "Real-time financial reporting",

@@ -236,28 +236,28 @@ function sentence(text: string | null): string {
   return /[.!?]$/.test(text) ? text : `${text}.`;
 }
 
-// Running-copy phrasings for EasyAccounts claims (verified value, or fallback).
-const eaPermissions = claimStat("easyAccountsPermissions");
-const eaBranches = claimStat("easyAccountsBranches");
+// Running-copy phrasings for TappyIO claims (verified value, or fallback).
+const tappyIOPermissions = claimStat("tappyIOPermissions");
+const tappyIOBranches = claimStat("tappyIOBranches");
 
 /** e.g. "role-based access control with 189+ permissions". */
-const accessControlPhrase = eaPermissions
-  ? `role-based access control with ${eaPermissions.value} permissions`
+const accessControlPhrase = tappyIOPermissions
+  ? `role-based access control with ${tappyIOPermissions.value} permissions`
   : "granular role-based access control";
 
 /** e.g. "Used in a live, multi-branch wholesale operation." */
 const branchesSentence = sentence(
-  claimText("easyAccountsBranches", (c) => `Live across ${c.value} branches`),
+  claimText("tappyIOBranches", (c) => `Live across ${c.value} branches`),
 );
 
 /** e.g. "across 50+ branches" or "across a multi-branch operation". */
-const branchesPhrase = eaBranches
-  ? `across ${eaBranches.value} branches`
+const branchesPhrase = tappyIOBranches
+  ? `across ${tappyIOBranches.value} branches`
   : "across a multi-branch operation";
 
 /** e.g. "Built and maintained for daily wholesale operations." */
 const durationSentence = sentence(
-  claimText("easyAccountsDuration", (c) => `In production for ${c.value}`),
+  claimText("tappyIODuration", (c) => `In production for ${c.value}`),
 );
 
 /** Hirecinch outcome percentages that may be published (verified only). */
@@ -1031,9 +1031,9 @@ CASE_STUDIES.xenia = {
   },
 };
 
-CASE_STUDIES.easyaccounts = {
-  slug: "easyaccounts",
-  name: "EasyAccounts",
+CASE_STUDIES.tappyio = {
+  slug: "tappyio",
+  name: "TappyIO",
   engagement: "own-product",
   meta: [
     { label: "Role", value: FOUNDER_TITLE },
@@ -1049,22 +1049,22 @@ CASE_STUDIES.easyaccounts = {
   // Branch count only when verified (neutral fallback otherwise); volume
   // badges are hidden until their definitions and dates are verified.
   heroStats: heroStats([
-    claimStat("easyAccountsBranches") ?? {
+    claimStat("tappyIOBranches") ?? {
       value: "Multi-branch",
       label: "Live wholesale operation",
     },
-    claimStat("easyAccountsTransactions"),
-    claimStat("easyAccountsPayments"),
-    claimStat("easyAccountsPermissions"),
+    claimStat("tappyIOTransactions"),
+    claimStat("tappyIOPayments"),
+    claimStat("tappyIOPermissions"),
   ]),
   hero: {
     image: {
-      src: "/easyaccounts/reports-product-cost-trace.png",
-      alt: "EasyAccounts product cost trace report with chronological event log",
+      src: "/tappyio/reports-product-cost-trace.png",
+      alt: "TappyIO product cost trace report with chronological event log",
       width: 1465,
       height: 812,
     },
-    url: "app.easyaccounts.com",
+    url: "tappyio.com",
   },
   summary: {
     label: "In Brief",
@@ -1081,7 +1081,7 @@ CASE_STUDIES.easyaccounts = {
       },
       {
         question: "Usama’s contribution",
-        answer: `Usama Nadeem, ${FOUNDER_TITLE} of TechTrinity, built EasyAccounts for his family’s wholesale business and continues to work on it: the data model, purchasing and sales workflows, reporting, cost tracing, and permissions.`,
+        answer: `Usama Nadeem, ${FOUNDER_TITLE} of TechTrinity, built TappyIO for his family’s wholesale business and continues to work on it: the data model, purchasing and sales workflows, reporting, cost tracing, and permissions.`,
       },
       {
         question: "What changed",
@@ -1092,7 +1092,7 @@ CASE_STUDIES.easyaccounts = {
         question: "Outcomes",
         answer: [
           branchesSentence,
-          publishedStats(["easyAccountsTransactions", "easyAccountsPayments"]).length > 0
+          publishedStats(["tappyIOTransactions", "tappyIOPayments"]).length > 0
             ? "Transaction and payment volumes are shown above."
             : "Operational description; transaction and payment figures are pending verification and are not published.",
         ]
@@ -1117,40 +1117,40 @@ CASE_STUDIES.easyaccounts = {
         caption:
           "Staff record the purchase invoice with party, quantity, amount, book reference, and date. It joins the searchable transaction history.",
         image: {
-          src: "/easyaccounts/transactions-list.png",
-          alt: "EasyAccounts transactions list with party, amount, and book references",
+          src: "/tappyio/transactions-list.png",
+          alt: "TappyIO transactions list with party, amount, and book references",
           width: 3454,
           height: 1912,
         },
-        url: "app.easyaccounts.com",
+        url: "tappyio.com",
       },
       {
         title: "Trace the cost",
         caption:
           "The product cost trace shows opening and closing average cost per yard, the cost change, and average sale price — with every transaction that moved the cost in a chronological log.",
         image: {
-          src: "/easyaccounts/reports-product-cost-trace.png",
-          alt: "EasyAccounts product cost trace with chronological event log",
+          src: "/tappyio/reports-product-cost-trace.png",
+          alt: "TappyIO product cost trace with chronological event log",
           width: 1465,
           height: 812,
         },
-        url: "app.easyaccounts.com",
+        url: "tappyio.com",
       },
       {
         title: "See the effect on profit",
         caption:
           "The income statement breaks gross profit down by product category — finished goods, raw materials, dyeing/washing, and processing — and every figure traces back to its transactions.",
         image: {
-          src: "/easyaccounts/reprots-income-statement.png",
-          alt: "EasyAccounts income statement broken down by product category",
+          src: "/tappyio/reprots-income-statement.png",
+          alt: "TappyIO income statement broken down by product category",
           width: 1467,
           height: 812,
         },
-        url: "app.easyaccounts.com",
+        url: "tappyio.com",
       },
     ],
     note:
-      "EasyAccounts was designed around one textile wholesale operation — yardage, rolls, dyeing, and processing stages. It is not an off-the-shelf fit for every distributor; another business’s workflow would need its own review.",
+      "TappyIO was designed around one textile wholesale operation — yardage, rolls, dyeing, and processing stages. It is not an off-the-shelf fit for every distributor; another business’s workflow would need its own review.",
   },
   overview: {
     label: "The System",
@@ -1160,15 +1160,15 @@ CASE_STUDIES.easyaccounts = {
       "real business.",
     ],
     body: compact([
-      "EasyAccounts started as a solution to a problem Usama knew firsthand — managing his family’s multi-branch textile wholesale business without the right tools meant manual ledgers, disconnected spreadsheets, and no reliable view of financial health.",
-      `He built EasyAccounts from scratch as a full-scale ERP purpose-built for the operational complexity of wholesale trading. ${branchesSentence} ${durationSentence}`.trim(),
+      "TappyIO started as a solution to a problem Usama knew firsthand — managing his family’s multi-branch textile wholesale business without the right tools meant manual ledgers, disconnected spreadsheets, and no reliable view of financial health.",
+      `He built TappyIO from scratch as a full-scale ERP purpose-built for the operational complexity of wholesale trading. ${branchesSentence} ${durationSentence}`.trim(),
       `The system handles the complete business lifecycle — purchasing, sales, inventory, financial reporting, cheque management, and ${accessControlPhrase} — all in one platform.`,
     ]),
   },
   whyItMatters: {
     label: "Why It Matters",
     headline: ["Why this matters for", "owner-led inventory businesses."],
-    body: "EasyAccounts is proof that we understand more than screens and code. It handles the operational details that generic software often misses: units, branches, stock movements, ledgers, permissions, reports, audit trails, and the messy edge cases that appear when real staff use the system every day.",
+    body: "TappyIO is proof that we understand more than screens and code. It handles the operational details that generic software often misses: units, branches, stock movements, ledgers, permissions, reports, audit trails, and the messy edge cases that appear when real staff use the system every day.",
     bullets: [
       "Multi-branch inventory visibility",
       "Real-time financial reporting",
@@ -1209,78 +1209,78 @@ CASE_STUDIES.easyaccounts = {
         label: "Purchase & Sale Management",
         body: "Full purchase and sale invoice management with support for wholesale-specific units. Every transaction is recorded with party, amount, quantity, book reference, and date — filterable and searchable across the full transaction history. Every request is recorded in the audit trail.",
         image: {
-          src: "/easyaccounts/transactions-list.png",
-          alt: "EasyAccounts transactions list with party, amount, and book references",
+          src: "/tappyio/transactions-list.png",
+          alt: "TappyIO transactions list with party, amount, and book references",
           width: 3454,
           height: 1912,
         },
-        url: "app.easyaccounts.com",
+        url: "tappyio.com",
       },
       {
         label: "Income Statement",
         body: "A full P&L broken down by product category — finished goods, raw materials, dyeing/washing, and processing — with gross profit per category and net profit margin calculated automatically. Backed by real double-entry accounting. Every figure traces back to individual transactions.",
         image: {
-          src: "/easyaccounts/reprots-income-statement.png",
-          alt: "EasyAccounts income statement broken down by product category",
+          src: "/tappyio/reprots-income-statement.png",
+          alt: "TappyIO income statement broken down by product category",
           width: 1467,
           height: 812,
         },
-        url: "app.easyaccounts.com",
+        url: "tappyio.com",
       },
       {
         label: "Balance Sheet",
         body: "Total assets, liabilities, and owner's equity — calculated in real time from all recorded transactions. The balance sheet updates automatically as invoices, payments, expenses, and account transfers are recorded.",
         image: {
-          src: "/easyaccounts/reports-balance-sheet.png",
-          alt: "EasyAccounts balance sheet with assets, liabilities, and equity",
+          src: "/tappyio/reports-balance-sheet.png",
+          alt: "TappyIO balance sheet with assets, liabilities, and equity",
           width: 1467,
           height: 812,
         },
-        url: "app.easyaccounts.com",
+        url: "tappyio.com",
       },
       {
         label: "Sale / Purchase Ledger",
         body: "Visual ledger analytics with time-series charts showing sale and purchase trends across any date range. Each data point drills down to the underlying transactions. Designed for business owners who need to understand their numbers quickly, not just accountants who already do.",
         image: {
-          src: "/easyaccounts/reports-sale-ledger.png",
-          alt: "EasyAccounts sale and purchase ledger with time-series chart",
+          src: "/tappyio/reports-sale-ledger.png",
+          alt: "TappyIO sale and purchase ledger with time-series chart",
           width: 1465,
           height: 812,
         },
-        url: "app.easyaccounts.com",
+        url: "tappyio.com",
       },
       {
         label: "Product Cost Trace",
         body: "One of the most complex features in the system. Tracks the average cost per yard of every product from first purchase through dyeing, processing, and eventual sale. Shows opening cost, closing cost, cost change percentage, and average sale price — with a full chronological event log showing every transaction that affected the cost.",
         image: {
-          src: "/easyaccounts/reports-product-cost-trace.png",
-          alt: "EasyAccounts product cost trace with chronological event log",
+          src: "/tappyio/reports-product-cost-trace.png",
+          alt: "TappyIO product cost trace with chronological event log",
           width: 1465,
           height: 812,
         },
-        url: "app.easyaccounts.com",
+        url: "tappyio.com",
       },
       {
         label: "Cheque Management",
         body: "Full cheque lifecycle management — received, pending, transferred, and cleared. Each cheque has a complete history log showing every action taken on it. Remaining recovery and status tracked at all times across all parties.",
         image: {
-          src: "/easyaccounts/cheque-history.png",
-          alt: "EasyAccounts cheque history and lifecycle log",
+          src: "/tappyio/cheque-history.png",
+          alt: "TappyIO cheque history and lifecycle log",
           width: 3456,
           height: 1916,
         },
-        url: "app.easyaccounts.com",
+        url: "tappyio.com",
       },
       {
         label: "Immutable Request Logs",
         body: `Every action in the system is logged — user, timestamp, path, view name, IP address, device type, browser, OS, and HTTP status. Logs are immutable and append-only. 500 entries load per page with full search and filter capability. Built for accountability ${branchesPhrase}.`,
         image: {
-          src: "/easyaccounts/reports-request-logs.png",
-          alt: "EasyAccounts immutable request log audit trail",
+          src: "/tappyio/reports-request-logs.png",
+          alt: "TappyIO immutable request log audit trail",
           width: 1465,
           height: 812,
         },
-        url: "app.easyaccounts.com",
+        url: "tappyio.com",
       },
     ],
   },
@@ -1289,8 +1289,8 @@ CASE_STUDIES.easyaccounts = {
     headline: ["Built for multi-branch", "operations from day one."],
     cards: [
       {
-        title: eaPermissions ? `${eaPermissions.value} Permissions` : "Granular Permissions",
-        body: `Granular role-based access control${eaPermissions ? ` with ${eaPermissions.value} individual permissions` : ""}. Every feature, every report, every action can be enabled or disabled per employee role.`,
+        title: tappyIOPermissions ? `${tappyIOPermissions.value} Permissions` : "Granular Permissions",
+        body: `Granular role-based access control${tappyIOPermissions ? ` with ${tappyIOPermissions.value} individual permissions` : ""}. Every feature, every report, every action can be enabled or disabled per employee role.`,
       },
       {
         title: "Multi-warehouse stock",
@@ -1307,16 +1307,16 @@ CASE_STUDIES.easyaccounts = {
     headline: ["In production.", "In daily use."],
     // Verified figures from lib/claims.ts; neutral operational copy otherwise.
     cards: compact([
-      claimCardOr("easyAccountsBranches", ["Live branches", "in production"], {
+      claimCardOr("tappyIOBranches", ["Live branches", "in production"], {
         primary: "Multi-branch",
         description: [
           "Live operation",
           "Used in a live, multi-branch wholesale operation",
         ],
       }),
-      claimCard("easyAccountsTransactions", ["Transactions", "processed"]),
-      claimCard("easyAccountsPayments", ["Payments", "recorded"]),
-      claimCard("easyAccountsPermissions", ["Access", "permissions"]),
+      claimCard("tappyIOTransactions", ["Transactions", "processed"]),
+      claimCard("tappyIOPayments", ["Payments", "recorded"]),
+      claimCard("tappyIOPermissions", ["Access", "permissions"]),
       {
         primary: "Traceable",
         description: ["Stock & cost", "Every cost change linked to its transactions"],

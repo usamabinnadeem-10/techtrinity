@@ -26,7 +26,7 @@ export function Team() {
           <div className="space-y-4 text-[15px] font-light leading-[1.8] text-muted md:max-w-[440px] md:justify-self-end">
             <p>
               TechTrinity is led by {FOUNDER_DISPLAY_NAME}, {FOUNDER_TITLE}, who
-              built EasyAccounts and has {FOUNDER_CANONICAL_BADGE.toLowerCase()}.
+              built TappyIO and has {FOUNDER_CANONICAL_BADGE.toLowerCase()}.
               You work directly with the people responsible for the project—no
               account-management layer between you and the work.
             </p>

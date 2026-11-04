@@ -59,13 +59,13 @@ export function Hero() {
             {PRIMARY_CTA_LABEL}
           </LinkButton>
           <LinkButton
-            href="/work/easyaccounts"
+            href="/work/tappyio"
             variant="ghost"
             size="lg"
             className="justify-center"
-            cta={{ label: "See EasyAccounts", section: "hero" }}
+            cta={{ label: "See TappyIO", section: "hero" }}
           >
-            See EasyAccounts
+            See TappyIO
           </LinkButton>
         </div>
         <p className="hero-fade mt-5 max-w-[440px] text-[13px] leading-[1.6] text-muted [animation-delay:1s]">

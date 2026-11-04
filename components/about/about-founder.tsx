@@ -8,7 +8,7 @@ import {
   OWN_PRODUCT_LABEL,
 } from "@/lib/offer";
 
-const CHIPS = [`EasyAccounts — ${OWN_PRODUCT_LABEL}`, FOUNDER_CANONICAL_BADGE];
+const CHIPS = [`TappyIO — ${OWN_PRODUCT_LABEL}`, FOUNDER_CANONICAL_BADGE];
 
 export function AboutFounder() {
   return (
@@ -108,7 +108,7 @@ export function AboutFounder() {
             <div className="mt-7 space-y-5 text-[16px] font-light leading-[1.85] text-muted">
               <p className="text-foreground/90">{FOUNDER_BIO}</p>
               <p>
-                EasyAccounts started as a replacement for spreadsheets and
+                TappyIO started as a replacement for spreadsheets and
                 fragile backups. Working on it day to day teaches the lessons
                 that matter in operational software: every shortcut in stock,
                 permissions, or reporting eventually shows up as a mistake

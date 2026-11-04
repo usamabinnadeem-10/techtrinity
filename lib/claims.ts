@@ -33,9 +33,9 @@ export type Claim = {
 };
 
 export const CLAIMS = {
-  easyAccountsBranches: {
+  tappyIOBranches: {
     definition:
-      "Number of branches/locations actively using EasyAccounts in production.",
+      "Number of branches/locations actively using TappyIO in production.",
     value: "12+",
     label: "Live branches in production",
     measuredAt: "2026-09-24",
@@ -43,9 +43,9 @@ export const CLAIMS = {
     status: "verified",
     fallback: "Used in a live, multi-branch wholesale operation",
   },
-  easyAccountsDuration: {
+  tappyIODuration: {
     definition:
-      "How long EasyAccounts has been in daily production use (product age — not founder career length or studio age).",
+      "How long TappyIO has been in daily production use (product age — not founder career length or studio age).",
     value: "4 years",
     label: "In production",
     measuredAt: "2026-09-24",
@@ -53,9 +53,9 @@ export const CLAIMS = {
     status: "verified",
     fallback: "Built and maintained for daily wholesale operations",
   },
-  easyAccountsTransactions: {
+  tappyIOTransactions: {
     definition:
-      "Count of sale/purchase transactions recorded in EasyAccounts since launch.",
+      "Count of sale/purchase transactions recorded in TappyIO since launch.",
     value: "90,000+",
     label: "Transactions processed",
     measuredAt: "2026-09-24",
@@ -63,8 +63,8 @@ export const CLAIMS = {
     status: "verified",
     fallback: null,
   },
-  easyAccountsPayments: {
-    definition: "Count of payment records created in EasyAccounts since launch.",
+  tappyIOPayments: {
+    definition: "Count of payment records created in TappyIO since launch.",
     value: "50,000+",
     label: "Payments recorded",
     measuredAt: "2026-09-24",
@@ -72,9 +72,9 @@ export const CLAIMS = {
     status: "verified",
     fallback: null,
   },
-  easyAccountsPermissions: {
+  tappyIOPermissions: {
     definition:
-      "Number of individual permissions in the EasyAccounts role-based access control system (a product capability).",
+      "Number of individual permissions in the TappyIO role-based access control system (a product capability).",
     value: "189+",
     label: "Access permissions",
     measuredAt: "2026-09-24",

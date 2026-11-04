@@ -8,7 +8,7 @@ TechTrinity is not a SaaS subscription product or a template-based ERP vendor. I
 
 Primary technology stack: React, Next.js, Node.js, Django, and PostgreSQL on modern cloud infrastructure. TechTrinity does not offer Laravel or PHP development.
 
-Founder: Usama Nadeem (Usama Bin Nadeem), Founder & CEO, based in Lahore, Pakistan. He built EasyAccounts, his own ERP product, for his family's wholesale business, and has engineering experience at Canonical, the company behind Ubuntu.
+Founder: Usama Nadeem (Usama Bin Nadeem), Founder & CEO, based in Lahore, Pakistan. He built TappyIO, his own ERP product, for his family's wholesale business, and has engineering experience at Canonical, the company behind Ubuntu.
 
 Core positioning:
 
@@ -47,7 +47,7 @@ Core positioning:
 
 ## Case Studies
 
-* [EasyAccounts ERP](https://www.techtrinity.ai/work/easyaccounts): The founder's own product — a production ERP built with React and Django for his family's wholesale textile business, live across 12+ branches and in production for 4 years. Handles purchasing, sales, inventory, financial reporting, cheque management, audit logs, and role-based access control with 189+ permissions.
+* [TappyIO ERP](https://www.techtrinity.ai/work/tappyio): The founder's own product — a production ERP built with React and Django for his family's wholesale textile business, live across 12+ branches and in production for 4 years. Handles purchasing, sales, inventory, financial reporting, cheque management, audit logs, and role-based access control with 189+ permissions.
 * [Canonical Academy](https://www.techtrinity.ai/work/canonical-academy): Founder's engineering work, in-house at Canonical — certification platform work involving Go, Node.js, React, payment flows, exam scheduling, proctoring integration, and badge issuance. Not a TechTrinity client engagement.
 * [Xenia](https://www.techtrinity.ai/work/xenia): Founder's engineering work as an employee of Xenia (not a TechTrinity client project) on a frontline operations platform — tasks, checklists, audits, reporting, and performance improvements for multi-location teams.
 * [Hirecinch ATS](https://www.techtrinity.ai/work/hirecinch): Founder's engineering work as an employee of Hirecinch (not a TechTrinity client project) on an applicant tracking system built with React and Django — structured applications, a shared candidate pipeline, scorecards, and email workflows.
