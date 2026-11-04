@@ -92,10 +92,10 @@ export function TappyIOProof() {
           </div>
           <div className="relative min-w-0 overflow-hidden rounded-md border border-border bg-background">
             <Image
-              src="/tappyio/reports-product-cost-trace.png"
+              src="/tappyio/reports-product-cost-trace-light.png"
               alt="TappyIO product cost trace report, following a product's cost through its stock movements"
-              width={1465}
-              height={812}
+              width={3456}
+              height={1916}
               sizes="(min-width: 768px) 540px, 100vw"
               className="h-auto w-full"
             />
