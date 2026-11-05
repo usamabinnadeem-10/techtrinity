@@ -16,7 +16,7 @@ const ROWS: Row[] = [
     dir: "normal",
     dur: "120s",
     shots: [
-      "/tappyio/transactions-list.png",
+      "/tappyio/transactions-list-light.png",
       "/xenia/task-management-kanban.png",
       "/hirecinch/pipeline.png",
       "/canonical/my-exams.png",
@@ -30,7 +30,7 @@ const ROWS: Row[] = [
       "/hirecinch/applicants.png",
       "/canonical/checkout.png",
       "/xenia/documents.png",
-      "/tappyio/ledgers-view.png",
+      "/tappyio/ledgers-view-light.png",
       "/hirecinch/scorecard.png",
     ],
   },
